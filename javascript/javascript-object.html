@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh-CN"> 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="On The Way" />
+    <meta name="application-name" content="On The Way" />
+    <title>Javascript对象篇 - Javascript学习笔记（二） - On The Way</title>
+    <meta name="keywords" content="Javascrip,对象,学习笔记" />
+    <meta name="description" content="" />
+    
+    <link rel="alternate" type="application/rss+xml" href="/feed.xml" title="On The Way" />
+    <link rel="stylesheet" href="/static/style.css?v=f0f73" />
+    <link rel="canonical" href="http://wlog.cn/javascript/javascript-object.html" />
+    <!--[if lt IE 9]>
+    <script src="/static/js/html5shiv.js?v=fb4e3"></script>
+    <![endif]-->
+</head>
+<body>
+<div id="wrapper">   
+<header id="header" class="clear">
+    <h1>Javascript对象篇 - Javascript学习笔记（二）</h1>
+</header><!-- #header -->
+<nav id="nav" role="navigation">
+    <a href="/index.html">INDEX</a>
+    <a href="/tag/index.html">TAGS</a>
+    <a href="/about.html">ABOUT ME</a>
+    <a href="/links.html">LINKS</a>
+    <a href="/project.html">PROJECTS</a>
+    <a href="/feed.xml">FEED</a>
+</nav><article id="main" class="hentry">
+    <!-- <h1 class="entry-title">Javascript对象篇 - Javascript学习笔记（二）</h1> -->
+    <div class="entry-content">
+        <p>对象(Object)是属性的无序集合，每个属性都有自己的名字和值，每个属性存放一个原始值、对象或函数。</p>
+<p>javascript的原始类型包括数字、字符串、布尔值、null、undefined。其它所有值都是对象。javascript中，数组、函数、正则表达式都是对象。</p>
+
+<h2 id="toc_0">一、创建对象</h2>
+<p> ### 1.1 new操作符后面跟Object构造函数</p>
+
+<pre><code>var person = new object();</code></pre>
+<p> ### 1.2 对象字面量表示法</p>
+
+<pre><code>var empty = {};
+
+var person = {
+    'first-name':'Nicholas',
+    'last-name':'Zakas',
+    'age':29
+};
+
+var flight = {
+    airline: 'MU',
+    number: 2769,
+    departure: {
+        IATA: 'NKG',
+        time: '2011-06-30 07:45',
+        city: 'Nanjing'
+    },
+    arrival: {
+        IATA: 'XIY',
+        time: '2011-06-30 09:45,
+        city: 'XiAn'
+    }
+};</code></pre>
+
+<h2 id="toc_1">二、检索</h2>
+<p>检索方法，优先使用.表示法</p>
+
+<pre><code>person['first-name']    //Nicholas
+flight.number           //2769
+person['job']           //undefined
+flight.status           //undefined</code></pre>
+<p>用||运算符来填充默认值</p>
+
+<pre><code>var job = person['job'] || 'none';
+var status = flight.status || 'unkown';</code></pre>
+<p>尝试检索一个undefined值会导致异常</p>
+
+<pre><code>flight.equipment                            //undefined
+flight.equipment.model                      //throw 'TypeError'
+flight.equipment &amp;&amp; flight.equipment.model  //undefined</code></pre>
+
+<h2 id="toc_2">三、更新</h2>
+<p>属性存在于对象中，属属性值将被替换</p>
+
+<pre><code>person['age'] = 32;</code></pre>
+<p>如果对象没有该属性名，则该属性名将被添加到对象中</p>
+
+<pre><code>person.job = 'Software Engineer';</code></pre>
+<p>删除属性</p>
+
+<pre><code>delete person.age</code></pre>
+<p>删除属性不仅仅是将属性值设置为undefined，实际上从对象上移除了属性。</p>
+
+<h2 id="toc_3">四、引用</h2>
+<p>对象通过引用来传值，它们永远不会被拷贝。</p>
+
+<pre><code>var x = person;
+x.job = 'Software Engineer';
+var job = person.job;     //x和person引用同一对象，job为'Software Engineer'
+
+var a = {}, b = {}, c = {};     //a b c 引用不同的空对象
+
+var a = b = c = {};     //a、b、c引用同一空对象</code></pre>
+
+<h2 id="toc_4">五、反射</h2>
+<p>typeof操作符确定属性类型</p>
+
+<pre><code>typeof flight.number    //'number'
+typeof flight.status    //'string'
+typeof flight.arrival   //'Object'
+typeof flight.manifest  //'undefined'</code></pre>
+<p>原型链中任何属性也会产生一个值</p>
+
+<pre><code>typeof flight.toString      //function
+typeof  flight.constructor  //'function'</code></pre>
+<p>另一个方法，hasOwnProperty方法</p>
+
+<pre><code>flight.hasOwnProperty('number')     //true
+flight.hasOwnProperty(constructor)  //false</code></pre>
+
+<h2 id="toc_5">六、枚举</h2>
+<p>for in 语句遍历对象中的所有属性名。hasOwnProperty和typeof排除函数、原型链中的属性和不想要的值。</p>
+
+<pre><code>var name;
+for (name in person) {
+    if (typeof person[name] !== 'function') {
+        console.log(name+':'+ person[name]);
+    }
+}</code></pre>
+<p>上面属性名出现的顺序是不确定的。如果要以特定的顺序出现，可以使用数组：</p>
+
+<pre><code>var i;
+var properties = [
+    'last-name',
+    'fist-name',
+    'age'
+];
+var len = properties.length;
+for (i = 0; i &lt; len; i++) {
+    console.log(properties[i]+':'+person[properties[i]]);
+}</code></pre>
+<p>&ndash;add</p>
+
+<pre><code>Object.prototype.bar = 1;
+
+var person = {
+    'name': 'bingdian',
+    'age': '25'
+}
+
+for (i in person) {
+    console.log(i + ':' + person[i]);
+}
+//name:bingdian
+//age:25
+//bar:1</code></pre>
+<p>和 in 操作符一样，for in 循环同样在查找对象属性时遍历原型链上的所有属性。</p>
+<p>由于不可能改变 for in 自身的行为，因此有必要过滤出那些不希望出现在循环体中的属性， 这可以通过 Object.prototype 原型上的 hasOwnProperty 函数来完成。</p>
+
+<pre><code>Object.prototype.bar = 1;
+
+var person = {
+    'name': 'bingdian',
+    'age': '25'
+}
+
+for (i in person) {
+    if (person.hasOwnProperty(i)) {
+        console.log(i + ':' + person[i]);
+    }
+}
+//name:bingdian
+//age:25</code></pre>
+<p>推荐总是使用 hasOwnProperty。不要对代码运行的环境做任何假设，不要假设原生对象是否已经被扩展了。</p>
+
+<h2 id="toc_6">七、删除</h2>
+
+<pre><code>delete person.age
+person.age              //undefined</code></pre>
+
+<h2 id="toc_7">八、通用Object属性和方法</h2>
+
+<h3 id="toc_8">属性</h3>
+<p>在javascript中，每一下对象都有一个constructor属性，它引用了初始化这个对象的构造函数。</p>
+
+<h3 id="toc_9">方法</h3>
+
+<pre><code>person.toString();
+person.valueOf();
+person.hasOwnProperty('age');</code></pre>
+<p>//如果isPrototypeOf()所属的对象是参数的原型对象，则返回true</p>
+
+<pre><code>var  o = {};
+console.log(Object.prototype.isPrototypeOf(o)); //true o.constructor == Object
+console.log(Object.isPrototypeOf(o)); //false
+console.log(o.isPrototypeOf(Object.prototype)); //false
+console.log(Function.prototype.isPrototypeOf(Object)); //true Object.constructor == Function</code></pre>
+
+<h2 id="toc_10">九、减少全局变量污染</h2>
+
+<pre><code>var APP = {};
+
+APP.person = {
+    'first-name':'Nicholas',
+    'last-name':'Zakas',
+    'age':29
+
+};
+APP.flight = {
+    airline: 'MU',
+    number: 2769,
+    departure: {
+        IATA: 'NKG',
+        time: '2011-06-30 07:45',
+        city: 'Nanjing'
+    },
+    arrival: {
+        IATA: 'XIY',
+        time: '2011-06-30 09:45,
+        city: 'XiAn'
+    }
+};</code></pre>
+
+    </div>
+    <div class="entry-meta">
+        Posted in<time class="updated" datetime="2011-06-27T22:10:00+08:00" pubdate>
+            2011-06-27
+        </time>
+        <span class="entry-tags">Category:<a href="/javascript/">Javascript</a></span>
+        <span class="entry-tags">Tags:
+            
+                <a href="/tag/javascrip/">Javascrip</a>
+            
+                ,<a href="/tag/对象/">对象</a>
+            
+                ,<a href="/tag/学习笔记/">学习笔记</a>
+            
+		</span>
+    
+        
+    </div>
+    
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'bingdian-ontheway';
+        var disqus_title = 'Javascript对象篇 - Javascript学习笔记（二）';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+</article><footer id="footer">
+    <p class="copyright"><span class="software">Powered by <a href="http://lab.lepture.com/liquidluck/">Felix Felicis</a> 3.8, </span><span class="theme">Theme <a href="http://wlog.cn/" rel="nofollow">responsive</a> 0.1 by <a href="http://wlog.cn/">bingdian</a></span></p>
+</footer><!-- #footer -->
+</div><!-- #wrapper -->
+
+
+</body>
+</html>

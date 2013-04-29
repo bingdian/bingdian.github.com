@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN"> 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="On The Way" />
+    <meta name="application-name" content="On The Way" />
+    <title>Dropbox 做私有 Git 服务器 - On The Way</title>
+    <meta name="keywords" content="git,dropbox,共享" />
+    <meta name="description" content="使用Dropbox 做私有 Git 服务器，实现多人协作" />
+    
+    <link rel="alternate" type="application/rss+xml" href="/feed.xml" title="On The Way" />
+    <link rel="stylesheet" href="/static/style.css?v=f0f73" />
+    <link rel="canonical" href="http://wlog.cn/discover/dropbox-git.html" />
+    <!--[if lt IE 9]>
+    <script src="/static/js/html5shiv.js?v=fb4e3"></script>
+    <![endif]-->
+</head>
+<body>
+<div id="wrapper">   
+<header id="header" class="clear">
+    <h1>Dropbox 做私有 Git 服务器</h1>
+</header><!-- #header -->
+<nav id="nav" role="navigation">
+    <a href="/index.html">INDEX</a>
+    <a href="/tag/index.html">TAGS</a>
+    <a href="/about.html">ABOUT ME</a>
+    <a href="/links.html">LINKS</a>
+    <a href="/project.html">PROJECTS</a>
+    <a href="/feed.xml">FEED</a>
+</nav><article id="main" class="hentry">
+    <!-- <h1 class="entry-title">Dropbox 做私有 Git 服务器</h1> -->
+    <div class="entry-content">
+        <p>原理：在dropbox中建立git仓库，然后共享文件夹，从而实现多人协作。例如我们要在Dropbox/project/目录下建立demo.git项目：</p>
+<p>一、在Dropbox的文件夹下创建远程repository文件夹(.git后缀)，</p>
+
+<pre><code>cd ~/Dropbox/project
+mkdir demo.git</code></pre>
+<p>二、进入demo.git文件夹并初始化repository</p>
+
+<pre><code>cd demo.git
+git init --bare</code></pre>
+<p>三、创建完毕，现在创建一份本地clone，如要创建在～/lab/demo/目录下</p>
+
+<pre><code>cd ~/lab/
+git clone  ～/Dropbox/project/demo.git demo</code></pre>
+<p>四、测试git</p>
+
+<pre><code>cd demo
+touch README
+git add README
+git commit -m &quot;fisrt commit&quot;
+git push origin master</code></pre>
+<p>五、共享/Dropbox/project/demo.git文件夹，其他指定用户同步后，本地clone git项目。</p>
+<p>enJoy it!</p>
+
+    </div>
+    <div class="entry-meta">
+        Posted in<time class="updated" datetime="2012-12-06T12:00:00+08:00" pubdate>
+            2012-12-06
+        </time>
+        <span class="entry-tags">Category:<a href="/discover/">Discover</a></span>
+        <span class="entry-tags">Tags:
+            
+                <a href="/tag/git/">git</a>
+            
+                ,<a href="/tag/dropbox/">dropbox</a>
+            
+                ,<a href="/tag/共享/">共享</a>
+            
+		</span>
+    
+        
+    </div>
+    
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'bingdian-ontheway';
+        var disqus_title = 'Dropbox 做私有 Git 服务器';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+</article><footer id="footer">
+    <p class="copyright"><span class="software">Powered by <a href="http://lab.lepture.com/liquidluck/">Felix Felicis</a> 3.8, </span><span class="theme">Theme <a href="http://wlog.cn/" rel="nofollow">responsive</a> 0.1 by <a href="http://wlog.cn/">bingdian</a></span></p>
+</footer><!-- #footer -->
+</div><!-- #wrapper -->
+
+
+</body>
+</html>

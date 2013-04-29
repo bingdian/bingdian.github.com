@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN"> 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="On The Way" />
+    <meta name="application-name" content="On The Way" />
+    <title>sphinx使用及其简单配置 - On The Way</title>
+    <meta name="keywords" content="sphinx" />
+    <meta name="description" content="" />
+    
+    <link rel="alternate" type="application/rss+xml" href="/feed.xml" title="On The Way" />
+    <link rel="stylesheet" href="/static/style.css?v=f0f73" />
+    <link rel="canonical" href="http://wlog.cn/discover/first-steps-with-sphinx.html" />
+    <!--[if lt IE 9]>
+    <script src="/static/js/html5shiv.js?v=fb4e3"></script>
+    <![endif]-->
+</head>
+<body>
+<div id="wrapper">   
+<header id="header" class="clear">
+    <h1>sphinx使用及其简单配置</h1>
+</header><!-- #header -->
+<nav id="nav" role="navigation">
+    <a href="/index.html">INDEX</a>
+    <a href="/tag/index.html">TAGS</a>
+    <a href="/about.html">ABOUT ME</a>
+    <a href="/links.html">LINKS</a>
+    <a href="/project.html">PROJECTS</a>
+    <a href="/feed.xml">FEED</a>
+</nav><article id="main" class="hentry">
+    <!-- <h1 class="entry-title">sphinx使用及其简单配置</h1> -->
+    <div class="entry-content">
+        <h2 id="toc_0">一、sphinx使用</h2>
+<p>进入你要创建文档的目录，例如要创建在目录/home/wwwroot/doc下</p>
+
+<pre><code>cd /home/wwwroot/doc</code></pre>
+<p>开始使用向导创建你的文档项目</p>
+
+<pre><code>sphinx-quickstart</code></pre>
+<p>程序会提示输入一些选项，如输入根目录,大部分使用默认选项，直接按回车即可。</p>
+
+<pre><code>Enter the root path for documentation.
+&gt; Root path for the documentation [.]:
+//输入跟目录，直接回车
+
+You have two options for placing the build directory for Sphinx output.
+Either, you use a directory &quot;_build&quot; within the root path, or you separate
+&quot;source&quot; and &quot;build&quot; directories within the root path.
+&gt; Separate source and build directories (y/N) [n]:
+//是否分离source和build目录，建议选y,方便管理
+
+Inside the root directory, two more directories will be created; &quot;_templates&quot;
+for custom HTML templates and &quot;_static&quot; for custom stylesheets and other static
+files. You can enter another prefix (such as &quot;.&quot;) to replace the underscore.
+&gt; Name prefix for templates and static dir [_]:
+//直接回车
+
+The project name will occur in several places in the built documentation.
+&gt; Project name: F2E Cookbook
+&gt; Author name(s): imbingdian
+//输入项目名称
+//输入作者名称
+
+The file name suffix for source files. Commonly, this is either &quot;.txt&quot;
+or &quot;.rst&quot;.  Only files with this suffix are considered documents.
+&gt; Source file suffix [.rst]: .txt
+//档文件的扩展名，默认是.rst
+
+//后面的操作基本回车就好</code></pre>
+<p>完成后可以看到doc文件中生了以下目录文件</p>
+
+<pre><code>build--生成文档目录
+source--源文件目录
+make.bat 
+makefile</code></pre>
+<p>生成html文档</p>
+
+<pre><code>make html</code></pre>
+<p>看一下build目录下是不是生成了html文档了?</p>
+<p>^_^ enjoy it!</p>
+
+<h2 id="toc_1">二、sphinx简单配置</h2>
+<p>source目录下的conf.py文件为sphinx的配置文件。</p>
+
+<h3 id="toc_2">1）修改文档语言为中文：</h3>
+<p>找到#language = None，修改为：language =&#39;zh_CN&#39;，其它语言见下表</p>
+
+<pre><code>bn – Bengali
+ca – Catalan
+cs – Czech
+da – Danish
+de – German
+en – English
+es – Spanish
+fi – Finnish
+fr – French
+hr – Croatian
+it – Italian
+ja – Japanese
+lt – Lithuanian
+nl – Dutch
+pl – Polish
+pt_BR – Brazilian Portuguese
+ru – Russian
+sl – Slovenian
+tr – Turkish
+uk_UA – Ukrainian
+zh_CN – Simplified Chinese
+zh_TW – Traditional Chinese</code></pre>
+
+<h3 id="toc_3">设置主题</h3>
+<p>找到html_theme = &#39;default&#39;，修改default即可。目前官方提供的主题见<a href="http://sphinx.pocoo.org/theming.html#builtin-themes" target="_blank"><a href="http://sphinx.pocoo.org/theming.html#builtin-themes">sphinx.pocoo.org/theming.html#builtin-themes</a></a></p>
+
+<h3 id="toc_4">其它</h3>
+<p>还其它更多设置，具体请参考<a href="http://sphinx.pocoo.org/contents.html" target="_blank">官方文档</a>。</p>
+<p>设置好以后，重新make html即可。</p>
+
+<h2 id="toc_5">扩展阅读：</h2>
+
+<ul>
+<li><a href="http://sphinx.pocoo.org/contents.html%22%20target=%22_blank%22%3Ehttp://sphinx.pocoo.org/contents.html">http://sphinx.pocoo.org/contents.html&quot; target=&ldquo;_blank&rdquo;&gt;http://sphinx.pocoo.org/contents.html</a></li>
+</ul>
+
+    </div>
+    <div class="entry-meta">
+        Posted in<time class="updated" datetime="2011-03-25T23:10:00+08:00" pubdate>
+            2011-03-25
+        </time>
+        <span class="entry-tags">Category:<a href="/discover/">Discover</a></span>
+        <span class="entry-tags">Tags:
+            
+                <a href="/tag/sphinx/">sphinx</a>
+            
+		</span>
+    
+        
+    </div>
+    
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'bingdian-ontheway';
+        var disqus_title = 'sphinx使用及其简单配置';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+</article><footer id="footer">
+    <p class="copyright"><span class="software">Powered by <a href="http://lab.lepture.com/liquidluck/">Felix Felicis</a> 3.8, </span><span class="theme">Theme <a href="http://wlog.cn/" rel="nofollow">responsive</a> 0.1 by <a href="http://wlog.cn/">bingdian</a></span></p>
+</footer><!-- #footer -->
+</div><!-- #wrapper -->
+
+
+</body>
+</html>

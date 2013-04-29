@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-CN"> 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="On The Way" />
+    <meta name="application-name" content="On The Way" />
+    <title>Javascript 加载性能优化 - On The Way</title>
+    <meta name="keywords" content="性能,优化,Javascrip,load,loader,labjs,seajs,lazyload" />
+    <meta name="description" content="" />
+    
+    <link rel="alternate" type="application/rss+xml" href="/feed.xml" title="On The Way" />
+    <link rel="stylesheet" href="/static/style.css?v=f0f73" />
+    <link rel="canonical" href="http://wlog.cn/javascript/javascript-load-optimization.html" />
+    <!--[if lt IE 9]>
+    <script src="/static/js/html5shiv.js?v=fb4e3"></script>
+    <![endif]-->
+</head>
+<body>
+<div id="wrapper">   
+<header id="header" class="clear">
+    <h1>Javascript 加载性能优化</h1>
+</header><!-- #header -->
+<nav id="nav" role="navigation">
+    <a href="/index.html">INDEX</a>
+    <a href="/tag/index.html">TAGS</a>
+    <a href="/about.html">ABOUT ME</a>
+    <a href="/links.html">LINKS</a>
+    <a href="/project.html">PROJECTS</a>
+    <a href="/feed.xml">FEED</a>
+</nav><article id="main" class="hentry">
+    <!-- <h1 class="entry-title">Javascript 加载性能优化</h1> -->
+    <div class="entry-content">
+        <h2 id="toc_0">阻塞特性</h2>
+<p>浏览器对javascript的处理主要有2部分：下载和执行</p>
+
+<ul>
+<li>下载在有些浏览器中是并行的，有些浏览器中是串行的，如IE8、Firefox3、Chrome2都是串行下载的</li>
+<li>执行在所有浏览器中默认都是阻塞的，当js在执行时不会进行html解析等其它操作</li>
+</ul>
+<p>阻塞特性：</p>
+<p>javascript有个阻塞特性，当浏览器执行javascript代码时，不能同时做其它任何事情。无论当前javascript代码是内嵌还是在外链文件中，页面的下载和渲染都必须停下来等待脚本执行完成。浏览器在下载和执行脚本是进出现阻塞的原因在于，脚本可能会改变页面或javascript的命名空间，它们对后面页面内容造成影响。</p>
+
+<h2 id="toc_1">一、脚本位置</h2>
+<p>浏览器在碰到一个引入外部javascript文件的&lt;script&gt;标签时会停下所有工作来下载并解析执行它，在这个过程中，页面渲染和用户交互完全被阻塞了。例：</p>
+
+<pre><code>&lt;html&gt;  
+&lt;head&gt;  
+    &lt;title&gt;无标题文档&lt;/title&gt;  
+    &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;styles.css&quot; /&gt;
+    &lt;script type=&quot;text/javascript&quot; src=&quot;file1.js&quot;&gt;&lt;/script&gt;  
+    &lt;script type=&quot;text/javascript&quot; src=&quot;file2.js&quot;&gt;&lt;/script&gt;  
+    &lt;script type=&quot;text/javascript&quot; src=&quot;file3.js&quot;&gt;&lt;/script&gt;  
+&lt;/body&gt; 
+&lt;/head&gt;  
+&lt;body&gt;  
+    &lt;p&gt;页面的内容。。。&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>由于脚本的阻塞特性，页面会在3个javascript文件全部下载执行完成后，页面才会继续渲染，把脚本放在页面顶部会导致明显延迟，通常表现为显示空白页，用户无法浏览内容，也无法与页面交互。</p>
+<p>ie8+、firefox 3.5+、safari4+、chrome2+都允许并行下载javascript文件，但是在下载的过程中仍然会阻塞图片等其它资源的下载。</p>
+<p>由于脚本会阻塞页面其它资源的下载，因此推荐将javasrcipt尽量放到body标签的底部，以减少对整个页面下载的影响。</p>
+
+<h2 id="toc_2">二、组织脚本</h2>
+<p>由于&lt;script&gt;标签在下载时会阻塞页面的渲染，所以减少&lt;script&gt;标签数量有助于改善这一情况。建议将多个javascript文件合并为一个，这样可以减少性能的消耗。同时也可以减少请求的数量。</p>
+<p>参考：<a href="http://www.wlog.cn/performance/mergers-compression-javascript-css.html">在服务端合并和压缩javascript和CSS文件</a></p>
+
+<h2 id="toc_3">三、无阻塞脚本</h2>
+
+<h3 id="toc_4">1、延迟脚本</h3>
+<p>HTML4 为&lt;script&gt;标签定义了一个defer 属性，它能使这段代码延迟执行，然而该属性只有IE4+支持，因此它不是一个理想的跨浏览器解决方案。声明了defer 属性的script会在DOM加载完成，window.onload 事件触发前被解析执行：</p>
+
+<pre><code>&lt;html&gt;  
+&lt;head&gt;  
+    &lt;title&gt;script defer example&lt;/title&gt;  
+&lt;/body&gt; 
+&lt;/head&gt;  
+&lt;body&gt;
+&lt;script defer&gt;
+    alert('defer');
+&lt;/script&gt;
+&lt;script&gt;
+    alert('script');
+&lt;/script&gt;
+&lt;script&gt;
+    window.onload = function(){
+        alert('load');
+    }
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>这段代码在支持defer属性的浏览器弹出顺序是：script、defer、load；不支持defer属性的浏览器弹出的顺序是defer、script、load。</p>
+
+<h3 id="toc_5">2、动态脚本元素</h3>
+
+<pre><code>&lt;script type=&quot;text/javascript&quot;&gt;
+function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //for ie
+        script.onreadystatechange = function() {
+            if (script.readyState == 'loaded' || script.readyState == 'complete') {
+                script.onreadystatechange = null;
+                callback();
+            }
+        };
+    } else { //other browser
+        script.onload = function() {
+            callback();
+        };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+}
+&lt;/script&gt;</code></pre>
+<p>loadscript函数用法</p>
+
+<pre><code>&lt;script type=&quot;text/javascript&quot;&gt;
+    //单个文件
+    loadScript('file1.js', function(){
+        alert('loaded!');
+    });
+
+
+    //多个文件
+    loadScript('file1.js', function(){
+        loadScript('file2.js',function(){
+            loadScript('file3.js', function(){
+                alert('all files loaded!');
+            });
+        });
+    });
+&lt;/script&gt;</code></pre>
+<p>这种技术的重点在于：无论何时启动下载，文件的下载和执行过程不会阻塞页面其它进程，你甚至可以将代码放在页面的head区域而不影响页面的其它部分（下载该文件的http链接除外）。</p>
+
+<h3 id="toc_6">3、XMLHttpRequest 脚本注入</h3>
+<p>此技术会先创建一个XHR对象，然后用它下载javascript文件，最后创建动态的script元素将代码注入到页面中。</p>
+
+<pre><code>&lt;script type=&quot;text/javascript&quot;&gt;
+var xhr = new XMLHttpRequest();
+xhr.open('get', 'file1.js', true);
+xhr.onreadystatechange = function() {
+    if (xhr.status &gt;= 200 &amp;&amp; xhr.status &lt;300 || xhr.status == 304) {
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.text = xhr.responseText;
+        document.body.appendChild(script);
+    }
+};
+xhr.send(null);
+&lt;/script&gt;</code></pre>
+<p>这种方法优点是可以直接下载javascript代码但不立即执行。由于代码是在&lt;script&gt;标签之外返回的，因此下载后不会自动执行，这使得是可以把脚本推迟到你准备好的时候。这种方法的局限性在于javascript文件必须与所请求的页面处于相同的域，这意味着javascript文件不能从cdn下载，因此不适合大型网站或项目。</p>
+
+<h2 id="toc_7">四、推荐的无阻塞加载方式</h2>
+
+<h3 id="toc_8">1、YUI3的方式</h3>
+
+<h3 id="toc_9">2、LazyLoad（1.5k）</h3>
+<p>Yahoo!Search工程师Ryan Grove创建的一个通用的延迟加载工具，是loadScript()函数的增强版。</p>
+<p>用法示例:</p>
+
+<pre><code>&lt;script type=&quot;text/javascript&quot; src=&quot;lazyload-min.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+    LazyLoad.js('the-reset.js', function(){
+        Application.init();
+    });
+&lt;/script&gt;</code></pre>
+<p>LazyLoad同样支持多个javascript文件，并能保证在所有浏览器中都可以按正确的顺序执行。要加载多个javscript文件，只需要给LazyLoad.js()y方法传入一个url数组：</p>
+
+<pre><code>&lt;script type=&quot;text/javascript&quot; src=&quot;lazyload-min.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+    LazyLoad.js(['first.js', 'the-reset.js'], function(){
+        Application.init();
+    });
+&lt;/script&gt;</code></pre>
+<p>项目地址：<a href="https://github.com/rgrove/lazyload">https://github.com/rgrove/lazyload</a></p>
+
+<h3 id="toc_10">3、LABjs（4.7k）</h3>
+<p>LABjs是Kyle Simpson受Steve Sounders的启发实现的无阻塞加载工具。用法示例：</p>
+
+<pre><code>&lt;script type=&quot;text/javascript&quot; src=&quot;lab.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+    $LAB.script('the-reset.js')
+        .wait(function(){
+            Application.init();
+        });
+&lt;/script&gt;</code></pre>
+<p>$LAB.script()方法用来定义需要下载的javascript文件，$LAB.wait()用来指定文件下载并执行完毕后所调用的函数。</p>
+<p>要下载多个javscript文件，只需链式调用另一个$LAB.script()方法：</p>
+
+<pre><code>&lt;script type=&quot;text/javascript&quot; src=&quot;lab.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+    $LAB.script('first.js')
+        .script('the-reset.js')
+        .wait(function(){
+            Application.init();
+        });
+&lt;/script&gt;</code></pre>
+<p>LABjs与众不同的是它管理依赖关系的能力。通常来说，连续的&lt;script&gt;标签意味着文件逐个下载并按顺序执行。</p>
+<p>LABjs允许使用wait()方法来指定哪些文件需要等待其它文件。上面的例子中first.js不能保证会在the-reset.js的代码前执行，为了确保这一点，必须在第一个script()方法后调用wait():</p>
+
+<pre><code>&lt;script type=&quot;text/javascript&quot; src=&quot;lab.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+    $LAB.script('first.js').wait()
+        .script('the-reset.js')
+        .wait(function(){
+            Application.init();
+        });
+&lt;/script&gt;</code></pre>
+<p>项目地址：<a href="http://labjs.com/">http://labjs.com/</a></p>
+
+<h3 id="toc_11">4、SeaJS（7.5k）</h3>
+<p>SeaJS 是淘宝玉伯开发的一个遵循 CommonJS 规范的模块加载框架，可用来轻松愉悦地加载任意 javascript 模块。详细请参考：<a href="http://seajs.com/docs/">http://seajs.com/docs/</a></p>
+
+<h3 id="toc_12">5、do 框架（3.5k）</h3>
+<p>Do是豆瓣网kejun开发的一个很轻量的Javascript开发框架。目前do.min.js。它的核心功能是对模块进行组织和加载。加载采取并行异步队列的策略，并且可以控制执行时机。Do可以任意置换核心类库，默认是jQuery。</p>
+<p>项目地址：<a href="https://github.com/kejun/Do">https://github.com/kejun/Do</a></p>
+
+<h3 id="toc_13">6、RequireJS（13.1k）</h3>
+<p>项目地址：<a href="http://requirejs.org/">http://requirejs.org/</a></p>
+
+    </div>
+    <div class="entry-meta">
+        Posted in<time class="updated" datetime="2011-05-29T21:30:00+08:00" pubdate>
+            2011-05-29
+        </time>
+        <span class="entry-tags">Category:<a href="/javascript/">Javascript</a></span>
+        <span class="entry-tags">Tags:
+            
+                <a href="/tag/性能/">性能</a>
+            
+                ,<a href="/tag/优化/">优化</a>
+            
+                ,<a href="/tag/javascrip/">Javascrip</a>
+            
+                ,<a href="/tag/load/">load</a>
+            
+                ,<a href="/tag/loader/">loader</a>
+            
+                ,<a href="/tag/labjs/">labjs</a>
+            
+                ,<a href="/tag/seajs/">seajs</a>
+            
+                ,<a href="/tag/lazyload/">lazyload</a>
+            
+		</span>
+    
+        
+    </div>
+    
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'bingdian-ontheway';
+        var disqus_title = 'Javascript 加载性能优化';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+</article><footer id="footer">
+    <p class="copyright"><span class="software">Powered by <a href="http://lab.lepture.com/liquidluck/">Felix Felicis</a> 3.8, </span><span class="theme">Theme <a href="http://wlog.cn/" rel="nofollow">responsive</a> 0.1 by <a href="http://wlog.cn/">bingdian</a></span></p>
+</footer><!-- #footer -->
+</div><!-- #wrapper -->
+
+
+</body>
+</html>

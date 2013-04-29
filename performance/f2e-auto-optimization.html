@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN"> 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="On The Way" />
+    <meta name="application-name" content="On The Way" />
+    <title>前端开发自动化优化工具 - On The Way</title>
+    <meta name="keywords" content="性能,前端优化,无损压缩,自动化" />
+    <meta name="description" content="" />
+    
+    <link rel="alternate" type="application/rss+xml" href="/feed.xml" title="On The Way" />
+    <link rel="stylesheet" href="/static/style.css?v=f0f73" />
+    <link rel="canonical" href="http://wlog.cn/performance/f2e-auto-optimization.html" />
+    <!--[if lt IE 9]>
+    <script src="/static/js/html5shiv.js?v=fb4e3"></script>
+    <![endif]-->
+</head>
+<body>
+<div id="wrapper">   
+<header id="header" class="clear">
+    <h1>前端开发自动化优化工具</h1>
+</header><!-- #header -->
+<nav id="nav" role="navigation">
+    <a href="/index.html">INDEX</a>
+    <a href="/tag/index.html">TAGS</a>
+    <a href="/about.html">ABOUT ME</a>
+    <a href="/links.html">LINKS</a>
+    <a href="/project.html">PROJECTS</a>
+    <a href="/feed.xml">FEED</a>
+</nav><article id="main" class="hentry">
+    <!-- <h1 class="entry-title">前端开发自动化优化工具</h1> -->
+    <div class="entry-content">
+        <h2 id="toc_0">一、功能介绍：</h2>
+<p>该工具用于前端自动化优化，主要有以下功能：</p>
+
+<ul>
+<li>压缩css&ndash;（yuicompressor）</li>
+<li>js语法检查和压缩&ndash;（google-closure-compiler）</li>
+<li>jpg、png、gif无损压缩&ndash;（jpegtran、pngout、gifsicle）</li>
+</ul>
+<p>目前该工具只有windows版本，linux和mac版本将在后面推出，欢迎大家试用。</p>
+
+<h2 id="toc_1">二、安装与使用：</h2>
+<p><strong>安装：</strong></p>
+<p>1、需要安装 JDK &gt;= 1.4, 并设置环境变量 JAVA_HOME</p>
+<p>JAVA_HOME配置方法如下:</p>
+
+<ol>
+<li>下载jdk并安装，下载地址：<a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank"><a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">www.oracle.com/technetwork/java/javase/downloads/index.html</a></a></li>
+<li>右键点击 我的电脑&gt;属性&gt;高级&gt;环境变量&gt;系统变量</li>
+<li>新建变量,变量名JAVA_HOME 路径：C:\Program Files\Java\jdk1.6.0_26 (填写jdk安装路径)</li>
+<li>找到path变量,在后面添加路径：;C:\Program Files\Java\jdk1.6.0_26\bin (注意前面有分号）</li>
+<li>打开cmd,输入java -version 如果能看到版本信息就说明配置成功了</li>
+</ol>
+<p>2、直接解压文件，运行F2E-Auto-Optimization.cmd（请不要放在有空格的目录下面）</p>
+<p><strong>使用：</strong></p>
+<p>根据提示输入项目所在目录，直接按照提示操作。（注意：源代码文件放在项目目录下src文件夹，build目录为优化后的文件，文件结构和src目录结构一致）。</p>
+
+<h2 id="toc_2">三、下载地址：</h2>
+<p>下载地址：<a href="http://www.wlog.cn/usr/uploads/2011/06/1127265507.rar" title="F2E-Auto-Optimization-for-win">F2E-Auto-Optimization-for-win.rar</a></p>
+<p>项目地址： <a href="https://github.com/bingdian/tools"target="_blank"><a href="https://github.com/bingdian/tools">github.com/bingdian/tools</a></a></p>
+
+    </div>
+    <div class="entry-meta">
+        Posted in<time class="updated" datetime="2011-05-19T22:32:00+08:00" pubdate>
+            2011-05-19
+        </time>
+        <span class="entry-tags">Category:<a href="/performance/">Performance</a></span>
+        <span class="entry-tags">Tags:
+            
+                <a href="/tag/性能/">性能</a>
+            
+                ,<a href="/tag/前端优化/">前端优化</a>
+            
+                ,<a href="/tag/无损压缩/">无损压缩</a>
+            
+                ,<a href="/tag/自动化/">自动化</a>
+            
+		</span>
+    
+        
+    </div>
+    
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'bingdian-ontheway';
+        var disqus_title = '前端开发自动化优化工具';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+</article><footer id="footer">
+    <p class="copyright"><span class="software">Powered by <a href="http://lab.lepture.com/liquidluck/">Felix Felicis</a> 3.8, </span><span class="theme">Theme <a href="http://wlog.cn/" rel="nofollow">responsive</a> 0.1 by <a href="http://wlog.cn/">bingdian</a></span></p>
+</footer><!-- #footer -->
+</div><!-- #wrapper -->
+
+
+</body>
+</html>

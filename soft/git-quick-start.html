@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-CN"> 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="On The Way" />
+    <meta name="application-name" content="On The Way" />
+    <title>git学习笔记 - On The Way</title>
+    <meta name="keywords" content="git,版本控制" />
+    <meta name="description" content="" />
+    
+    <link rel="alternate" type="application/rss+xml" href="/feed.xml" title="On The Way" />
+    <link rel="stylesheet" href="/static/style.css?v=f0f73" />
+    <link rel="canonical" href="http://wlog.cn/soft/git-quick-start.html" />
+    <!--[if lt IE 9]>
+    <script src="/static/js/html5shiv.js?v=fb4e3"></script>
+    <![endif]-->
+</head>
+<body>
+<div id="wrapper">   
+<header id="header" class="clear">
+    <h1>git学习笔记</h1>
+</header><!-- #header -->
+<nav id="nav" role="navigation">
+    <a href="/index.html">INDEX</a>
+    <a href="/tag/index.html">TAGS</a>
+    <a href="/about.html">ABOUT ME</a>
+    <a href="/links.html">LINKS</a>
+    <a href="/project.html">PROJECTS</a>
+    <a href="/feed.xml">FEED</a>
+</nav><article id="main" class="hentry">
+    <!-- <h1 class="entry-title">git学习笔记</h1> -->
+    <div class="entry-content">
+        <p>Git &mdash; The stupid content tracker。</p>
+<p>用途：版本控制</p>
+<p>流程：取代码 → 每次工作前更新代码到最新版本 → 修改代码 → 提交代码到服务器</p>
+<p>git下载地址：<a href="http://git-scm.com/download" target="_blank"><a href="http://git-scm.com/download">git-scm.com/download</a></a> （有win、linux、mac对应版本）</p>
+
+<h2 id="toc_0">一、git设置</h2>
+<p>设置用户名与邮箱</p>
+
+<pre><code>git config --global user.name &quot;My Name&quot;
+git config --global user.email &quot;my@email.com&quot;</code></pre>
+<p>上面设置命令中带了“&ndash;global&quot;参数，是全局配置，影响本机上所有的git项目。也可以对一些单独的项目进行设置，进入要设置的项目目录，进行设置：</p>
+
+<pre><code>cd dir
+git config user.name &quot;My Name&quot;
+git config user.email &quot;my@email.com&quot;</code></pre>
+<p>查看配置：</p>
+
+<pre><code>cat .git/config</code></pre>
+
+<h2 id="toc_1">二、创建git仓库及获取代码</h2>
+<p>创建git仓库：</p>
+
+<pre><code>mkdir project
+cd project
+git init #在当前的目录下建一个仓库</code></pre>
+<p>从已有的git仓库中提取代码:</p>
+
+<pre><code>git clone git@server:app.git myrepo</code></pre>
+
+<h2 id="toc_2">三、更改代码的操作</h2>
+<p>更新本地代码到最新版本（需要merge才能合到本地代码中）:</p>
+
+<pre><code>git fetch</code></pre>
+<p>合并更新后的代码到本地:</p>
+
+<pre><code>git merge</code></pre>
+<p>更新代码方式的另一种方法(git pull是git fetch和git merge命令的一个组合):</p>
+
+<pre><code>git pull</code></pre>
+<p>修改代码后，查看已修改的内容:</p>
+
+<pre><code>git diff --cached</code></pre>
+<p>将新增加文件加入到git中:</p>
+
+<pre><code>git add file1 file2 file3</code></pre>
+<p>所有文件全部加入到git中:</p>
+
+<pre><code>git add .</code></pre>
+<p>从git中删除文件:</p>
+
+<pre><code>git rm file1
+git rm -r dir1</code></pre>
+<p>提交修改:</p>
+
+<pre><code>git commit -m 'this is memo'</code></pre>
+<p>如果想省掉提交之前的 git add 命令，可以直接用:</p>
+
+<pre><code>git commit -a -m 'this is memo'
+
+commit和commit -a的区别, commit -a相当于：
+第一步：自动地add所有改动的代码，使得所有的开发代码都列于index file中
+第二步：自动地删除那些在index file中但不在工作树中的文件
+第三步：执行commit命令来提交</code></pre>
+<p>提交所有修改到远程服务器，这样，其它团队成员才能更新到这些修改</p>
+
+<pre><code>git push</code></pre>
+
+<h2 id="toc_3">四、git 分支（branch）操作</h2>
+<p>创建dev分支：</p>
+
+<pre><code>git branch dev</code></pre>
+<p>查看项目仓库中有几个分支：</p>
+
+<pre><code>git branch
+
+//*号为当前所在分支
+  dev
+* master</code></pre>
+<p>分支切换：</p>
+
+<pre><code>//切换到dev分支
+git checkout dev</code></pre>
+<p>查看master分支和dev分支差异：</p>
+
+<pre><code>git diff dev</code></pre>
+<p>合并dev分支到master分支(如果合并发生冲突，需要自己解决冲突)：</p>
+
+<pre><code>git merge branchname</code></pre>
+<p>解决冲突：</p>
+
+<pre><code>当merge命令自身无法解决冲突的时候，它会将工作树置于一种特殊的状态，并且给用户提供冲突信息，以期用户可以自己解决这些问题。当然在这个时候，未发生冲突的代码已经被git merge登记在了index file里了。如果你这个时候使用git diff，显示出来的只是发生冲突的代码信息。
+
+在你解决了冲突之前，发生冲突的文件会一直在index file中被标记出来。这个时候，如果你使用git commit提交的话，git会提示：filename.txt needs merge
+
+在发生冲突的时候，如果你使用git status命令，那么会显示出发生冲突的具体信息。</code></pre>
+<p>在你解决了冲突之后，你可以使用如下步骤来提交：</p>
+<p>第一步(如果需要增加文件)：</p>
+
+<pre><code>git add file1</code></pre>
+<p>第二步：</p>
+
+<pre><code>git commit</code></pre>
+<p>删除dev分支：</p>
+
+<pre><code>git branch -d dev</code></pre>
+<p>如果要删除的分支没有被合并到其它分支中去，那么就不能用“git branch -d”来删除它，需要改用“git branch -D”来强制删除。</p>
+
+<h2 id="toc_4">五、打标签</h2>
+<p>git可以对某一时间点上的版本打上标签。如在发布某个软件版本（比如 v0.1等），可以打版本标签。</p>
+<p>列出已有的标签：</p>
+
+<pre><code>git tag</code></pre>
+<p>打标签</p>
+
+<pre><code>git tag -a v0.1 -m 'tag version 0.1'</code></pre>
+
+<h2 id="toc_5">六、其它常用命令</h2>
+<p>显示commit日志：</p>
+
+<pre><code>git log</code></pre>
+<p>不仅显示commit日志，而且同时显示每次commit的代码改变：</p>
+
+<pre><code>git log -p</code></pre>
+<p>查看当前仓库的状态：</p>
+
+<pre><code>git status</code></pre>
+<p>回滚代码：</p>
+
+<pre><code>git revert HEAD</code></pre>
+<p>你也可以revert更早的commit，例如：</p>
+
+<pre><code>git revert HEAD^</code></pre>
+<p>销毁自己的修改</p>
+
+<pre><code>git reset --hard</code></pre>
+<p>查看最新版本和上一个版本的差异(一个^表示向前推进一个版本)</p>
+
+<pre><code>git diff HEAD HEAD^</code></pre>
+<p>git取消已经缓存的文件(慎用)：</p>
+
+<pre><code>git reset</code></pre>
+<p>git恢复删除了的文件，git pull 从git服务器取出，并且和本地修改merge， 类似于SVN up，但是对删除的文件不管用，恢复删除文件用</p>
+
+<pre><code>git checkout -f</code></pre>
+
+<h2 id="toc_6">七、githubb备忘</h2>
+
+<pre><code>Global setup:
+  Download and install Git
+  git config --global user.name &quot;imbingdian&quot;
+  git config --global user.email imbingdian@gmail.com
+
+Next steps:
+  mkdir projectname
+  cd projectname
+  git init
+  touch README
+  git add README
+  git commit -m 'first commit'
+  git remote add origin git@github.com:bingdian/projectname.git
+  git push -u origin master
+
+Existing Git Repo?
+  cd existing_git_repo
+  git remote add origin git@github.com:bingdian/projectname.git
+  git push -u origin master</code></pre>
+<p><a href="http://www.wlog.cn/usr/uploads/2011/07/2671512346.png" title="git.png" target="blank">Git 常用命令图示</a>&ndash;来源：<a href="http://www.cnblogs.com/1-2-3/archive/2010/07/18/git-commands.html" target="blank"><a href="http://www.cnblogs.com/1-2-3/archive/2010/07/18/git-commands.html">www.cnblogs.com/1-2-3/archive/2010/07/18/git-commands.html</a></a></p>
+
+<h2 id="toc_7">扩展阅读：</h2>
+
+<ul>
+<li><a href="http://www.linuxsir.org/main/doc/git/gittutorcn.htm">Git 中文教程</a></li>
+<li><a href="http://progit.org/book/zh/">Pro Git professional version control</a></li>
+<li><a href="http://scie.nti.st/2007/11/14/hosting-git-repositories-the-easy-and-secure-way">Hosting Git repositories, The Easy (and Secure) Way)</a></li>
+</ul>
+
+    </div>
+    <div class="entry-meta">
+        Posted in<time class="updated" datetime="2011-06-18T22:32:00+08:00" pubdate>
+            2011-06-18
+        </time>
+        <span class="entry-tags">Category:<a href="/soft/">Soft</a></span>
+        <span class="entry-tags">Tags:
+            
+                <a href="/tag/git/">git</a>
+            
+                ,<a href="/tag/版本控制/">版本控制</a>
+            
+		</span>
+    
+        
+    </div>
+    
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'bingdian-ontheway';
+        var disqus_title = 'git学习笔记';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+</article><footer id="footer">
+    <p class="copyright"><span class="software">Powered by <a href="http://lab.lepture.com/liquidluck/">Felix Felicis</a> 3.8, </span><span class="theme">Theme <a href="http://wlog.cn/" rel="nofollow">responsive</a> 0.1 by <a href="http://wlog.cn/">bingdian</a></span></p>
+</footer><!-- #footer -->
+</div><!-- #wrapper -->
+
+
+</body>
+</html>

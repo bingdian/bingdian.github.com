@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="zh-CN"> 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="On The Way" />
+    <meta name="application-name" content="On The Way" />
+    <title>Javascrip基础 - Javascript学习笔记（一） - On The Way</title>
+    <meta name="keywords" content="javascrit,学习笔记" />
+    <meta name="description" content="" />
+    
+    <link rel="alternate" type="application/rss+xml" href="/feed.xml" title="On The Way" />
+    <link rel="stylesheet" href="/static/style.css?v=f0f73" />
+    <link rel="canonical" href="http://wlog.cn/javascript/basic-javascript-notes.html" />
+    <!--[if lt IE 9]>
+    <script src="/static/js/html5shiv.js?v=fb4e3"></script>
+    <![endif]-->
+</head>
+<body>
+<div id="wrapper">   
+<header id="header" class="clear">
+    <h1>Javascrip基础 - Javascript学习笔记（一）</h1>
+</header><!-- #header -->
+<nav id="nav" role="navigation">
+    <a href="/index.html">INDEX</a>
+    <a href="/tag/index.html">TAGS</a>
+    <a href="/about.html">ABOUT ME</a>
+    <a href="/links.html">LINKS</a>
+    <a href="/project.html">PROJECTS</a>
+    <a href="/feed.xml">FEED</a>
+</nav><article id="main" class="hentry">
+    <!-- <h1 class="entry-title">Javascrip基础 - Javascript学习笔记（一）</h1> -->
+    <div class="entry-content">
+        <h2 id="toc_0">一、数据类型</h2>
+
+<ul>
+<li>原始值(primitive value) 是存储在栈(stack)中的简单数据段，也就是说，他们的值直接存储在变量的访问的位置。(ECMAScript有五种原始类型：Undefined、Null、Boolean、Number和String。) </li>
+<li>引用值(reference value) 是存储在堆(heap)中的对象，也就是说存储的值是一个指针(point)，指向存储对象的内存处。(对象，数组函数属于引用类型)</li>
+</ul>
+
+<h3 id="toc_1">1）数字</h3>
+
+<h3 id="toc_2">2）字符串</h3>
+<p>数字转换字符串：</p>
+
+<pre><code>var i = 138;
+
+//三种方法
+var s1 = i + '';
+var s2 = String(i);
+var s3 = i.toString();
+console.log(typeof(i)); //number
+console.log(typeof(s1)); //string
+console.log(typeof(s2)); //string
+console.log(typeof(s3)); //string
+
+//二进制、八进制、十六进制
+var s4 = i.toString(2);
+var s5 = i.toString(8);
+var s6 = i.toString(16);
+
+console.log(s4);    //10001010
+console.log(s5);    //212
+console.log(s6);    //8a</code></pre>
+<p>字符串转换数字：</p>
+
+<pre><code>var s = '22 years old';
+var i = s - 0;      //注：给一个字符串加0则导致字符串连接
+var j = Number(i);
+var k = parseInt(s);   
+var l = parseFloat(s);
+
+console.log(typeof(s)); //string
+console.log(typeof(i)); //number
+console.log(typeof(j)); //number</code></pre>
+<p>parseInt和parseFloat可以从字符串开始处转换和返回任何数字，忽略或舍去非数字部分。parseInt只截取整数，parseFloat截取整数和浮点数。如果是以0x或0X开头，parseInt将其解释为16进制数字。</p>
+<p>字符串链接用+号：</p>
+
+<pre><code>var longString = 'here is the strory, of a ' +
+                 'man named bingdian.'</code></pre>
+
+<h3 id="toc_3">3）布尔值</h3>
+
+<h3 id="toc_4">4）null</h3>
+<p>null是一个特殊值，在下列场景应使用null:</p>
+
+<ul>
+<li>用来初始化一个变量，这个变量可能赋值为一个对象</li>
+<li>用来和一个已经初始化的变量比较，这个变量可以是也可以不是一个对象</li>
+<li>当函数的参数期望是对象时，用作参数传入</li>
+<li>当函数的返回值期望是对象时，用作返回值传出</li>
+</ul>
+<p>下面的场景不应当使用null:</p>
+
+<ul>
+<li>不要用null来检测是否传入了某个参数</li>
+<li>不要用null来检测一个未初始化的变量</li>
+</ul>
+<p>示例代码：</p>
+
+<pre><code>// 好的用法
+var person = null;
+
+// 好的用法
+function getPerson() {
+    if ( condition ) {
+        return new Person('bingdian');
+    } else {
+        return null;
+    }
+}
+
+// 好的用法
+var person = getPerson();
+if ( person !=== null ) {
+    doSomething();
+}
+
+// 不好的用法，用来和未初始化的变量比较
+var person;
+if ( person  != null ) {
+    doSomething();
+}
+
+// 不好的用法 ，检测是否传入了参数
+function doSomething(arg1, arg2, arg3, arg4) {
+    if ( arg4 != null ) {
+        doSomethingElse();
+    }
+}</code></pre>
+<p>理解null的最好的方式是将它当做是对象的占位符(placeholder)。</p>
+
+<h3 id="toc_5">5）undefined</h3>
+<p>undefined是一个特殊值，容易和null搞混，undefined == null为true,这两个值的用途各不相同。</p>
+<p>没有被初始化的变量都有一个初始值，即undefined，表示这个变量等待被赋值。</p>
+
+<pre><code>//不好的写法
+var person;
+console.log(person === undefined);//true</code></pre>
+<p>尽管这段代码能正常工作，但建议避免在代码中使用undefined。这个值常常和返回&quot;undefined&quot;的typeof运算符混淆。typeof不管理undefined的变量还是未声明的变量，运算结果都是&quot;undefined&quot;:</p>
+
+<pre><code>//foo未声明
+var person;
+console.log(typeof person); //&quot;undefined&quot;
+console.log(typeof foo); //&quot;undefined&quot;</code></pre>
+<p>通过禁止使用特殊值undefined,可以确保只有一种情况下typeof才会返回&quot;undefined&quot;:当变量未声明时。</p>
+
+<h3 id="toc_6">6）函数</h3>
+
+<h3 id="toc_7">7）对象</h3>
+
+<h3 id="toc_8">8）数组</h3>
+
+<h3 id="toc_9">9）Date对象</h3>
+
+<h3 id="toc_10">10）正则表达式</h3>
+
+<h3 id="toc_11">11）Error对象</h3>
+
+<h2 id="toc_12">二、变量</h2>
+
+<h3 id="toc_13">1）变量声明</h3>
+<p>变量用关键字var来声明，如：</p>
+
+<pre><code>var i,
+    num,
+    a, b,
+    name ='bingdian';</code></pre>
+<p>var关键字声明的变量是永久的，用delete运算符删除这些变量将会引发错误。</p>
+
+<pre><code>x = 1;
+delete x;
+console.log(x);   //x is not defined</code></pre>
+<p>javascript的变量类型是松散类型的，可以用来保存任何数据类型，可以在修改变量值的同时修改变量类型：</p>
+
+<pre><code>var answer = 10;
+x = 'The answer is ' + 10
+y = 10 + ' is the answer'
+console.log(x);   // The answer is 10
+console.log(y);   // 10 is the answer
+
+var a = '17' - 8;  //9
+var b = '17' + 8;  //178
+console.log(a);
+console.log(b);</code></pre>
+<p>使用一个未声明的变量，会引发错误。</p>
+
+<h3 id="toc_14">2）变量作用域 ###</h3>
+<p>变量的作用域是程序中定义这个变量的区域。函数内声明的变量只在函数内部起作用（声明局部变量一定要使用var关键字声明）。</p>
+<p>在函数内部，局部变量作用域优先级高于同名全局变量，例：</p>
+
+<pre><code>var i = 99;
+var foo = function() {
+    var i = 10;
+    console.log(i);
+}
+foo();  //10 使用局部变量
+console.log(i);     //99 使用全局变量</code></pre>
+<p>声明局部变量一定要使用var关键字，使用var关键字声明变量时，变量会自动添加到距离最近的可用环境中。如果没有写var, 变量就会暴露在全局上下文中, 这样很可能会和现有变量冲突. 另外, 如果没有加上, 很难明确该变量的作用域是什么, 变量也很可能像在局部作用域中, 很轻易地泄漏到 Document 或者 Window 中, 所以务必用var去声明变量。例：</p>
+
+<pre><code>var a = 3;
+var foo = function() {
+    a = 10;
+    b = 22;
+    console.log(a);
+    console.log(b);
+}
+foo();              //10 22
+console.log(a);     //10
+console.log(b);     //22</code></pre>
+<p>如果变量在未声明的情况下被初始化，该变量会自动添加到全局环境。看下面两个例子：</p>
+
+<pre><code>function add(a ,b) {
+    var sum = a+b;
+    return sum;
+}
+var rs = add(2,3);  
+console.log(rs);    //5
+console.log(sum);   //sum is not defined
+function add(a ,b) {
+    sum = a+b;
+    return sum;
+}
+var rs = add(2,3);  
+console.log(rs);    //5
+console.log(sum);   //5 sum在被初始化赋值时没用var关键字，调用完add()后，添加到全局变量的sum继续存在。</code></pre>
+<p>javascript执行代码时，会创建一个上下文执行环境，全局环境是最外围的环境。每个函数在被调用时都会创建自己的执行环境，当函数执行完，当前执行gg&#39;f环境被销毁。每个执行环境都有一个与之关联的作用域链。在执行代码时，javascript引擎会通过搜索执行环境的作用域链来解析变量和函数名这样的标识符。解析过程从作用域链的前端开始，向上逐级查询与给定名字匹配的标识符，一旦找到标识符，搜索过程就停止，如果没找到该标识符，则沿作用域链继续向上搜索，一直搜索到全局对象，如果没有搜索到，则认为该标识符未定义。标识符在作用域链中位置越深，查找和访问它所需要时间越长，所以尽可能使用局部变量。</p>
+<p>全局环境只能访问在全局环境中定义的的变量和函数，不能直接访问局部环境中的任何数据。</p>
+
+<h3 id="toc_15">3）没有块级作用域 ###</h3>
+
+<pre><code>var a = 8;
+var foo = function() {
+    console.log(a);     //undefined
+    var a = 5;
+    console.log(a);     //5
+}
+f();</code></pre>
+<p>因为局部变量在整个函数foo()内都有定义的，整个函数中隐藏了全局变量。虽然局部变量在整个函数体中有定义的，但在var语句之后，所以不会被初始化。所以最好在函数的顶部声明函数中所有用到的变量。</p>
+
+<h3 id="toc_16">4）未定义的变量和未赋值的变量 ###</h3>
+<p>没有赋值的变量值为undefined，使用未定义的变量会引起错误。</p>
+
+<pre><code>var a;
+console.log(a);     //undefined
+console.log(b);     //b is not defined</code></pre>
+
+<h3 id="toc_17">5）垃圾收集（grabage collection）</h3>
+<p>javascrip具有自动垃圾收集机制，javascript解释器可以检测到何时程序不再使用一个对象，就把它所占用的内存释放掉。</p>
+
+<h2 id="toc_18">三、运算符</h2>
+
+<h3 id="toc_19">1）算术运算符</h3>
+<p>加法运算符(+)</p>
+<p>减法法运算符(-)</p>
+<p>乘法法运算符(*)</p>
+<p>除法法运算符(/)</p>
+<p>模运算符(%),取模运算符通常是整数，但它也适用于浮点数。</p>
+<p>加法运算符(+)</p>
+<p>递增运算符(++)</p>
+
+<pre><code>i = 1;
+j = ++i;
+console.log(i); //2
+console.log(j); //2
+
+i = 1;
+j = i++;
+console.log(i); //2
+console.log(j); //1</code></pre>
+<p>递减运算符(&ndash;)</p>
+
+<pre><code>i = 1;
+j = --i;
+console.log(i); //0
+console.log(j); //0
+
+i = 1;
+j = i--;
+console.log(i); //0
+console.log(j); //1</code></pre>
+
+<h3 id="toc_20">2）相等运算符</h3>
+<p><em>==相等运算符允许类型转换，检测两个运算符是否相等。</em></p>
+
+<ul>
+<li>如果两个值具有相同的类型，检测它们的等同性，如果两个值完全相同，则它们相等。</li>
+<li>如果两个值具有不同的类型：
+
+<ul>
+<li>如果一个是null,一个是undefined，它们相等</li>
+<li>如果一个是数字，一个是字符串，将字符串转换为数字比较</li>
+<li>如果一个是true，将它转换为1比较。如是一个是false，将它转换为0比较。</li>
+<li>如果一个值是对象，另一个是数字或字符串，将对象转换为原始类型值，再进行比较。可以使用对象的toString或valueOf转换。</li>
+</ul></li>
+</ul>
+<p>JavaScript 是弱类型语言，这就意味着，等于操作符会为了比较两个值而进行强制类型转换。</p>
+
+<pre><code>&quot;&quot;           ==   &quot;0&quot;           // false
+0            ==   &quot;&quot;            // true
+0            ==   &quot;0&quot;           // true
+false        ==   &quot;false&quot;       // false
+false        ==   &quot;0&quot;           // true
+false        ==   undefined     // false
+false        ==   null          // false
+null         ==   undefined     // true
+&quot; \t\r\n&quot;    ==   0             // true</code></pre>
+<p>上面的展示了强类型转换，这也是使用 == 被广泛认为是不好编程习惯的主要原因， 由于它的复杂转换规则，会导致难以跟踪的问题。</p>
+<p>此外，强制类型转换也会带来性能消耗，比如一个字符串为了和一个数组进行比较，必须事先被强制转换为数字。</p>
+
+<h3 id="toc_21">3)===完全等同</h3>
+
+<ul>
+<li>两个值类型不同，它们就不同</li>
+<li>如果两个值都是数字，除非其中一个或两个者是NaN，否则他们是等同的。</li>
+<li>如果两个值都是字符串，而且同一位置上的字符完全相同，那么它们就完全等同。</li>
+<li>两个值都是布尔值true或者都是false，那么它们等同。</li>
+<li>两个值引用同一对象、数组或函数，它们完全等同。如果引用不同对象，它们就不等同。</li>
+<li><p>如果两个值者是null或者都是undefined，它们完全相同。</p>
+<p>{} === {};                   // false
+new String(&#39;foo&#39;) === &#39;foo&#39;; // false
+new Number(10) === 10;       // false
+var foo = {};
+foo === foo;                 // true</p></li>
+</ul>
+<p>这里等于运算符比较的不是值是否相等，而是是否属于同一个身份；也就是说，只有对象的同一个实例才被认为是相等的。</p>
+
+<h3 id="toc_22">4）关系运算符</h3>
+
+<blockquote>
+<p>、&gt;=、&lt;、&lt;=</p>
+</blockquote>
+<p>比较运算符只能在数字和字符串上进行，如果不是数字或字符串的运算数将被转换成数字或字符串。</p>
+
+<h3 id="toc_23">5）in运算符</h3>
+<p>in左边的运算数是一字符串或者可以被转为为字符串，右边运算数是一个对象或数组，如果左边的值是右边对象的一个属性名，则返回true。</p>
+
+<h3 id="toc_24">6）typeof运算符</h3>
+<p>typeof 操作符（和 instanceof 一起）或许是 JavaScript 中最大的设计缺陷， 因为几乎不可能从它们那里得到想要的结果</p>
+
+<pre><code>Value               Class      Type
+-------------------------------------
+&quot;foo&quot;               String     string
+new String(&quot;foo&quot;)   String     object
+1.2                 Number     number
+new Number(1.2)     Number     object
+true                Boolean    boolean
+new Boolean(true)   Boolean    object
+new Date()          Date       object
+new Error()         Error      object
+[1,2,3]             Array      object
+new Array(1, 2, 3)  Array      object
+new Function(&quot;&quot;)    Function   function
+/abc/g              RegExp     object (function in Nitro/V8)
+new RegExp(&quot;meow&quot;)  RegExp     object (function in Nitro/V8)
+{}                  Object     object
+new Object()        Object     object</code></pre>
+<p>上面代码中，Type 一列表示 typeof 操作符的运算结果。可以看到，这个值在大多数情况下都返回 &ldquo;object&quot;。</p>
+<p>Class 一列表示对象的内部属性 [[Class]] 的值。</p>
+
+<pre><code>JavaScript 标准文档中定义: [[Class]] 的值只可能是下面字符串中的一个： Arguments, Array, Boolean, Date, Error, Function, JSON, Math, Number, Object, RegExp, String.</code></pre>
+<p>为了获取对象的 [[Class]]，我们需要使用定义在 Object.prototype 上的方法 toString。</p>
+
+<pre><code>console.log(Object.prototype.toString.call([]));  // &quot;[object Array]&quot;
+console.log(Object.prototype.toString.call({}));  // &quot;[object Object]&quot;
+console.log(Object.prototype.toString.call(2));   // &quot;[object Number]&quot;</code></pre>
+<p>为了检测一个对象的类型，强烈推荐使用 Object.prototype.toString 方法； 因为这是唯一一个可依赖的方式。正如上面表格所示，typeof 的一些返回值在标准文档中并未定义， 因此不同的引擎实现可能不同。</p>
+<p>除非为了检测一个变量是否已经定义，我们应尽量避免使用 typeof 操作符。</p>
+
+<h3 id="toc_25">7）instanceof运算符</h3>
+<p>instanceof左边的运算数是一个对象，右边运算数是一个对象类的名字，如果左边的对象是右边类的一个实例，则返回true。</p>
+<p>比较自定义对象：</p>
+
+<pre><code>function Foo() {}
+function Bar() {}
+Bar.prototype = new Foo();
+
+new Bar() instanceof Bar; // true
+new Bar() instanceof Foo; // true
+
+// 如果仅仅设置 Bar.prototype 为函数 Foo 本身，而不是 Foo 构造函数的一个实例
+Bar.prototype = Foo;
+new Bar() instanceof Foo; // false</code></pre>
+<p>instanceof 比较内置类型：</p>
+
+<pre><code>new String('foo') instanceof String; // true
+new String('foo') instanceof Object; // true
+
+'foo' instanceof String; // false
+'foo' instanceof Object; // false</code></pre>
+<p>instanceof 运算符应该仅仅用来比较来自同一个 JavaScript 上下文的自定义对象。</p>
+
+<h3 id="toc_26">8）字符串运算符</h3>
+<p>+</p>
+
+<h3 id="toc_27">9）逻辑运算符</h3>
+<p>&amp;&amp; 、 || 、！</p>
+
+<h3 id="toc_28">10）条件运算符</h3>
+<p>?:</p>
+
+<h3 id="toc_29">11）其它运算符</h3>
+<p>对象创建运算符new</p>
+<p>delete运算符</p>
+<p>数组对象存取运算符[]、.</p>
+
+<h2 id="toc_30">四、语句</h2>
+
+<h3 id="toc_31">1）if</h3>
+
+<h3 id="toc_32">2）else if</h3>
+
+<h3 id="toc_33">3）switch</h3>
+
+<pre><code>switch(n) {
+    case 1: 
+    //do something
+    break;
+
+    case 2: 
+    //do something
+    break;
+
+    case 3: 
+    //do something
+    break;
+
+    case 4: 
+    //do something
+    break;
+
+    default:
+    //do something
+    break;
+}</code></pre>
+
+<h3 id="toc_34">4）while</h3>
+
+<pre><code>var count = 0;
+while (count &lt; 10) {
+    console.log(count++);
+}</code></pre>
+
+<h3 id="toc_35">5）do while</h3>
+
+<pre><code>var count = 0;
+do {
+    console.log(count++);
+} while (count &lt; 10)</code></pre>
+
+<h3 id="toc_36">6）for</h3>
+
+<pre><code>for (var i = 0; i &lt; 10; i++) {
+    console.log(i);
+}</code></pre>
+
+<h3 id="toc_37">7）for in</h3>
+
+<pre><code>Object.prototype.bar = 1;
+
+var person = {
+    'name': 'bingdian',
+    'age': '25'
+}
+
+for (i in person) {
+    console.log(i + ':' + person[i]);
+}
+//name:bingdian
+//age:25
+//bar:1</code></pre>
+<p>和 in 操作符一样，for in 循环同样在查找对象属性时遍历原型链上的所有属性。</p>
+<p>由于不可能改变 for in 自身的行为，因此有必要过滤出那些不希望出现在循环体中的属性， 这可以通过 Object.prototype 原型上的 hasOwnProperty 函数来完成。</p>
+
+<pre><code>Object.prototype.bar = 1;
+
+var person = {
+    'name': 'bingdian',
+    'age': '25'
+}
+
+for (i in person) {
+    if (person.hasOwnProperty(i)) {
+        console.log(i + ':' + person[i]);
+    }
+}
+//name:bingdian
+//age:25</code></pre>
+<p>推荐总是使用 hasOwnProperty。不要对代码运行的环境做任何假设，不要假设原生对象是否已经被扩展了。</p>
+
+    </div>
+    <div class="entry-meta">
+        Posted in<time class="updated" datetime="2011-06-21T22:23:00+08:00" pubdate>
+            2011-06-21
+        </time>
+        <span class="entry-tags">Category:<a href="/javascript/">Javascript</a></span>
+        <span class="entry-tags">Tags:
+            
+                <a href="/tag/javascrit/">javascrit</a>
+            
+                ,<a href="/tag/学习笔记/">学习笔记</a>
+            
+		</span>
+    
+        
+    </div>
+    
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'bingdian-ontheway';
+        var disqus_title = 'Javascrip基础 - Javascript学习笔记（一）';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+</article><footer id="footer">
+    <p class="copyright"><span class="software">Powered by <a href="http://lab.lepture.com/liquidluck/">Felix Felicis</a> 3.8, </span><span class="theme">Theme <a href="http://wlog.cn/" rel="nofollow">responsive</a> 0.1 by <a href="http://wlog.cn/">bingdian</a></span></p>
+</footer><!-- #footer -->
+</div><!-- #wrapper -->
+
+
+</body>
+</html>

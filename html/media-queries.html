@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN"> 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="On The Way" />
+    <meta name="application-name" content="On The Way" />
+    <title>CSS3 Media Queries - On The Way</title>
+    <meta name="keywords" content="css3,Media-Queries" />
+    <meta name="description" content="" />
+    
+    <link rel="alternate" type="application/rss+xml" href="/feed.xml" title="On The Way" />
+    <link rel="stylesheet" href="/static/style.css?v=f0f73" />
+    <link rel="canonical" href="http://wlog.cn/html/media-queries.html" />
+    <!--[if lt IE 9]>
+    <script src="/static/js/html5shiv.js?v=fb4e3"></script>
+    <![endif]-->
+</head>
+<body>
+<div id="wrapper">   
+<header id="header" class="clear">
+    <h1>CSS3 Media Queries</h1>
+</header><!-- #header -->
+<nav id="nav" role="navigation">
+    <a href="/index.html">INDEX</a>
+    <a href="/tag/index.html">TAGS</a>
+    <a href="/about.html">ABOUT ME</a>
+    <a href="/links.html">LINKS</a>
+    <a href="/project.html">PROJECTS</a>
+    <a href="/feed.xml">FEED</a>
+</nav><article id="main" class="hentry">
+    <!-- <h1 class="entry-title">CSS3 Media Queries</h1> -->
+    <div class="entry-content">
+        <h2 id="toc_0">一、Media Queries 支持的属性</h2>
+
+<pre><code>属性                值                 Min/Max     描述
+color               integer             yes         每种色彩的字节数
+color-index         integer             yes         色彩表中的色彩数
+device-aspect-ratio integer/integer     yes         宽高比例
+device-height       length              yes         设备屏幕的输出高度
+device-width        length              yes         设备屏幕的输出宽度
+grid                integer             no          是否是基于格栅的设备
+height              length              yes         渲染界面的高度
+monochrome          integer             yes         单色帧缓冲器中每像素字节
+resolution          resolution          yes         分辨率
+scan                                    no          tv媒体类型的扫描方式
+width               length              yes         渲染界面的宽度
+orientation         Portrait/landscape  no          横屏或竖屏</code></pre>
+
+<h2 id="toc_1"></h2>
+
+<pre><code>height              min-height              max-height
+device-width        min-device-width        max-device-width
+device-height       min-device-height       max-device-height
+aspect-ratio        min-aspect-ratio        max-aspect-ratio
+device-aspect-ratio min-device-aspect-ratio max-device-aspect-ratio
+color               min-color               max-color
+color-index         min-color-index         max-color-index
+Monochrome          min-monochrome          max-monochrome
+Resolution          min-resolution          max-resolution</code></pre>
+
+<h2 id="toc_2">二、关键字</h2>
+<p>and - 结合多个媒体查询
+not - 排除某种制定的媒体类型
+only - 用来定某种特定的媒体类型</p>
+
+<h2 id="toc_3">三、引用样式示例</h3></h2>
+
+<pre><code>&amp;lt;link rel=&quot;stylesheet&quot; media=&quot;all&quot; href=&quot;style.css&quot; /&gt;
+&amp;lt;link rel=&quot;stylesheet&quot; media=&quot;screen and (min-width:980px)&quot; href=&quot;desktop.css&quot; /&gt;
+&amp;lt;link rel=&quot;stylesheet&quot; media=&quot;screen and (min-width:768px) and (max-width:980px)&quot; href=&quot;pad.css&quot; /&gt;
+&amp;lt;link rel=&quot;stylesheet&quot; media=&quot;screen and (min-width:480) and (max-width: 768px)&quot; href=&quot;phone.css&quot; /&gt;
+&amp;lt;link rel=&quot;stylesheet&quot; media=&quot;screen and (max-width:320px)&quot; href=&quot;small.css&quot; /&gt;</code></pre>
+
+<h2 id="toc_4">四、内联样式示例</h2>
+
+<pre><code>@media screen and (min-width: 980px) {
+    //css code
+}
+@screen and (min-width:768px) and (max-width:980px) {
+    //css code
+}
+@screen and (min-width:480) and (max-width: 768px) {
+    //css code
+}
+@screen and (max-width:320px) {
+    //css code
+}
+
+@media screen and (max-device-width: 480px) {
+    //max-device-width等于480px
+}
+@media screen and (device-aspect-ratio: 16/9), screen and (device-aspect-ratio: 16/10) {
+    //设备宽高比
+}
+@media all and (orientation:portrait) {
+    //竖屏
+}
+@media all and (orientation:landscape) {
+    //横屏
+}</code></pre>
+
+<h2 id="toc_5">五、jQuery Media Queries Plugin for ie6/7/8</h2>
+<p><a href="http://archive.plugins.jquery.com/project/MediaQueries">http://archive.plugins.jquery.com/project/MediaQueries</a></p>
+
+<h2 id="toc_6">六、Demo</h2>
+<p>本博客缩放即可看到效果</p>
+
+<h2 id="toc_7">扩展阅读：</h2>
+
+<ul>
+<li><a href="http://www.w3.org/TR/css3-mediaqueries/">http://www.w3.org/TR/css3-mediaqueries/</a></li>
+<li><a href="https://developer.mozilla.org/en/CSS/Media_queries">https://developer.mozilla.org/en/CSS/Media_queries</a></li>
+<li><a href="https://developer.mozilla.org/en/CSS/Media_queries">https://developer.mozilla.org/en/CSS/Media_queries</a></li>
+<li><a href="http://dev.opera.com/articles/view/safe-media-queries/">http://dev.opera.com/articles/view/safe-media-queries/</a></li>
+<li><a href="http://reference.sitepoint.com/css/mediaqueries">http://reference.sitepoint.com/css/mediaqueries</a></li>
+<li><a href="http://mediaqueri.es">http://mediaqueri.es</a></li>
+</ul>
+
+    </div>
+    <div class="entry-meta">
+        Posted in<time class="updated" datetime="2012-02-08T21:42:00+08:00" pubdate>
+            2012-02-08
+        </time>
+        <span class="entry-tags">Category:<a href="/html/">Html</a></span>
+        <span class="entry-tags">Tags:
+            
+                <a href="/tag/css3/">css3</a>
+            
+                ,<a href="/tag/media-queries/">Media-Queries</a>
+            
+		</span>
+    
+        
+    </div>
+    
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'bingdian-ontheway';
+        var disqus_title = 'CSS3 Media Queries';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+</article><footer id="footer">
+    <p class="copyright"><span class="software">Powered by <a href="http://lab.lepture.com/liquidluck/">Felix Felicis</a> 3.8, </span><span class="theme">Theme <a href="http://wlog.cn/" rel="nofollow">responsive</a> 0.1 by <a href="http://wlog.cn/">bingdian</a></span></p>
+</footer><!-- #footer -->
+</div><!-- #wrapper -->
+
+
+</body>
+</html>

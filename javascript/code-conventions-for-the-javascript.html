@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="zh-CN"> 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="On The Way" />
+    <meta name="application-name" content="On The Way" />
+    <title>[转]JavaScript程序编码规范 - On The Way</title>
+    <meta name="keywords" content="规范,Javascript" />
+    <meta name="description" content="" />
+    
+    <link rel="alternate" type="application/rss+xml" href="/feed.xml" title="On The Way" />
+    <link rel="stylesheet" href="/static/style.css?v=f0f73" />
+    <link rel="canonical" href="http://wlog.cn/javascript/code-conventions-for-the-javascript.html" />
+    <!--[if lt IE 9]>
+    <script src="/static/js/html5shiv.js?v=fb4e3"></script>
+    <![endif]-->
+</head>
+<body>
+<div id="wrapper">   
+<header id="header" class="clear">
+    <h1>[转]JavaScript程序编码规范</h1>
+</header><!-- #header -->
+<nav id="nav" role="navigation">
+    <a href="/index.html">INDEX</a>
+    <a href="/tag/index.html">TAGS</a>
+    <a href="/about.html">ABOUT ME</a>
+    <a href="/links.html">LINKS</a>
+    <a href="/project.html">PROJECTS</a>
+    <a href="/feed.xml">FEED</a>
+</nav><article id="main" class="hentry">
+    <!-- <h1 class="entry-title">[转]JavaScript程序编码规范</h1> -->
+    <div class="entry-content">
+        <p>来源：<a href="http://www.yeeyan.org/articles/view/cloudwater/4042">www.yeeyan.org/articles/view/cloudwater/4042</a></p>
+<p>原文：<a href="http://javascript.crockford.com/code.html">javascript.crockford.com/code.html</a></p>
+
+<h2 id="toc_0">JavaScript程序编码规范</h2>
+<p>这是一套适用于JavaScript程序的编码规范。它基于Sun的Java程序编码规范。但进行了大幅度的修改, 因为JavaScript不是Java。</p>
+<p>软件的长期价值直接源于其编码质量。在它的整个生命周期里,一个程序可能会被许多人阅读或修改。如果一个程序可以清晰的展现出它的结构和特征,那就能减少在以后对其进行修改时出错的可能性。
+编程规范可以帮助程序员们增加程序的健壮性。</p>
+<p>所有的JavaScript代码都是暴露给公众的。所以我们更应该保证其质量。</p>
+<p>保持整洁很重要。</p>
+
+<h2 id="toc_1">JavaScript文件</h2>
+<p>JavaScript程序应独立保存在后缀名为.js的文件中。</p>
+<p>JavaScript代码不应该被包含在HTML文件中,除非这是段特定只属于此部分的代码。在HTML中的JavaScript代码会明显增加文件大小,而且也不能对其进行缓存和压缩。</p>
+<p>filename.js&gt;应尽量放到body的后面。这样可以减少因为载入script而造成其他页面内容载入也被延迟的问题。也没有必要使用language或者type属性。MIME类型是由服务器而非scripttag来决定的。</p>
+
+<h2 id="toc_2">缩进</h2>
+<p>缩进的单位为四个空格。避免使用Tab键来缩进(即使现在已经是21世纪了),也始终没有个统一的Tab长短标准。虽然使用空格会增加文件的大小,但在局域网中几乎可以忽略,且在最小化过程中也可被消除掉。</p>
+
+<h2 id="toc_3">每行长度</h2>
+<p>避免每行超过80个字符。当一条语句一行写不下时,请考虑折行。在运算符号,最好是逗号后换行。在运算符后换行可以减少因为复制粘贴产生的错误被分号掩盖的几率。下一行应该缩进8个空格。</p>
+
+<h2 id="toc_4">注释</h2>
+<p>不要吝啬注释。给以后需要理解你的代码的人们(或许就是你自己)留下信息是非常有用的。注释应该和它们所注释的代码一样是书写良好且清晰明了。偶尔的小幽默就更不错了。记得要避免冗长或者情绪化。</p>
+<p>及时地更新注释也很重要。错误的注释会让程序更加难以阅读和理解。</p>
+<p>让注释有意义。重点在解释那些不容易立即明白的逻辑上。不要把读者的时间浪费在阅读类似于:</p>
+
+<pre><code>i = 0; //让i等于0</code></pre>
+<p>使用单行注释。块注释用于注释正式文档和无用代码。</p>
+
+<h2 id="toc_5">变量声明</h2>
+<p>所有的变量必须在使用前进行声明。JavaScript并不强制必须这么做,但是这么做可以让程序易于阅读,且也容易发现那些没声明的变量(它们会被编译成全局变量)。</p>
+<p>将var语句放在函数的首部。</p>
+<p>最好把每个变量的声明语句单独放到一行,并加上注释说明。所有变量按照字母排序。</p>
+
+<pre><code>var currentEntry; // 当前选择项
+var level;        // 缩进程度
+var size;         // 表格大小</code></pre>
+<p>JavaScript没有块范围,所以在块里面定义变量很容易引起C/C++/Java程序员们的误解。在函数的首部定义所有的变量。
+尽量减少全局变量的使用。不要让局部变量覆盖全局变量。</p>
+
+<h2 id="toc_6">函数声明</h2>
+<p>所有的函数在使用前进行声明。 内函数的声明跟在var语句的后面。这样可以帮助判断哪些变量是在函数范围内的。</p>
+<p>函数名与((左括号)之间不应该有空格。)(右括号)与 开始程序体的{(左大括号)之间应插入一个空格。函数程序体应缩进四个空格。}(右大括号)与声明函数的那一行代码头部对齐。</p>
+
+<pre><code>function outer(c, d) {
+    var e = c * d;
+
+    function inner(a, b) {
+        return (e * a) + b;
+    }
+
+    return inner(0, 1);
+}</code></pre>
+<p>下面这种书写方式可以在JavaScript中正常使用,因为在JavaScript中,函数和对象的声明可以放到任何表达式允许的地方。且它让内联函数和混合结构具有最好的可读性。</p>
+
+<pre><code>function getElementsByClassName(className) {
+    var results = [];
+    walkTheDOM(document.body, function (node) {
+        var a;                  // array of class names
+        var c = node.className; // the node's classname
+        var i;                  // loop counter
+
+// If the node has a class name, then split it into a list of simple names.
+// If any of them match the requested name, then append the node to the set of results.
+
+        if (c) {
+            a = c.split(' ');
+            for (i = 0; i &lt; a.length; i += 1) {
+                if (a[i] === className) {
+                    results.push(node);
+                    break;
+                }
+            }
+        }
+    });
+    return results;
+}</code></pre>
+<p>如果函数是匿名函数,则在function和((左括号)之间应有一个空格。如果省略了空格,否则会让人感觉函数名叫作 function。</p>
+
+<pre><code>div.onclick = function (e) {
+    return false;
+};
+
+that = {
+    method: function () {
+        return this.datum;
+    },
+    datum: 0
+};</code></pre>
+<p>尽量不使用全局函数。</p>
+
+<h2 id="toc_7">命名</h2>
+<p>变量名应由26个大小写字母(A..Z,a..z),10个数字(0..9),和_(下划线)组成。避免使用国际化字符(如中文),因为它们不是在任何地方都可以被方便的阅读和理解。不要在命名中使用$(美元符号)或者(反斜杠)。</p>
+<p>不要把_(下划线)作为变量名的第一个字符。它有时用来表示私有变量,但实际上JavaScript并没提供私有变量的功能。如果私有变量很重要, 那么使用私有成员的形式。应避免使用这种容易让人误解的命名习惯。</p>
+<p>大多数的变量名和方法命应以小写字母开头。</p>
+<p>必须与new共同使用的构造函数名应以大写字母开头。当new被省略时JavaScript不会有任何编译错误或运行错误抛出。忘记加new时会让不好的事情发生(比如被当成一般的函数),所以大写构造函数名是我们来尽量避免这种情况发生的唯一办法。</p>
+<p>全局变量应该全部大写。(JavaScript没有宏或者常量,所以不会因此造成误会)</p>
+
+<h2 id="toc_8">语句</h2>
+
+<h3 id="toc_9">简单语句</h3>
+<p>每一行最多只包含一条语句。把;(分号)放到每条简单语句的结尾处。注意一个函数赋值或对象赋值语句也是赋值语句,应该以分号结尾。</p>
+<p>JavaScript可以把任何表达式当作一条语句。这很容易隐藏一些错误,特别是误加分号的错误。只有在赋值和调用时,表达式才应被当作一条单独的语句。</p>
+
+<h3 id="toc_10">复合语句</h3>
+<p>复合语句是被包含在{ }(大括号)的语句序列。</p>
+
+<ul>
+<li>被括起的语句必须多缩进四个空格。</li>
+<li>{(左大括号)应在复合语句其实行的结尾处。</li>
+<li>}(右大括号)应与{(左大括号)的那一行的开头对齐</li>
+<li>大括号应该在所有复合语句中使用,即使只有一条语句,当它们是控制结构的一部分时,比如一个if或者for语句。这样做可以避免以后添加语句时造成的错误。</li>
+</ul>
+
+<h3 id="toc_11">标示</h3>
+<p>语句标示是可选的,只有以下语句必须被标示:while, do,for,switch。</p>
+
+<h3 id="toc_12">return 语句</h3>
+<p>一条有返回值的return语句不要使用( )(括号)来括住返回值。如果返回表达式,则表达式应与return 关键字在同一行,以避免误加分号错误。</p>
+
+<h3 id="toc_13">if 语句</h3>
+<p>if语句应如以下格式:</p>
+
+<pre><code>if (condition){
+    statements;
+}
+
+if (condition) {
+    statements;
+} else {
+    statements;
+}
+
+if (condition) {
+    statements;
+} else if (condition) {
+    statements;
+} else {
+    statements;
+}</code></pre>
+
+<h3 id="toc_14">for 语句</h3>
+<p>for语句应如以下格式:</p>
+
+<pre><code>for (initialization;condition; update) {
+    statements;
+}
+
+for (variable in object)if (filter) {
+    statements;
+}</code></pre>
+<p>第一种形式的循环用于已经知道相关参数的数组循环。</p>
+<p>第二种形式应用于对象中。object原型中的成员将会被包含在迭代器中。通过预先定义hasOwnProperty方法来区分真正的object成员是个不错方法:</p>
+
+<pre><code>for (variablein object) if (object.hasOwnProperty(variable)){
+    statements;
+}</code></pre>
+
+<h3 id="toc_15">while 语句</h3>
+<p>while语句应如以下格式:</p>
+
+<pre><code>while (condition){
+    statements;
+}</code></pre>
+
+<h3 id="toc_16">do 语句</h3>
+<p>do语句应如以下格式:</p>
+
+<pre><code>do {
+    statements;
+} while (condition);</code></pre>
+<p>不像别的复合语句,do语句总是以;(分号)结尾。</p>
+
+<h3 id="toc_17">switch 语句</h3>
+<p>switch语句应如以下格式:</p>
+
+<pre><code>switch (expression){
+case expression:
+    statements;
+default:
+    statements;
+}</code></pre>
+<p>每个 case与switch对齐。这可避免过分缩进。</p>
+<p>每一组statements(除了default应以 break,return,或者throw结尾。不要让它顺次往下执行。</p>
+
+<h3 id="toc_18">try 语句</h3>
+<p>try语句应如以下格式:</p>
+
+<pre><code>try {
+    statements;
+} catch (variable){
+    statements;
+}
+
+try {
+    statements;
+} catch (variable){
+    statements;
+} finally {
+    statements;
+}</code></pre>
+
+<h3 id="toc_19">continue 语句</h3>
+<p>避免使用continue语句。它很容易使得程序的逻辑过程晦涩难懂。</p>
+
+<h3 id="toc_20">with 语句</h3>
+<p>不要使用with语句。</p>
+
+<h2 id="toc_21">空白</h2>
+<p>用空行来将逻辑相关的代码块分割开可以提高程序的可读性。</p>
+<p>空格应在以下情况时使用:</p>
+
+<ul>
+<li>跟在((左括号)后面的关键字应被一个空格隔开。</li>
+<li>函数参数与((左括号)之间不应该有空格。这能帮助区分关键字和函数调用。</li>
+<li>所有的二元操作符,除了.(点) 和((左括号)和 [(左方括号)应用空格将其与操作数隔开。</li>
+<li>一元操作符与其操作数之间不应有空格,除非操作符是个单词,比如typeof。</li>
+<li>每个在控制部分,比如for 语句中的; (分号)后须跟一个空格。</li>
+<li>每个,(逗号)后应跟一个空格。</li>
+</ul>
+
+<h2 id="toc_22">另外的建议</h2>
+
+<h2 id="toc_23">{} 和[]</h2>
+<p>使用{}代替new Object()。使用[]代替new Array()。</p>
+<p>当成员名是一组有序的数字时使用数组来保存数据。当成员名是无规律的字符串或其他时使用对象来保存数据。</p>
+
+<h3 id="toc_24">,(逗号)操作符</h3>
+<p>避免使用逗号操作符,除非在特定的for 语句的控制部分。(这不包括那些被用在对象定义,数组定义,var语句,和参数列表中的逗号分隔符。)</p>
+
+<h3 id="toc_25">作用域</h3>
+<p>在JavaScript中块没有域。只有函数有域。不要使用块,除非在复合语句中。</p>
+
+<h3 id="toc_26">赋值表达式</h3>
+<p>避免在if和while语句的条件部分进行赋值。</p>
+
+<pre><code>if (a = b) {</code></pre>
+<p>是一条正确语句?或者</p>
+
+<pre><code>if (a == b) {</code></pre>
+<p>才是对的?避免这种不容易判断对错的结构。</p>
+
+<h3 id="toc_27">===和!==操作符。</h3>
+<p>使用===和!==操作符会相对好点。==和!=操作符会进行类型强制转换。 特别是, 不要将==用于与错值比较( false,null,undefined,“”,0,NaN)。</p>
+
+<h3 id="toc_28">令人迷惑的加号和减号</h3>
+<p>小心在+后紧跟+或++。这种形式很容易仍人迷惑。应插入括号以便于理解。</p>
+
+<pre><code>total = subtotal + +myInput.value;</code></pre>
+<p>最好能写成</p>
+
+<pre><code>total = subtotal + (+myInput.value);</code></pre>
+<p>这样+ +不会被误认为是++。</p>
+
+<h3 id="toc_29">eval 是恶魔</h3>
+<p>eval是JavaScript中最容易被滥用的方法。避免使用它。</p>
+<p>eval有别名。不要使用Function构造器。不要给setTimeout或者setInterval传递字符串参数。</p>
+
+    </div>
+    <div class="entry-meta">
+        Posted in<time class="updated" datetime="2008-05-13T22:31:00+08:00" pubdate>
+            2008-05-13
+        </time>
+        <span class="entry-tags">Category:<a href="/javascript/">Javascript</a></span>
+        <span class="entry-tags">Tags:
+            
+                <a href="/tag/规范/">规范</a>
+            
+                ,<a href="/tag/javascript/">Javascript</a>
+            
+		</span>
+    
+        
+    </div>
+    
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'bingdian-ontheway';
+        var disqus_title = '[转]JavaScript程序编码规范';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+</article><footer id="footer">
+    <p class="copyright"><span class="software">Powered by <a href="http://lab.lepture.com/liquidluck/">Felix Felicis</a> 3.8, </span><span class="theme">Theme <a href="http://wlog.cn/" rel="nofollow">responsive</a> 0.1 by <a href="http://wlog.cn/">bingdian</a></span></p>
+</footer><!-- #footer -->
+</div><!-- #wrapper -->
+
+
+</body>
+</html>

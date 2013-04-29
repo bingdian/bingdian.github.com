@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN"> 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="On The Way" />
+    <meta name="application-name" content="On The Way" />
+    <title>SSH Permission denied (publickey)解决办法 - On The Way</title>
+    <meta name="keywords" content="publickey,ssh" />
+    <meta name="description" content="" />
+    
+    <link rel="alternate" type="application/rss+xml" href="/feed.xml" title="On The Way" />
+    <link rel="stylesheet" href="/static/style.css?v=f0f73" />
+    <link rel="canonical" href="http://wlog.cn/linux/ssh-permission-denied-publickey.html" />
+    <!--[if lt IE 9]>
+    <script src="/static/js/html5shiv.js?v=fb4e3"></script>
+    <![endif]-->
+</head>
+<body>
+<div id="wrapper">   
+<header id="header" class="clear">
+    <h1>SSH Permission denied (publickey)解决办法</h1>
+</header><!-- #header -->
+<nav id="nav" role="navigation">
+    <a href="/index.html">INDEX</a>
+    <a href="/tag/index.html">TAGS</a>
+    <a href="/about.html">ABOUT ME</a>
+    <a href="/links.html">LINKS</a>
+    <a href="/project.html">PROJECTS</a>
+    <a href="/feed.xml">FEED</a>
+</nav><article id="main" class="hentry">
+    <!-- <h1 class="entry-title">SSH Permission denied (publickey)解决办法</h1> -->
+    <div class="entry-content">
+        <p>重装了mac系统后，用终端terminal录服务器时，提示 Permission denied (publickey)，无法登录，在win下试了一下完全可以登录。</p>
+
+<blockquote>
+<p>f you have some problems likes Permission denied (publickey,gssapi-with-mic), or the error &#39;Not a RSA1 key file&#39; when using ssh remote login, try to fix issues as below:
+get more information with ssh -vvv <a href="mailto:username@yourhost.com">username@yourhost.com</a>, it&#39;s more important.
+check the permissions of your private and public keys, id_rsa should 600, id_rsa.pub should 644
+check if your id_rsa matched with id_rsa.pub.
+For the 3rd, it looks very strange, I am not sure it&#39;s a bug of openssh or something. The id_rsa.pub is the public key for my windows host (I have ssh server on windows), the id_rsa is the private key for remote linux host, I put them to the .ssh folder.
+But when I ssh login the linux host, I got &ldquo;Permission denied (publickey,gssapi-with-mic)&rdquo;. if I remove id_rsa.pub from .ssh folder, it work fine.</p>
+</blockquote>
+<p>用上面的第三条办法解决，因为我的id_rsa和id_ras.pub位于同一目录，将id_rsa.pub删除后成功登陆服务器。</p>
+
+    </div>
+    <div class="entry-meta">
+        Posted in<time class="updated" datetime="2011-07-29T23:43:00+08:00" pubdate>
+            2011-07-29
+        </time>
+        <span class="entry-tags">Category:<a href="/linux/">Linux</a></span>
+        <span class="entry-tags">Tags:
+            
+                <a href="/tag/publickey/">publickey</a>
+            
+                ,<a href="/tag/ssh/">ssh</a>
+            
+		</span>
+    
+        
+    </div>
+    
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'bingdian-ontheway';
+        var disqus_title = 'SSH Permission denied (publickey)解决办法';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+</article><footer id="footer">
+    <p class="copyright"><span class="software">Powered by <a href="http://lab.lepture.com/liquidluck/">Felix Felicis</a> 3.8, </span><span class="theme">Theme <a href="http://wlog.cn/" rel="nofollow">responsive</a> 0.1 by <a href="http://wlog.cn/">bingdian</a></span></p>
+</footer><!-- #footer -->
+</div><!-- #wrapper -->
+
+
+</body>
+</html>
