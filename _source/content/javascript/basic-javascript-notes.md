@@ -1,7 +1,7 @@
-# Javascrip基础 - Javascript学习笔记（一）
+# Javascript基础 - Javascript学习笔记（一）
 
 - date: 2011-06-21 22:23
-- tags: javascrit,学习笔记
+- tags: javascript,学习笔记
 - category: Javascript
 
 ----------------
