@@ -16,7 +16,7 @@
     "static": "../static",
     "static_prefix": "/static/",
     "permalink": "{{folder}}/{{filename}}.html",
-    "relative_url": true,
+    "relative_url": false,
     "perpage": 50,
     "feedcount": 100,
     "timezone": "+08:00"
