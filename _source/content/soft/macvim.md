@@ -2,7 +2,7 @@
 
 - date: 2010-07-16 23:21
 - tags: mac,vim
-- category: Javascript
+- category: Soft
 
 ----------------
 
