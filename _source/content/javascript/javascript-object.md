@@ -1,7 +1,7 @@
 # Javascript对象篇 - Javascript学习笔记（二）
 
 - date: 2011-06-27 22:10
-- tags: javascrip,对象,学习笔记
+- tags: javascript,对象,学习笔记
 - category: Javascript
 
 ----------------
