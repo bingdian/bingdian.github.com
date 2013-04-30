@@ -3,14 +3,14 @@
     <title>On The Way</title>
     <link href="http://wlog.cn/feed.xml" rel="self" />
     <link href="http://wlog.cn/" />
-    <updated>2013-04-30T02:51:56+08:00</updated>
+    <updated>2013-04-30T03:21:45+08:00</updated>
     <id>http://wlog.cn/</id>
     <entry>
         <title type="html"><![CDATA[博客从typecho换成liquidluck]]></title>
         <author><name>bingdian</name></author>
         <link href="http://wlog.cn/life/typecho-to-liquidluck.html"/>
         <published>2013-04-29T22:17:00+08:00</published>
-        <updated>2013-04-30T02:51:56+08:00</updated>
+        <updated>2013-04-30T03:21:45+08:00</updated>
         <id>http://wlog.cn/life/typecho-to-liquidluck.html</id>
         <category scheme="http://wlog.cn/tag/#typecho" term="typecho" label="typecho" />
         <category scheme="http://wlog.cn/tag/#liquidluck" term="liquidluck" label="liquidluck" />
@@ -27,7 +27,7 @@
         <author><name>bingdian</name></author>
         <link href="http://wlog.cn/soft/why-use-markdown.html"/>
         <published>2013-04-05T21:26:00+08:00</published>
-        <updated>2013-04-29T23:38:51+08:00</updated>
+        <updated>2013-04-30T03:21:45+08:00</updated>
         <id>http://wlog.cn/soft/why-use-markdown.html</id>
         <category scheme="http://wlog.cn/tag/#Markdown" term="Markdown" label="Markdown" />
         <category scheme="http://wlog.cn/tag/#写作" term="写作" label="写作" />
@@ -79,7 +79,7 @@
         <author><name>bingdian</name></author>
         <link href="http://wlog.cn/html/html5.html"/>
         <published>2013-02-21T23:21:00+08:00</published>
-        <updated>2013-04-29T13:20:20+08:00</updated>
+        <updated>2013-04-30T03:21:45+08:00</updated>
         <id>http://wlog.cn/html/html5.html</id>
         <category scheme="http://wlog.cn/tag/#html5" term="html5" label="html5" />
         <category scheme="http://wlog.cn/tag/#doctype" term="doctype" label="doctype" />
@@ -1260,7 +1260,7 @@ CSS1Compat：标准兼容模式（又叫严格模式，Standards mode 或者 Str
         <author><name>bingdian</name></author>
         <link href="http://wlog.cn/discover/dropbox-git.html"/>
         <published>2012-12-06T12:00:00+08:00</published>
-        <updated>2013-04-29T01:13:59+08:00</updated>
+        <updated>2013-04-30T03:21:44+08:00</updated>
         <id>http://wlog.cn/discover/dropbox-git.html</id>
         <category scheme="http://wlog.cn/tag/#git" term="git" label="git" />
         <category scheme="http://wlog.cn/tag/#dropbox" term="dropbox" label="dropbox" />
@@ -1295,7 +1295,7 @@ git push origin master</code></pre>
         <author><name>bingdian</name></author>
         <link href="http://wlog.cn/html/media-queries.html"/>
         <published>2012-02-08T21:42:00+08:00</published>
-        <updated>2013-04-16T23:27:24+08:00</updated>
+        <updated>2013-04-30T03:21:45+08:00</updated>
         <id>http://wlog.cn/html/media-queries.html</id>
         <category scheme="http://wlog.cn/tag/#css3" term="css3" label="css3" />
         <category scheme="http://wlog.cn/tag/#Media-Queries" term="Media-Queries" label="Media-Queries" />
@@ -1392,7 +1392,7 @@ only - 用来定某种特定的媒体类型</p>
         <author><name>bingdian</name></author>
         <link href="http://wlog.cn/linux/debian-vps-vpn-install.html"/>
         <published>2011-11-21T22:28:00+08:00</published>
-        <updated>2013-04-17T23:20:04+08:00</updated>
+        <updated>2013-04-30T03:21:45+08:00</updated>
         <id>http://wlog.cn/linux/debian-vps-vpn-install.html</id>
         <category scheme="http://wlog.cn/tag/#linux" term="linux" label="linux" />
         <category scheme="http://wlog.cn/tag/#debian" term="debian" label="debian" />
@@ -1491,7 +1491,7 @@ chkconfig iptables on</code></pre>
         <author><name>bingdian</name></author>
         <link href="http://wlog.cn/linux/ssh-permission-denied-publickey.html"/>
         <published>2011-07-29T23:43:00+08:00</published>
-        <updated>2013-04-15T19:48:43+08:00</updated>
+        <updated>2013-04-30T03:21:45+08:00</updated>
         <id>http://wlog.cn/linux/ssh-permission-denied-publickey.html</id>
         <category scheme="http://wlog.cn/tag/#publickey" term="publickey" label="publickey" />
         <category scheme="http://wlog.cn/tag/#ssh" term="ssh" label="ssh" />
@@ -1514,7 +1514,7 @@ But when I ssh login the linux host, I got &ldquo;Permission denied (publickey,g
         <author><name>bingdian</name></author>
         <link href="http://wlog.cn/performance/high-performance-web-pages.html"/>
         <published>2011-07-22T23:11:00+08:00</published>
-        <updated>2013-04-16T23:29:25+08:00</updated>
+        <updated>2013-04-30T03:21:45+08:00</updated>
         <id>http://wlog.cn/performance/high-performance-web-pages.html</id>
         <category scheme="http://wlog.cn/tag/#前端优化" term="前端优化" label="前端优化" />
         <content type="html" xml:base="http://wlog.cn" xml:lang="en">
@@ -1526,7 +1526,7 @@ But when I ssh login the linux host, I got &ldquo;Permission denied (publickey,g
         <author><name>bingdian</name></author>
         <link href="http://wlog.cn/javascript/javascript-closures.html"/>
         <published>2011-07-16T22:21:00+08:00</published>
-        <updated>2013-04-29T01:27:21+08:00</updated>
+        <updated>2013-04-30T03:21:45+08:00</updated>
         <id>http://wlog.cn/javascript/javascript-closures.html</id>
         <category scheme="http://wlog.cn/tag/#学习笔记" term="学习笔记" label="学习笔记" />
         <category scheme="http://wlog.cn/tag/#javascript" term="javascript" label="javascript" />
@@ -1717,7 +1717,7 @@ assignHandler();</code></pre>
         <author><name>bingdian</name></author>
         <link href="http://wlog.cn/javascript/javascript-variable-scope-chain.html"/>
         <published>2011-07-13T22:18:00+08:00</published>
-        <updated>2013-04-15T23:24:45+08:00</updated>
+        <updated>2013-04-30T03:21:45+08:00</updated>
         <id>http://wlog.cn/javascript/javascript-variable-scope-chain.html</id>
         <category scheme="http://wlog.cn/tag/#学习笔记" term="学习笔记" label="学习笔记" />
         <category scheme="http://wlog.cn/tag/#变量" term="变量" label="变量" />
@@ -1821,7 +1821,7 @@ console.log(b);     //b is not defined</code></pre>
         <author><name>bingdian</name></author>
         <link href="http://wlog.cn/javascript/javascript-function.html"/>
         <published>2011-07-03T22:33:00+08:00</published>
-        <updated>2013-04-29T01:31:08+08:00</updated>
+        <updated>2013-04-30T03:21:45+08:00</updated>
         <id>http://wlog.cn/javascript/javascript-function.html</id>
         <category scheme="http://wlog.cn/tag/#学习笔记" term="学习笔记" label="学习笔记" />
         <category scheme="http://wlog.cn/tag/#函数" term="函数" label="函数" />
@@ -1977,7 +1977,7 @@ foo.call(bar, 1, 2, 3); // 传递到foo的参数是：a = 1, b = 2, c = 3</code>
         <author><name>bingdian</name></author>
         <link href="http://wlog.cn/javascript/javascript-object.html"/>
         <published>2011-06-27T22:10:00+08:00</published>
-        <updated>2013-04-29T01:32:48+08:00</updated>
+        <updated>2013-04-30T03:21:45+08:00</updated>
         <id>http://wlog.cn/javascript/javascript-object.html</id>
         <category scheme="http://wlog.cn/tag/#Javascrip" term="Javascrip" label="Javascrip" />
         <category scheme="http://wlog.cn/tag/#对象" term="对象" label="对象" />
@@ -2180,7 +2180,7 @@ APP.flight = {
         <author><name>bingdian</name></author>
         <link href="http://wlog.cn/javascript/basic-javascript-notes.html"/>
         <published>2011-06-21T22:23:00+08:00</published>
-        <updated>2013-04-18T22:07:43+08:00</updated>
+        <updated>2013-04-30T03:21:45+08:00</updated>
         <id>http://wlog.cn/javascript/basic-javascript-notes.html</id>
         <category scheme="http://wlog.cn/tag/#javascrit" term="javascrit" label="javascrit" />
         <category scheme="http://wlog.cn/tag/#学习笔记" term="学习笔记" label="学习笔记" />
@@ -2648,7 +2648,7 @@ for (i in person) {
         <author><name>bingdian</name></author>
         <link href="http://wlog.cn/soft/git-quick-start.html"/>
         <published>2011-06-18T22:32:00+08:00</published>
-        <updated>2013-04-16T23:45:08+08:00</updated>
+        <updated>2013-04-30T03:21:45+08:00</updated>
         <id>http://wlog.cn/soft/git-quick-start.html</id>
         <category scheme="http://wlog.cn/tag/#git" term="git" label="git" />
         <category scheme="http://wlog.cn/tag/#版本控制" term="版本控制" label="版本控制" />
@@ -2835,7 +2835,7 @@ Existing Git Repo?
         <author><name>bingdian</name></author>
         <link href="http://wlog.cn/javascript/javascript-load-optimization.html"/>
         <published>2011-05-29T21:30:00+08:00</published>
-        <updated>2013-04-29T01:35:47+08:00</updated>
+        <updated>2013-04-30T03:21:45+08:00</updated>
         <id>http://wlog.cn/javascript/javascript-load-optimization.html</id>
         <category scheme="http://wlog.cn/tag/#性能" term="性能" label="性能" />
         <category scheme="http://wlog.cn/tag/#优化" term="优化" label="优化" />
@@ -3042,7 +3042,7 @@ xhr.send(null);
         <author><name>bingdian</name></author>
         <link href="http://wlog.cn/performance/f2e-auto-optimization.html"/>
         <published>2011-05-19T22:32:00+08:00</published>
-        <updated>2013-04-16T23:34:58+08:00</updated>
+        <updated>2013-04-30T03:21:45+08:00</updated>
         <id>http://wlog.cn/performance/f2e-auto-optimization.html</id>
         <category scheme="http://wlog.cn/tag/#性能" term="性能" label="性能" />
         <category scheme="http://wlog.cn/tag/#前端优化" term="前端优化" label="前端优化" />
@@ -3085,7 +3085,7 @@ xhr.send(null);
         <author><name>bingdian</name></author>
         <link href="http://wlog.cn/discover/first-steps-with-sphinx.html"/>
         <published>2011-03-25T23:10:00+08:00</published>
-        <updated>2013-04-17T23:42:48+08:00</updated>
+        <updated>2013-04-30T03:21:45+08:00</updated>
         <id>http://wlog.cn/discover/first-steps-with-sphinx.html</id>
         <category scheme="http://wlog.cn/tag/#sphinx" term="sphinx" label="sphinx" />
         <content type="html" xml:base="http://wlog.cn" xml:lang="en">
@@ -3186,7 +3186,7 @@ zh_TW – Traditional Chinese</code></pre>
         <author><name>bingdian</name></author>
         <link href="http://wlog.cn/discover/linux-sphinx-setup.html"/>
         <published>2011-03-25T22:12:00+08:00</published>
-        <updated>2013-04-17T23:42:53+08:00</updated>
+        <updated>2013-04-30T03:21:45+08:00</updated>
         <id>http://wlog.cn/discover/linux-sphinx-setup.html</id>
         <category scheme="http://wlog.cn/tag/#linux" term="linux" label="linux" />
         <category scheme="http://wlog.cn/tag/#sphinx" term="sphinx" label="sphinx" />
@@ -3241,7 +3241,7 @@ zh_TW – Traditional Chinese</code></pre>
         <author><name>bingdian</name></author>
         <link href="http://wlog.cn/life/wordpress-to-typecho.html"/>
         <published>2011-03-24T21:17:00+08:00</published>
-        <updated>2013-04-17T23:44:07+08:00</updated>
+        <updated>2013-04-30T03:21:45+08:00</updated>
         <id>http://wlog.cn/life/wordpress-to-typecho.html</id>
         <category scheme="http://wlog.cn/tag/#wordpress" term="wordpress" label="wordpress" />
         <category scheme="http://wlog.cn/tag/#typecho" term="typecho" label="typecho" />
@@ -3278,7 +3278,7 @@ update typecho_contents set text=replace(text,&#39;wp-admin/uploads&#39;,&#39;us
         <author><name>bingdian</name></author>
         <link href="http://wlog.cn/performance/mergers-compression-javascript-css.html"/>
         <published>2011-02-07T21:11:00+08:00</published>
-        <updated>2013-04-29T18:37:11+08:00</updated>
+        <updated>2013-04-30T03:21:45+08:00</updated>
         <id>http://wlog.cn/performance/mergers-compression-javascript-css.html</id>
         <category scheme="http://wlog.cn/tag/#优化" term="优化" label="优化" />
         <category scheme="http://wlog.cn/tag/#压缩" term="压缩" label="压缩" />
@@ -3394,7 +3394,7 @@ $min_serveOptions['minifiers']['text/css'] = '';</code></pre>
         <author><name>bingdian</name></author>
         <link href="http://wlog.cn/soft/mac-soft.html"/>
         <published>2010-12-06T12:00:00+08:00</published>
-        <updated>2013-04-29T01:41:33+08:00</updated>
+        <updated>2013-04-30T03:21:45+08:00</updated>
         <id>http://wlog.cn/soft/mac-soft.html</id>
         <category scheme="http://wlog.cn/tag/#mac" term="mac" label="mac" />
         <category scheme="http://wlog.cn/tag/#软件" term="软件" label="软件" />
@@ -3477,7 +3477,7 @@ $min_serveOptions['minifiers']['text/css'] = '';</code></pre>
         <author><name>bingdian</name></author>
         <link href="http://wlog.cn/html/unicode-css-fontfamily.html"/>
         <published>2010-08-27T23:21:00+08:00</published>
-        <updated>2013-04-18T22:24:42+08:00</updated>
+        <updated>2013-04-30T03:21:45+08:00</updated>
         <id>http://wlog.cn/html/unicode-css-fontfamily.html</id>
         <category scheme="http://wlog.cn/tag/#css" term="css" label="css" />
         <category scheme="http://wlog.cn/tag/#字体" term="字体" label="字体" />
@@ -3492,7 +3492,7 @@ $min_serveOptions['minifiers']['text/css'] = '';</code></pre>
         <author><name>bingdian</name></author>
         <link href="http://wlog.cn/javascript/macvim.html"/>
         <published>2010-07-16T23:21:00+08:00</published>
-        <updated>2013-04-29T15:59:15+08:00</updated>
+        <updated>2013-04-30T03:21:45+08:00</updated>
         <id>http://wlog.cn/javascript/macvim.html</id>
         <category scheme="http://wlog.cn/tag/#mac" term="mac" label="mac" />
         <category scheme="http://wlog.cn/tag/#vim" term="vim" label="vim" />
@@ -3522,7 +3522,7 @@ vi .gvimrc</code></pre>
         <author><name>bingdian</name></author>
         <link href="http://wlog.cn/performance/web-performance.html"/>
         <published>2010-05-31T00:00:00+08:00</published>
-        <updated>2013-04-29T18:36:33+08:00</updated>
+        <updated>2013-04-30T03:21:45+08:00</updated>
         <id>http://wlog.cn/performance/web-performance.html</id>
         <category scheme="http://wlog.cn/tag/#前端优化" term="前端优化" label="前端优化" />
         <category scheme="http://wlog.cn/tag/#性能优化" term="性能优化" label="性能优化" />
@@ -3535,7 +3535,7 @@ vi .gvimrc</code></pre>
         <author><name>bingdian</name></author>
         <link href="http://wlog.cn/html/front-end-engineer-mind-mapping.html"/>
         <published>2009-04-22T21:23:00+08:00</published>
-        <updated>2013-04-29T15:59:10+08:00</updated>
+        <updated>2013-04-30T03:21:45+08:00</updated>
         <id>http://wlog.cn/html/front-end-engineer-mind-mapping.html</id>
         <category scheme="http://wlog.cn/tag/#前端" term="前端" label="前端" />
         <content type="html" xml:base="http://wlog.cn" xml:lang="en">
@@ -3547,7 +3547,7 @@ vi .gvimrc</code></pre>
         <author><name>bingdian</name></author>
         <link href="http://wlog.cn/jquery/jquery-calendar-widget-plugin.html"/>
         <published>2009-03-13T00:00:00+08:00</published>
-        <updated>2013-04-29T16:23:09+08:00</updated>
+        <updated>2013-04-30T03:21:45+08:00</updated>
         <id>http://wlog.cn/jquery/jquery-calendar-widget-plugin.html</id>
         <category scheme="http://wlog.cn/tag/#JQuery框架" term="JQuery框架" label="JQuery框架" />
         <category scheme="http://wlog.cn/tag/#DatePicker" term="DatePicker" label="DatePicker" />
@@ -3586,7 +3586,7 @@ $(&quot;#calendar&quot;).calendarWidget({
         <author><name>bingdian</name></author>
         <link href="http://wlog.cn/jquery/jquery-ui-datepicker.html"/>
         <published>2009-03-13T00:00:00+08:00</published>
-        <updated>2013-04-29T15:34:57+08:00</updated>
+        <updated>2013-04-30T03:21:45+08:00</updated>
         <id>http://wlog.cn/jquery/jquery-ui-datepicker.html</id>
         <category scheme="http://wlog.cn/tag/#JQuery框架" term="JQuery框架" label="JQuery框架" />
         <category scheme="http://wlog.cn/tag/#DatePicker" term="DatePicker" label="DatePicker" />
@@ -3603,7 +3603,7 @@ $(&quot;#calendar&quot;).calendarWidget({
         <author><name>bingdian</name></author>
         <link href="http://wlog.cn/html/css-write-regular.html"/>
         <published>2008-12-22T23:21:00+08:00</published>
-        <updated>2013-04-29T15:39:15+08:00</updated>
+        <updated>2013-04-30T03:21:45+08:00</updated>
         <id>http://wlog.cn/html/css-write-regular.html</id>
         <category scheme="http://wlog.cn/tag/#css" term="css" label="css" />
         <content type="html" xml:base="http://wlog.cn" xml:lang="en">
@@ -3622,7 +3622,7 @@ color font text-decoration text-align vertical-align white-space other text cont
         <author><name>bingdian</name></author>
         <link href="http://wlog.cn/javascript/code-conventions-for-the-javascript.html"/>
         <published>2008-05-13T22:31:00+08:00</published>
-        <updated>2013-04-29T18:41:25+08:00</updated>
+        <updated>2013-04-30T03:21:45+08:00</updated>
         <id>http://wlog.cn/javascript/code-conventions-for-the-javascript.html</id>
         <category scheme="http://wlog.cn/tag/#规范" term="规范" label="规范" />
         <category scheme="http://wlog.cn/tag/#Javascript" term="Javascript" label="Javascript" />
@@ -3891,7 +3891,7 @@ try {
         <author><name>bingdian</name></author>
         <link href="http://wlog.cn/javascript/javascript-keycode.html"/>
         <published>2008-03-22T21:33:00+08:00</published>
-        <updated>2013-04-29T15:59:06+08:00</updated>
+        <updated>2013-04-30T03:21:45+08:00</updated>
         <id>http://wlog.cn/javascript/javascript-keycode.html</id>
         <category scheme="http://wlog.cn/tag/#javascript" term="javascript" label="javascript" />
         <category scheme="http://wlog.cn/tag/#keyCode" term="keyCode" label="keyCode" />
