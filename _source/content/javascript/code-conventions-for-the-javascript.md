@@ -1,7 +1,7 @@
 # [转]JavaScript程序编码规范
 
 - date: 2008-05-13 22:31
-- tags: 规范, Javascript
+- tags: 规范, javascript
 - category: Javascript
 
 ----------------

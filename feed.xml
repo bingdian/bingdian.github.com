@@ -3,7 +3,7 @@
     <title>On The Way</title>
     <link href="http://wlog.cn/feed.xml" rel="self" />
     <link href="http://wlog.cn/" />
-    <updated>2013-04-30T12:30:43+08:00</updated>
+    <updated>2013-04-30T13:24:57+08:00</updated>
     <id>http://wlog.cn/</id>
     <entry>
         <title type="html"><![CDATA[博客从typecho换成liquidluck]]></title>
@@ -28,9 +28,9 @@
         <author><name>bingdian</name></author>
         <link href="http://wlog.cn/soft/why-use-markdown.html"/>
         <published>2013-04-05T21:26:00+08:00</published>
-        <updated>2013-04-30T03:21:45+08:00</updated>
+        <updated>2013-04-30T13:22:53+08:00</updated>
         <id>http://wlog.cn/soft/why-use-markdown.html</id>
-        <category scheme="http://wlog.cn/tag/#Markdown" term="Markdown" label="Markdown" />
+        <category scheme="http://wlog.cn/tag/#markdown" term="markdown" label="markdown" />
         <category scheme="http://wlog.cn/tag/#写作" term="写作" label="写作" />
         <content type="html" xml:base="http://wlog.cn" xml:lang="en">
             <![CDATA[ <p><img src="/files/img/markdown.png" alt="markdown" /></p>
@@ -1296,10 +1296,10 @@ git push origin master</code></pre>
         <author><name>bingdian</name></author>
         <link href="http://wlog.cn/html/media-queries.html"/>
         <published>2012-02-08T21:42:00+08:00</published>
-        <updated>2013-04-30T03:21:45+08:00</updated>
+        <updated>2013-04-30T13:23:26+08:00</updated>
         <id>http://wlog.cn/html/media-queries.html</id>
         <category scheme="http://wlog.cn/tag/#css3" term="css3" label="css3" />
-        <category scheme="http://wlog.cn/tag/#Media-Queries" term="Media-Queries" label="Media-Queries" />
+        <category scheme="http://wlog.cn/tag/#media-queries" term="media-queries" label="media-queries" />
         <content type="html" xml:base="http://wlog.cn" xml:lang="en">
             <![CDATA[ <h2 id="toc_0">一、Media Queries 支持的属性</h2>
 
@@ -1978,9 +1978,9 @@ foo.call(bar, 1, 2, 3); // 传递到foo的参数是：a = 1, b = 2, c = 3</code>
         <author><name>bingdian</name></author>
         <link href="http://wlog.cn/javascript/javascript-object.html"/>
         <published>2011-06-27T22:10:00+08:00</published>
-        <updated>2013-04-30T03:21:45+08:00</updated>
+        <updated>2013-04-30T13:24:02+08:00</updated>
         <id>http://wlog.cn/javascript/javascript-object.html</id>
-        <category scheme="http://wlog.cn/tag/#Javascrip" term="Javascrip" label="Javascrip" />
+        <category scheme="http://wlog.cn/tag/#javascrip" term="javascrip" label="javascrip" />
         <category scheme="http://wlog.cn/tag/#对象" term="对象" label="对象" />
         <category scheme="http://wlog.cn/tag/#学习笔记" term="学习笔记" label="学习笔记" />
         <content type="html" xml:base="http://wlog.cn" xml:lang="en">
@@ -2836,11 +2836,11 @@ Existing Git Repo?
         <author><name>bingdian</name></author>
         <link href="http://wlog.cn/javascript/javascript-load-optimization.html"/>
         <published>2011-05-29T21:30:00+08:00</published>
-        <updated>2013-04-30T03:21:45+08:00</updated>
+        <updated>2013-04-30T13:23:56+08:00</updated>
         <id>http://wlog.cn/javascript/javascript-load-optimization.html</id>
         <category scheme="http://wlog.cn/tag/#性能" term="性能" label="性能" />
         <category scheme="http://wlog.cn/tag/#优化" term="优化" label="优化" />
-        <category scheme="http://wlog.cn/tag/#Javascrip" term="Javascrip" label="Javascrip" />
+        <category scheme="http://wlog.cn/tag/#javascrip" term="javascrip" label="javascrip" />
         <category scheme="http://wlog.cn/tag/#load" term="load" label="load" />
         <category scheme="http://wlog.cn/tag/#loader" term="loader" label="loader" />
         <category scheme="http://wlog.cn/tag/#labjs" term="labjs" label="labjs" />
@@ -3395,7 +3395,7 @@ $min_serveOptions['minifiers']['text/css'] = '';</code></pre>
         <author><name>bingdian</name></author>
         <link href="http://wlog.cn/soft/mac-soft.html"/>
         <published>2010-12-06T12:00:00+08:00</published>
-        <updated>2013-04-30T03:21:45+08:00</updated>
+        <updated>2013-04-30T13:24:57+08:00</updated>
         <id>http://wlog.cn/soft/mac-soft.html</id>
         <category scheme="http://wlog.cn/tag/#mac" term="mac" label="mac" />
         <category scheme="http://wlog.cn/tag/#软件" term="软件" label="软件" />
@@ -3548,13 +3548,13 @@ vi .gvimrc</code></pre>
         <author><name>bingdian</name></author>
         <link href="http://wlog.cn/jquery/jquery-calendar-widget-plugin.html"/>
         <published>2009-03-13T00:00:00+08:00</published>
-        <updated>2013-04-30T03:21:45+08:00</updated>
+        <updated>2013-04-30T13:24:24+08:00</updated>
         <id>http://wlog.cn/jquery/jquery-calendar-widget-plugin.html</id>
-        <category scheme="http://wlog.cn/tag/#JQuery框架" term="JQuery框架" label="JQuery框架" />
-        <category scheme="http://wlog.cn/tag/#DatePicker" term="DatePicker" label="DatePicker" />
+        <category scheme="http://wlog.cn/tag/#jquery框架" term="jquery框架" label="jquery框架" />
+        <category scheme="http://wlog.cn/tag/#datepicker" term="datepicker" label="datepicker" />
         <category scheme="http://wlog.cn/tag/#ui" term="ui" label="ui" />
         <category scheme="http://wlog.cn/tag/#日历" term="日历" label="日历" />
-        <category scheme="http://wlog.cn/tag/#Calendar" term="Calendar" label="Calendar" />
+        <category scheme="http://wlog.cn/tag/#calendar" term="calendar" label="calendar" />
         <content type="html" xml:base="http://wlog.cn" xml:lang="en">
             <![CDATA[ <h2 id="toc_0">演示：</h2>
 <p><img src="/files/img/jquery-calendar-widget.jpg" alt="jQuery Calendar Widget Plugin" /></p>
@@ -3587,10 +3587,10 @@ $(&quot;#calendar&quot;).calendarWidget({
         <author><name>bingdian</name></author>
         <link href="http://wlog.cn/jquery/jquery-ui-datepicker.html"/>
         <published>2009-03-13T00:00:00+08:00</published>
-        <updated>2013-04-30T03:21:45+08:00</updated>
+        <updated>2013-04-30T13:24:33+08:00</updated>
         <id>http://wlog.cn/jquery/jquery-ui-datepicker.html</id>
-        <category scheme="http://wlog.cn/tag/#JQuery框架" term="JQuery框架" label="JQuery框架" />
-        <category scheme="http://wlog.cn/tag/#DatePicker" term="DatePicker" label="DatePicker" />
+        <category scheme="http://wlog.cn/tag/#jquery框架" term="jquery框架" label="jquery框架" />
+        <category scheme="http://wlog.cn/tag/#datepicker" term="datepicker" label="datepicker" />
         <category scheme="http://wlog.cn/tag/#ui" term="ui" label="ui" />
         <content type="html" xml:base="http://wlog.cn" xml:lang="en">
             <![CDATA[ <p>update:请移步官方下载：<a href="http://jqueryui.com/datepicker/">jqueryui.com/datepicker/</a></p>
@@ -3623,10 +3623,10 @@ color font text-decoration text-align vertical-align white-space other text cont
         <author><name>bingdian</name></author>
         <link href="http://wlog.cn/javascript/code-conventions-for-the-javascript.html"/>
         <published>2008-05-13T22:31:00+08:00</published>
-        <updated>2013-04-30T03:21:45+08:00</updated>
+        <updated>2013-04-30T13:23:38+08:00</updated>
         <id>http://wlog.cn/javascript/code-conventions-for-the-javascript.html</id>
         <category scheme="http://wlog.cn/tag/#规范" term="规范" label="规范" />
-        <category scheme="http://wlog.cn/tag/#Javascript" term="Javascript" label="Javascript" />
+        <category scheme="http://wlog.cn/tag/#javascript" term="javascript" label="javascript" />
         <content type="html" xml:base="http://wlog.cn" xml:lang="en">
             <![CDATA[ <p>来源：<a href="http://www.yeeyan.org/articles/view/cloudwater/4042">www.yeeyan.org/articles/view/cloudwater/4042</a></p>
 <p>原文：<a href="http://javascript.crockford.com/code.html">javascript.crockford.com/code.html</a></p>

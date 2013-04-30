@@ -1,7 +1,7 @@
 # 简单的jQuery日历插件--jQuery Calendar Widget Plugin
 
 - date: 2009-03-13
-- tags: JQuery框架, DatePicker, ui, 日历, Calendar
+- tags: jquery框架, datepicker, ui, 日历, calendar
 - category: jquery
 
 ----------------

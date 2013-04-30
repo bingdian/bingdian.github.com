@@ -1,7 +1,7 @@
 # 为什么要使用Markdown写作
 
 - date: 2013-04-05 21:26
-- tags: Markdown,写作
+- tags: markdown,写作
 - category: Soft
 
 ----------------

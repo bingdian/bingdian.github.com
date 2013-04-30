@@ -1,7 +1,7 @@
 # Javascript 加载性能优化
 
 - date: 2011-05-29 21:30
-- tags: 性能,优化,Javascrip,load,loader,labjs,seajs,lazyload
+- tags: 性能,优化,javascrip,load,loader,labjs,seajs,lazyload
 - category: Javascript
 
 ----------------

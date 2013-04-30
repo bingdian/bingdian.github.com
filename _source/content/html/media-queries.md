@@ -1,7 +1,7 @@
 # CSS3 Media Queries
 
 - date: 2012-02-08 21:42
-- tags: css3,Media-Queries
+- tags: css3,media-queries
 - category: Html
 
 ----------------
