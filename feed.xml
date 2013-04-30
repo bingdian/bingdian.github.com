@@ -3,7 +3,7 @@
     <title>On The Way</title>
     <link href="http://wlog.cn/feed.xml" rel="self" />
     <link href="http://wlog.cn/" />
-    <updated>2013-04-30T13:30:00+08:00</updated>
+    <updated>2013-04-30T14:26:46+08:00</updated>
     <id>http://wlog.cn/</id>
     <entry>
         <title type="html"><![CDATA[博客从typecho换成liquidluck]]></title>
@@ -73,6 +73,114 @@
 <li><a href="https://github.com/progit/progit">Markdow电子书项目 - Pro Git Book</a></li>
 <li><a href="https://github.com/bingdian/F2E-Cookbook">Markdow电子书项目 - F2E-Cookbook</a></li>
 </ul>
+]]>
+        </content>
+    </entry><entry>
+        <title type="html"><![CDATA[Grunt 使用说明]]></title>
+        <author><name>bingdian</name></author>
+        <link href="http://wlog.cn/javascript/gruntjs-quick-start.html"/>
+        <published>2013-03-12T21:33:00+08:00</published>
+        <updated>2013-04-30T14:26:46+08:00</updated>
+        <id>http://wlog.cn/javascript/gruntjs-quick-start.html</id>
+        <category scheme="http://wlog.cn/tag/#javascript" term="javascript" label="javascript" />
+        <category scheme="http://wlog.cn/tag/#自动化" term="自动化" label="自动化" />
+        <category scheme="http://wlog.cn/tag/#构建" term="构建" label="构建" />
+        <content type="html" xml:base="http://wlog.cn" xml:lang="en">
+            <![CDATA[ <p><a href="http://gruntjs.com/">Gruntjs</a>是一款基于nodejs的javascript项目的自动化构建工具。很多知名的开源项目都在使用，如：jquery、yui、qunit、angular.js、CanJS、Modernizr等。</p>
+
+<h2 id="toc_0">一、安装nodejs</h2>
+<p><a href="http://nodejs.org/#download">nodejs.org/#download</a></p>
+
+<h2 id="toc_1">如果以前全局安装过grunt 0.3x，执行以下命令</h2>
+
+<pre><code>npm uninstall -g grunt</code></pre>
+
+<h2 id="toc_2">二、安装grunt-cli</h2>
+
+<pre><code>npm install -g grunt-cli</code></pre>
+
+<h2 id="toc_3">三、安装templates</h2>
+
+<pre><code>//clone the template inside of the ~/.grunt-init/ directory.
+//http://gruntjs.com/project-scaffolding#installing-templates
+git clone https://github.com/gruntjs/grunt-init-jquery.git ~/.grunt-init/jquery
+git clone https://github.com/gruntjs/grunt-init-gruntfile.git ~/.grunt-init/gruntfile</code></pre>
+
+<h2 id="toc_4">四、已经存在的grunt项目</h2>
+
+<h3 id="toc_5">安装插件</h3>
+<p>如果有配置文件package.json，执行npm install可以安装项目依赖的Grunt插件</p>
+
+<pre><code>npm install</code></pre>
+<p>或者直接通过官网<a href="http://gruntjs.com/plugins安装插件">gruntjs.com/plugins安装插件</a></p>
+
+<h3 id="toc_6">使用</h3>
+
+<pre><code>grunt//执行默认命令</code></pre>
+
+<h2 id="toc_7">五、新建grunt项目</h2>
+
+<h3 id="toc_8">创建项目</h3>
+
+<pre><code>mkdir project
+grunt-init template //如grunt-init gruntfile</code></pre>
+
+<h3 id="toc_9">当前项目下安装grunt</h3>
+
+<pre><code>npm install grunt --save-dev</code></pre>
+
+<h3 id="toc_10">package.json</h3>
+<p>可以在这个文件中配置项目依赖的Grunt插件</p>
+
+<h3 id="toc_11">配置Gruntfile</h3>
+<p>文件名为Gruntfile.js或Gruntfile.coffee，在这个文件中配置各种构建任务及其加载任务所需要的插件。</p>
+
+<h3 id="toc_12">安装插件</h3>
+<p>如果有配置文件package.json，执行npm install可以安装项目依赖的Grunt插件</p>
+
+<pre><code>npm install</code></pre>
+<p>或者直接通过官网<a href="http://gruntjs.com/plugins安装插件">gruntjs.com/plugins安装插件</a></p>
+
+<h3 id="toc_13">使用</h3>
+
+<pre><code>grunt//执行默认命令，也可以使用</code></pre>
+
+<h2 id="toc_14">六、前端开发推荐插件</h2>
+<p>grunt-contrib-clean</p>
+
+<pre><code>npm install grunt-contrib-clean --save-dev</code></pre>
+<p>grunt-contrib-concat</p>
+
+<pre><code>npm install grunt-contrib-concat --save-dev</code></pre>
+<p>grunt-yui-compressor</p>
+
+<pre><code>npm install grunt-yui-compressor</code></pre>
+<p>grunt-contrib-csslint</p>
+
+<pre><code>npm install grunt-contrib-csslint --save-dev</code></pre>
+<p>grunt-contrib-jshint</p>
+
+<pre><code>npm install grunt-contrib-jshint --save-dev</code></pre>
+<p>grunt-contrib-qunit</p>
+
+<pre><code>npm install grunt-contrib-qunit --save-dev</code></pre>
+<p>grunt-contrib-copy</p>
+
+<pre><code>npm install grunt-contrib-copy --save-dev</code></pre>
+<p>grunt-contrib-uglify</p>
+
+<pre><code>npm install grunt-contrib-uglify --save-dev</code></pre>
+<p>grunt-imagine
+    npm install grunt-imagine</p>
+<p>grunt-contrib-imagemin</p>
+
+<pre><code>npm install grunt-contrib-imagemin --save-dev</code></pre>
+<p>grunt-asset-revisions</p>
+
+<pre><code>npm install grunt-asset-revisions</code></pre>
+<p>grunt-assets-revving</p>
+
+<pre><code>npm install grunt-assets-revving</code></pre>
 ]]>
         </content>
     </entry><entry>
@@ -1289,6 +1397,195 @@ git commit -m &quot;fisrt commit&quot;
 git push origin master</code></pre>
 <p>五、共享/Dropbox/project/demo.git文件夹，其他指定用户同步后，本地clone git项目。</p>
 <p>enJoy it!</p>
+]]>
+        </content>
+    </entry><entry>
+        <title type="html"><![CDATA[移动开发框架]]></title>
+        <author><name>bingdian</name></author>
+        <link href="http://wlog.cn/javascript/mobile-webapp-framework.html"/>
+        <published>2012-03-28T22:13:00+08:00</published>
+        <updated>2013-04-30T14:14:34+08:00</updated>
+        <id>http://wlog.cn/javascript/mobile-webapp-framework.html</id>
+        <category scheme="http://wlog.cn/tag/#webapp" term="webapp" label="webapp" />
+        <category scheme="http://wlog.cn/tag/#手机" term="手机" label="手机" />
+        <category scheme="http://wlog.cn/tag/#移动" term="移动" label="移动" />
+        <category scheme="http://wlog.cn/tag/#javascript" term="javascript" label="javascript" />
+        <content type="html" xml:base="http://wlog.cn" xml:lang="en">
+            <![CDATA[ <h2 id="toc_0">1 PhoneGap</h2>
+<p><a href="http://phonegap.com/">phonegap.com/</a></p>
+<p>PhoneGap是一款HTML5平台，通过它，开发商可以使用HTML、CSS及JavaScript来开发本地移动应用程序。因此，目前开发商可以只 编写一次应用程序，然后在6个主要的移动平台和应用程序商店(app store)里进行发布，这些移动平台和应用程序商店包括：iOS、Android、BlackBerry、webOS、bada以及Symbian。</p>
+
+<h2 id="toc_1">2 jQ.Mobi</h2>
+<p><a href="http://www.jqmobi.com/">www.jqmobi.com/</a></p>
+<p>jQ.Mobi是jQuery的部分重写版本，但针对HTML5和移动设备做了优化。它的文件大小只有3KB，并且据JSPerf test的数据，它在Android上要比jQuery快3倍，在iOS上快2.2倍。该框架是由appMobi发布并开源的。因为jQ.Mobi是插件式开发，所以它的编程语法和jQuery完全相同。jQ.Mobi只包含jQuery API的子集，也就是appMobi认为给iOS和Android提供完全相同用户体验最重要的那部分。</p>
+
+<h2 id="toc_2">3 jQuery Mobile</h2>
+<p><a href="http://jquerymobile.com/">jquerymobile.com/</a></p>
+<p>jQuery Mobile 是 jQuery 在手机上和平板设备上的版本。</p>
+
+<h2 id="toc_3">4 Sencha Touch</h2>
+<p><a href="http://www.sencha.com/products/touch/">www.sencha.com/products/touch/</a></p>
+<p>Sencha Touch是专门为移动设备开发应用的Javascrt框架。通过Sencha Touch你可以创建非常像native app的web app，用户界面组件和数据管理全部基于HTML5和CSS3的web标准，全面兼容Android和Apple iOS。</p>
+
+<h2 id="toc_4">5 zepto.js</h2>
+<p><a href="http://zeptojs.com/">zeptojs.com/</a></p>
+
+<h2 id="toc_5">6 lungojs</h2>
+<p><a href="http://lungo.tapquo.com/">lungo.tapquo.com/</a></p>
+]]>
+        </content>
+    </entry><entry>
+        <title type="html"><![CDATA[移动webapp开发小贴士]]></title>
+        <author><name>bingdian</name></author>
+        <link href="http://wlog.cn/html/mobile-webapp-tips.html"/>
+        <published>2012-03-21T22:13:00+08:00</published>
+        <updated>2013-04-30T14:07:58+08:00</updated>
+        <id>http://wlog.cn/html/mobile-webapp-tips.html</id>
+        <category scheme="http://wlog.cn/tag/#webapp" term="webapp" label="webapp" />
+        <category scheme="http://wlog.cn/tag/#手机" term="手机" label="手机" />
+        <category scheme="http://wlog.cn/tag/#移动" term="移动" label="移动" />
+        <category scheme="http://wlog.cn/tag/#media-queries" term="media-queries" label="media-queries" />
+        <category scheme="http://wlog.cn/tag/#ios" term="ios" label="ios" />
+        <content type="html" xml:base="http://wlog.cn" xml:lang="en">
+            <![CDATA[ <h2 id="toc_0">1 创建主屏幕图标 （Creating a home screen icon ，for ios）</h2>
+
+<pre><code>//57*57
+&lt;link rel=&quot;apple-touch-icon&quot; href=&quot;/custom_icon.png&quot;/&gt;
+
+
+&lt;link rel=&quot;apple-touch-icon&quot; href=&quot;touch-icon-iphone.png&quot; /&gt;
+&lt;link rel=&quot;apple-touch-icon&quot; sizes=&quot;72x72&quot; href=&quot;touch-icon-ipad.png&quot; /&gt;
+&lt;link rel=&quot;apple-touch-icon&quot; sizes=&quot;114x114&quot; href=&quot;touch-icon-iphone4.png&quot; /&gt;
+&lt;link rel=&quot;apple-touch-icon&quot; sizes=&quot;144x144&quot; href=&quot;touch-icon-ipad-retina.png&quot; /&gt;</code></pre>
+
+<ul>
+<li><a href="https://developer.apple.com/library/IOs/#documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html">developer.apple.com/library/IOs/#documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html</a></li>
+<li><a href="https://developer.apple.com/library/IOs/#documentation/UserExperience/Conceptual/MobileHIG/IconsImages/IconsImages.html#//apple_ref/doc/uid/TP40006556-CH14">developer.apple.com/library/IOs/#documentation/UserExperience/Conceptual/MobileHIG/IconsImages/IconsImages.html#//apple_ref/doc/uid/TP40006556-CH14</a></li>
+</ul>
+
+<h2 id="toc_1">2 启动画面图像 （Creating a splash screen， for ios）</h2>
+
+<pre><code>&lt;!!-- iPhone SPLASHSCREEN--&gt;
+&lt;!link href=&quot;apple-touch-startup-image-320x460.png&quot; media=&quot;(device-width: 320px)&quot; rel=&quot;apple-touch-startup-image&quot; /&gt;
+&lt;!!-- iPhone (Retina) SPLASHSCREEN--&gt;
+&lt;!link href=&quot;apple-touch-startup-image-640x920.png&quot; media=&quot;(device-width: 320px) and (-webkit-device-pixel-ratio: 2)&quot; rel=&quot;apple-touch-startup-image&quot; /&gt;
+&lt;!!-- iPad (portrait) SPLASHSCREEN--&gt;
+&lt;!link href=&quot;apple-touch-startup-image-768x1004.png&quot; media=&quot;(device-width: 768px) and (orientation: portrait)&quot; rel=&quot;apple-touch-startup-image&quot; /&gt;
+&lt;!!-- iPad (landscape) SPLASHSCREEN--&gt;
+&lt;!link href=&quot;apple-touch-startup-image-748x1024.png&quot; media=&quot;(device-width: 768px) and (orientation: landscape)&quot; rel=&quot;apple-touch-startup-image&quot; /&gt;
+&lt;!!-- iPad (Retina, portrait) SPLASHSCREEN--&gt;
+&lt;!link href=&quot;apple-touch-startup-image-1536x2008.png&quot; media=&quot;(device-width: 1536px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2)&quot; rel=&quot;apple-touch-startup-image&quot; /&gt;
+&lt;!!-- iPad (Retina, landscape) SPLASHSCREEN--&gt;
+&lt;link href=&quot;apple-touch-startup-image-1496x2048.png&quot; media=&quot;(device-width: 1536px)  and (orientation: landscape) and (-webkit-device-pixel-ratio: 2)&quot; rel=&quot;apple-touch-startup-image&quot; /&gt;</code></pre>
+
+<ul>
+<li><a href="https://developer.apple.com/library/IOs/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html#//apple_ref/doc/uid/TP40002051-CH3-SW6">developer.apple.com/library/IOs/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html#//apple_ref/doc/uid/TP40002051-CH3-SW6</a>
+*
+<a href="http://stackoverflow.com/questions/4687698/mulitple-apple-touch-startup-image-resolutions-for-ios-web-app-esp-for-ipad">stackoverflow.com/questions/4687698/mulitple-apple-touch-startup-image-resolutions-for-ios-web-app-esp-for-ipad</a></li>
+</ul>
+
+<h2 id="toc_2">3 全屏 （Making it full-screen， for ios）&ndash; 更像本地App</h2>
+
+<pre><code>&lt;meta name=&quot;apple-mobile-web-app-capable&quot; content=&quot;yes&quot; /&gt;</code></pre>
+
+<ul>
+<li><a href="https://developer.apple.com/library/IOs/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html#//apple_ref/doc/uid/TP40002051-CH3-SW2">developer.apple.com/library/IOs/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html#//apple_ref/doc/uid/TP40002051-CH3-SW2</a></li>
+</ul>
+
+<h3 id="toc_3">4 改变状态栏 （Changing the phone status bar, for ios）</h3>
+<p>content属性default, black and black-translucent</p>
+
+<pre><code>&lt;meta name=&quot;apple-mobile-web-app-status-bar-style&quot; content=&quot;black&quot; /&gt;</code></pre>
+<p>*
+<a href="https://developer.apple.com/library/IOs/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html#//apple_ref/doc/uid/TP40002051-CH3-SW1">developer.apple.com/library/IOs/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html#//apple_ref/doc/uid/TP40002051-CH3-SW1</a></p>
+
+<h2 id="toc_4">5 阻止缩放 （Preventing scaling）</h2>
+
+<pre><code>&lt;meta name=&quot;viewport&quot; content=&quot;user-scalable=no, width=device-width&quot; /&gt;</code></pre>
+
+<h2 id="toc_5">6 阻止弹性滚动（Preventing elastic scrolling）</h2>
+
+<pre><code>&lt;script&gt;
+function BlockMove(event) {
+    //Tell Safari not to move the window.
+    event.preventDefault() ;
+}
+&lt;/script&gt;
+
+&lt;body ontouchmove=&quot;BlockMove(event);&quot; &gt;
+  ...
+&lt;/body&gt;</code></pre>
+
+<h2 id="toc_6">7 检测屏幕是否旋转（Detect whether device supports orientationchange event, otherwise fall back to the resize event）</h2>
+
+<pre><code>//Detect whether device supports orientationchange event, otherwise fall back to
+//the resize event.
+var supportsOrientationChange = &quot;onorientationchange&quot; in window,
+    orientationEvent = supportsOrientationChange ? &quot;orientationchange&quot; : &quot;resize&quot;;
+
+window.addEventListener(orientationEvent, function() {
+    alert('HOLY ROTATING SCREENS BATMAN:' + window.orientation + &quot; &quot; + screen.width);
+}, false);</code></pre>
+
+<ul>
+<li><a href="http://davidbcalhoun.com/2010/dealing-with-device-orientation">davidbcalhoun.com/2010/dealing-with-device-orientation</a></li>
+</ul>
+
+<h2 id="toc_7">8 禁止webapp跳转到safari（for ios）</h2>
+
+<pre><code>// Mobile Safari in standalone mode
+if ((&quot;standalone&quot; in window.navigator) &amp;&amp; window.navigator.standalone) {
+
+        // If you want to prevent remote links in standalone web apps opening Mobile Safari, change 'remotes' to true
+    var noddy,
+        remotes = false;
+
+    document.addEventListener('click', function(event) {
+        noddy = event.target;
+        //Bubble up until we hit link or top HTML element. Warning: BODY element is not compulsory so better to stop on HTML
+        while (noddy.nodeName !== &quot;A&quot; &amp;&amp; noddy.nodeName !== &quot;HTML&quot;) {
+            noddy = noddy.parentNode;
+        }
+
+        if ('href' in noddy &amp;&amp; noddy.href.indexOf('http') !== -1 &amp;&amp; (noddy.href.indexOf(document.location.host) !== -1 || remotes)) {
+            event.preventDefault();
+            document.location.href = noddy.href;
+        }
+
+    }, false);
+}</code></pre>
+
+<h2 id="toc_8">9 禁用手机号码链接（for ios）</h2>
+
+<pre><code>&lt;meta name=&quot;format-detection&quot; content=&quot;telephone=no&quot; /&gt;</code></pre>
+
+<h2 id="toc_9">10 阻止旋转屏幕时自动调整字体大小</h2>
+
+<pre><code>-webkit-text-size-adjust:none;</code></pre>
+
+<h2 id="toc_10">11 IOS中禁止用户选中文字</h2>
+
+<pre><code>-webkit-user-select:none;</code></pre>
+
+<h2 id="toc_11">12 iOS中如何禁止用户保存图片 复制图片</h2>
+
+<pre><code>-webkit-touch-calloutt:none;</code></pre>
+
+<h2 id="toc_12">13 语音输入</h2>
+
+<pre><code>&lt;input type=&quot;text&quot; x-webkit-speech /&gt;</code></pre>
+
+<h2 id="toc_13">14 文件上传, 从相机捕获媒体</h2>
+
+<pre><code>&lt;input type=&quot;file&quot; accept = &quot;image/*; capture=camera&quot; /&gt;
+&lt;input type=&quot;file&quot; accept = &quot;video/*; capture=camcorder&quot; /&gt;
+&lt;input type=&quot;file&quot; accept = &quot;audio/*; capture=microphone&quot; /&gt;</code></pre>
+
+<h2 id="toc_14">15 电话短信</h2>
+
+<pre><code>&lt;a href=&quot;sms:18888886666,18888885555″]]&gt; 发送短信给多个人 的链接
+&lt;a href=&quot;sms:18888886666?body=sms txt&quot;]]&gt; 发送短信附带内容 的链接
+&lt;a href=&quot;tel:18888886666″]]&gt;Call us at 18888886666&lt;/a]]&gt; 拨打电话的链接</code></pre>
 ]]>
         </content>
     </entry><entry>

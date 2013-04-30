@@ -66,6 +66,7 @@ html {
 	font:16px/1.5  "Georgia","Helvetica Neue", Arial, sans-serif;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
+	word-wrap: break-word;
 }
 
 /**

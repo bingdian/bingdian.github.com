@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN"> 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="On The Way" />
+    <meta name="application-name" content="On The Way" />
+    <title>移动webapp开发小贴士 - On The Way</title>
+    <meta name="keywords" content="webapp,手机,移动,media-queries,ios" />
+    <meta name="description" content="" />
+    
+    <link rel="alternate" type="application/rss+xml" href="/feed.xml" title="On The Way" />
+    <link rel="stylesheet" href="/static/style.css?v=245b5" />
+    <link rel="canonical" href="http://wlog.cn/html/mobile-webapp-tips.html" />
+    <!--[if lt IE 9]>
+    <script src="/static/js/html5shiv.js?v=fb4e3"></script>
+    <![endif]-->
+</head>
+<body>
+<div id="wrapper">   
+<header id="header" class="clear">
+    <h1>移动webapp开发小贴士</h1>
+</header><!-- #header -->
+<nav id="nav" role="navigation">
+    <a href="/index.html">INDEX</a>
+    <a href="/tag/index.html">TAGS</a>
+    <a href="/about.html">ABOUT ME</a>
+    <a href="/links.html">LINKS</a>
+    <a href="/project.html">PROJECTS</a>
+    <a href="/feed.xml">FEED</a>
+</nav><article id="main" class="hentry">
+    <!-- <h1 class="entry-title">移动webapp开发小贴士</h1> -->
+    <div class="entry-content">
+        <h2 id="toc_0">1 创建主屏幕图标 （Creating a home screen icon ，for ios）</h2>
+
+<pre><code>//57*57
+&lt;link rel=&quot;apple-touch-icon&quot; href=&quot;/custom_icon.png&quot;/&gt;
+
+
+&lt;link rel=&quot;apple-touch-icon&quot; href=&quot;touch-icon-iphone.png&quot; /&gt;
+&lt;link rel=&quot;apple-touch-icon&quot; sizes=&quot;72x72&quot; href=&quot;touch-icon-ipad.png&quot; /&gt;
+&lt;link rel=&quot;apple-touch-icon&quot; sizes=&quot;114x114&quot; href=&quot;touch-icon-iphone4.png&quot; /&gt;
+&lt;link rel=&quot;apple-touch-icon&quot; sizes=&quot;144x144&quot; href=&quot;touch-icon-ipad-retina.png&quot; /&gt;</code></pre>
+
+<ul>
+<li><a href="https://developer.apple.com/library/IOs/#documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html">developer.apple.com/library/IOs/#documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html</a></li>
+<li><a href="https://developer.apple.com/library/IOs/#documentation/UserExperience/Conceptual/MobileHIG/IconsImages/IconsImages.html#//apple_ref/doc/uid/TP40006556-CH14">developer.apple.com/library/IOs/#documentation/UserExperience/Conceptual/MobileHIG/IconsImages/IconsImages.html#//apple_ref/doc/uid/TP40006556-CH14</a></li>
+</ul>
+
+<h2 id="toc_1">2 启动画面图像 （Creating a splash screen， for ios）</h2>
+
+<pre><code>&lt;!!-- iPhone SPLASHSCREEN--&gt;
+&lt;!link href=&quot;apple-touch-startup-image-320x460.png&quot; media=&quot;(device-width: 320px)&quot; rel=&quot;apple-touch-startup-image&quot; /&gt;
+&lt;!!-- iPhone (Retina) SPLASHSCREEN--&gt;
+&lt;!link href=&quot;apple-touch-startup-image-640x920.png&quot; media=&quot;(device-width: 320px) and (-webkit-device-pixel-ratio: 2)&quot; rel=&quot;apple-touch-startup-image&quot; /&gt;
+&lt;!!-- iPad (portrait) SPLASHSCREEN--&gt;
+&lt;!link href=&quot;apple-touch-startup-image-768x1004.png&quot; media=&quot;(device-width: 768px) and (orientation: portrait)&quot; rel=&quot;apple-touch-startup-image&quot; /&gt;
+&lt;!!-- iPad (landscape) SPLASHSCREEN--&gt;
+&lt;!link href=&quot;apple-touch-startup-image-748x1024.png&quot; media=&quot;(device-width: 768px) and (orientation: landscape)&quot; rel=&quot;apple-touch-startup-image&quot; /&gt;
+&lt;!!-- iPad (Retina, portrait) SPLASHSCREEN--&gt;
+&lt;!link href=&quot;apple-touch-startup-image-1536x2008.png&quot; media=&quot;(device-width: 1536px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2)&quot; rel=&quot;apple-touch-startup-image&quot; /&gt;
+&lt;!!-- iPad (Retina, landscape) SPLASHSCREEN--&gt;
+&lt;link href=&quot;apple-touch-startup-image-1496x2048.png&quot; media=&quot;(device-width: 1536px)  and (orientation: landscape) and (-webkit-device-pixel-ratio: 2)&quot; rel=&quot;apple-touch-startup-image&quot; /&gt;</code></pre>
+
+<ul>
+<li><a href="https://developer.apple.com/library/IOs/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html#//apple_ref/doc/uid/TP40002051-CH3-SW6">developer.apple.com/library/IOs/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html#//apple_ref/doc/uid/TP40002051-CH3-SW6</a>
+*
+<a href="http://stackoverflow.com/questions/4687698/mulitple-apple-touch-startup-image-resolutions-for-ios-web-app-esp-for-ipad">stackoverflow.com/questions/4687698/mulitple-apple-touch-startup-image-resolutions-for-ios-web-app-esp-for-ipad</a></li>
+</ul>
+
+<h2 id="toc_2">3 全屏 （Making it full-screen， for ios）&ndash; 更像本地App</h2>
+
+<pre><code>&lt;meta name=&quot;apple-mobile-web-app-capable&quot; content=&quot;yes&quot; /&gt;</code></pre>
+
+<ul>
+<li><a href="https://developer.apple.com/library/IOs/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html#//apple_ref/doc/uid/TP40002051-CH3-SW2">developer.apple.com/library/IOs/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html#//apple_ref/doc/uid/TP40002051-CH3-SW2</a></li>
+</ul>
+
+<h3 id="toc_3">4 改变状态栏 （Changing the phone status bar, for ios）</h3>
+<p>content属性default, black and black-translucent</p>
+
+<pre><code>&lt;meta name=&quot;apple-mobile-web-app-status-bar-style&quot; content=&quot;black&quot; /&gt;</code></pre>
+<p>*
+<a href="https://developer.apple.com/library/IOs/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html#//apple_ref/doc/uid/TP40002051-CH3-SW1">developer.apple.com/library/IOs/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html#//apple_ref/doc/uid/TP40002051-CH3-SW1</a></p>
+
+<h2 id="toc_4">5 阻止缩放 （Preventing scaling）</h2>
+
+<pre><code>&lt;meta name=&quot;viewport&quot; content=&quot;user-scalable=no, width=device-width&quot; /&gt;</code></pre>
+
+<h2 id="toc_5">6 阻止弹性滚动（Preventing elastic scrolling）</h2>
+
+<pre><code>&lt;script&gt;
+function BlockMove(event) {
+    //Tell Safari not to move the window.
+    event.preventDefault() ;
+}
+&lt;/script&gt;
+
+&lt;body ontouchmove=&quot;BlockMove(event);&quot; &gt;
+  ...
+&lt;/body&gt;</code></pre>
+
+<h2 id="toc_6">7 检测屏幕是否旋转（Detect whether device supports orientationchange event, otherwise fall back to the resize event）</h2>
+
+<pre><code>//Detect whether device supports orientationchange event, otherwise fall back to
+//the resize event.
+var supportsOrientationChange = &quot;onorientationchange&quot; in window,
+    orientationEvent = supportsOrientationChange ? &quot;orientationchange&quot; : &quot;resize&quot;;
+
+window.addEventListener(orientationEvent, function() {
+    alert('HOLY ROTATING SCREENS BATMAN:' + window.orientation + &quot; &quot; + screen.width);
+}, false);</code></pre>
+
+<ul>
+<li><a href="http://davidbcalhoun.com/2010/dealing-with-device-orientation">davidbcalhoun.com/2010/dealing-with-device-orientation</a></li>
+</ul>
+
+<h2 id="toc_7">8 禁止webapp跳转到safari（for ios）</h2>
+
+<pre><code>// Mobile Safari in standalone mode
+if ((&quot;standalone&quot; in window.navigator) &amp;&amp; window.navigator.standalone) {
+
+        // If you want to prevent remote links in standalone web apps opening Mobile Safari, change 'remotes' to true
+    var noddy,
+        remotes = false;
+
+    document.addEventListener('click', function(event) {
+        noddy = event.target;
+        //Bubble up until we hit link or top HTML element. Warning: BODY element is not compulsory so better to stop on HTML
+        while (noddy.nodeName !== &quot;A&quot; &amp;&amp; noddy.nodeName !== &quot;HTML&quot;) {
+            noddy = noddy.parentNode;
+        }
+
+        if ('href' in noddy &amp;&amp; noddy.href.indexOf('http') !== -1 &amp;&amp; (noddy.href.indexOf(document.location.host) !== -1 || remotes)) {
+            event.preventDefault();
+            document.location.href = noddy.href;
+        }
+
+    }, false);
+}</code></pre>
+
+<h2 id="toc_8">9 禁用手机号码链接（for ios）</h2>
+
+<pre><code>&lt;meta name=&quot;format-detection&quot; content=&quot;telephone=no&quot; /&gt;</code></pre>
+
+<h2 id="toc_9">10 阻止旋转屏幕时自动调整字体大小</h2>
+
+<pre><code>-webkit-text-size-adjust:none;</code></pre>
+
+<h2 id="toc_10">11 IOS中禁止用户选中文字</h2>
+
+<pre><code>-webkit-user-select:none;</code></pre>
+
+<h2 id="toc_11">12 iOS中如何禁止用户保存图片 复制图片</h2>
+
+<pre><code>-webkit-touch-calloutt:none;</code></pre>
+
+<h2 id="toc_12">13 语音输入</h2>
+
+<pre><code>&lt;input type=&quot;text&quot; x-webkit-speech /&gt;</code></pre>
+
+<h2 id="toc_13">14 文件上传, 从相机捕获媒体</h2>
+
+<pre><code>&lt;input type=&quot;file&quot; accept = &quot;image/*; capture=camera&quot; /&gt;
+&lt;input type=&quot;file&quot; accept = &quot;video/*; capture=camcorder&quot; /&gt;
+&lt;input type=&quot;file&quot; accept = &quot;audio/*; capture=microphone&quot; /&gt;</code></pre>
+
+<h2 id="toc_14">15 电话短信</h2>
+
+<pre><code>&lt;a href=&quot;sms:18888886666,18888885555″]]&gt; 发送短信给多个人 的链接
+&lt;a href=&quot;sms:18888886666?body=sms txt&quot;]]&gt; 发送短信附带内容 的链接
+&lt;a href=&quot;tel:18888886666″]]&gt;Call us at 18888886666&lt;/a]]&gt; 拨打电话的链接</code></pre>
+
+    </div>
+    <div class="entry-meta">
+        Posted in<time class="updated" datetime="2012-03-21T22:13:00+08:00" pubdate>
+            2012-03-21
+        </time>
+        <span class="entry-tags">Category:<a href="/html/">html</a></span>
+        <span class="entry-tags">Tags:
+            
+                <a href="/tag/webapp/">webapp</a>
+            
+                ,<a href="/tag/手机/">手机</a>
+            
+                ,<a href="/tag/移动/">移动</a>
+            
+                ,<a href="/tag/media-queries/">media-queries</a>
+            
+                ,<a href="/tag/ios/">ios</a>
+            
+		</span>
+    
+        
+    </div>
+    
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'bingdian-ontheway';
+        var disqus_title = '移动webapp开发小贴士';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+</article><footer id="footer">
+    <p class="copyright"><span class="software">Powered by <a href="http://lab.lepture.com/liquidluck/">Felix Felicis</a> 3.8, </span><span class="theme">Theme <a href="http://wlog.cn/" rel="nofollow">responsive</a> 0.1 by <a href="http://wlog.cn/">bingdian</a></span></p>
+</footer><!-- #footer -->
+</div><!-- #wrapper -->
+
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-1245097-16']);
+_gaq.push(['_trackPageview']);
+_gaq.push(['_trackPageLoadTime']);
+(function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = 'https://ssl.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+</body>
+</html>

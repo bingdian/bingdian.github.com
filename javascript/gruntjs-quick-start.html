@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN"> 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="On The Way" />
+    <meta name="application-name" content="On The Way" />
+    <title>Grunt 使用说明 - On The Way</title>
+    <meta name="keywords" content="javascript,自动化,构建" />
+    <meta name="description" content="" />
+    
+    <link rel="alternate" type="application/rss+xml" href="/feed.xml" title="On The Way" />
+    <link rel="stylesheet" href="/static/style.css?v=245b5" />
+    <link rel="canonical" href="http://wlog.cn/javascript/gruntjs-quick-start.html" />
+    <!--[if lt IE 9]>
+    <script src="/static/js/html5shiv.js?v=fb4e3"></script>
+    <![endif]-->
+</head>
+<body>
+<div id="wrapper">   
+<header id="header" class="clear">
+    <h1>Grunt 使用说明</h1>
+</header><!-- #header -->
+<nav id="nav" role="navigation">
+    <a href="/index.html">INDEX</a>
+    <a href="/tag/index.html">TAGS</a>
+    <a href="/about.html">ABOUT ME</a>
+    <a href="/links.html">LINKS</a>
+    <a href="/project.html">PROJECTS</a>
+    <a href="/feed.xml">FEED</a>
+</nav><article id="main" class="hentry">
+    <!-- <h1 class="entry-title">Grunt 使用说明</h1> -->
+    <div class="entry-content">
+        <p><a href="http://gruntjs.com/">Gruntjs</a>是一款基于nodejs的javascript项目的自动化构建工具。很多知名的开源项目都在使用，如：jquery、yui、qunit、angular.js、CanJS、Modernizr等。</p>
+
+<h2 id="toc_0">一、安装nodejs</h2>
+<p><a href="http://nodejs.org/#download">nodejs.org/#download</a></p>
+
+<h2 id="toc_1">如果以前全局安装过grunt 0.3x，执行以下命令</h2>
+
+<pre><code>npm uninstall -g grunt</code></pre>
+
+<h2 id="toc_2">二、安装grunt-cli</h2>
+
+<pre><code>npm install -g grunt-cli</code></pre>
+
+<h2 id="toc_3">三、安装templates</h2>
+
+<pre><code>//clone the template inside of the ~/.grunt-init/ directory.
+//http://gruntjs.com/project-scaffolding#installing-templates
+git clone https://github.com/gruntjs/grunt-init-jquery.git ~/.grunt-init/jquery
+git clone https://github.com/gruntjs/grunt-init-gruntfile.git ~/.grunt-init/gruntfile</code></pre>
+
+<h2 id="toc_4">四、已经存在的grunt项目</h2>
+
+<h3 id="toc_5">安装插件</h3>
+<p>如果有配置文件package.json，执行npm install可以安装项目依赖的Grunt插件</p>
+
+<pre><code>npm install</code></pre>
+<p>或者直接通过官网<a href="http://gruntjs.com/plugins安装插件">gruntjs.com/plugins安装插件</a></p>
+
+<h3 id="toc_6">使用</h3>
+
+<pre><code>grunt//执行默认命令</code></pre>
+
+<h2 id="toc_7">五、新建grunt项目</h2>
+
+<h3 id="toc_8">创建项目</h3>
+
+<pre><code>mkdir project
+grunt-init template //如grunt-init gruntfile</code></pre>
+
+<h3 id="toc_9">当前项目下安装grunt</h3>
+
+<pre><code>npm install grunt --save-dev</code></pre>
+
+<h3 id="toc_10">package.json</h3>
+<p>可以在这个文件中配置项目依赖的Grunt插件</p>
+
+<h3 id="toc_11">配置Gruntfile</h3>
+<p>文件名为Gruntfile.js或Gruntfile.coffee，在这个文件中配置各种构建任务及其加载任务所需要的插件。</p>
+
+<h3 id="toc_12">安装插件</h3>
+<p>如果有配置文件package.json，执行npm install可以安装项目依赖的Grunt插件</p>
+
+<pre><code>npm install</code></pre>
+<p>或者直接通过官网<a href="http://gruntjs.com/plugins安装插件">gruntjs.com/plugins安装插件</a></p>
+
+<h3 id="toc_13">使用</h3>
+
+<pre><code>grunt//执行默认命令，也可以使用</code></pre>
+
+<h2 id="toc_14">六、前端开发推荐插件</h2>
+<p>grunt-contrib-clean</p>
+
+<pre><code>npm install grunt-contrib-clean --save-dev</code></pre>
+<p>grunt-contrib-concat</p>
+
+<pre><code>npm install grunt-contrib-concat --save-dev</code></pre>
+<p>grunt-yui-compressor</p>
+
+<pre><code>npm install grunt-yui-compressor</code></pre>
+<p>grunt-contrib-csslint</p>
+
+<pre><code>npm install grunt-contrib-csslint --save-dev</code></pre>
+<p>grunt-contrib-jshint</p>
+
+<pre><code>npm install grunt-contrib-jshint --save-dev</code></pre>
+<p>grunt-contrib-qunit</p>
+
+<pre><code>npm install grunt-contrib-qunit --save-dev</code></pre>
+<p>grunt-contrib-copy</p>
+
+<pre><code>npm install grunt-contrib-copy --save-dev</code></pre>
+<p>grunt-contrib-uglify</p>
+
+<pre><code>npm install grunt-contrib-uglify --save-dev</code></pre>
+<p>grunt-imagine
+    npm install grunt-imagine</p>
+<p>grunt-contrib-imagemin</p>
+
+<pre><code>npm install grunt-contrib-imagemin --save-dev</code></pre>
+<p>grunt-asset-revisions</p>
+
+<pre><code>npm install grunt-asset-revisions</code></pre>
+<p>grunt-assets-revving</p>
+
+<pre><code>npm install grunt-assets-revving</code></pre>
+
+    </div>
+    <div class="entry-meta">
+        Posted in<time class="updated" datetime="2013-03-12T21:33:00+08:00" pubdate>
+            2013-03-12
+        </time>
+        <span class="entry-tags">Category:<a href="/javascript/">Javascript</a></span>
+        <span class="entry-tags">Tags:
+            
+                <a href="/tag/javascript/">javascript</a>
+            
+                ,<a href="/tag/自动化/">自动化</a>
+            
+                ,<a href="/tag/构建/">构建</a>
+            
+		</span>
+    
+        
+    </div>
+    
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'bingdian-ontheway';
+        var disqus_title = 'Grunt 使用说明';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+</article><footer id="footer">
+    <p class="copyright"><span class="software">Powered by <a href="http://lab.lepture.com/liquidluck/">Felix Felicis</a> 3.8, </span><span class="theme">Theme <a href="http://wlog.cn/" rel="nofollow">responsive</a> 0.1 by <a href="http://wlog.cn/">bingdian</a></span></p>
+</footer><!-- #footer -->
+</div><!-- #wrapper -->
+
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-1245097-16']);
+_gaq.push(['_trackPageview']);
+_gaq.push(['_trackPageLoadTime']);
+(function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = 'https://ssl.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+</body>
+</html>
