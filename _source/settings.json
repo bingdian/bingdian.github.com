@@ -69,16 +69,16 @@
             "name": "TAGS"
         },
         {
+            "link": "project.html",
+            "name": "PROJECTS"
+        },
+        {
             "link": "about.html",
             "name": "ABOUT ME"
         },
         {
             "link": "links.html",
             "name": "LINKS"
-        },
-        {
-            "link": "project.html",
-            "name": "PROJECTS"
         },
         {
             "link": "feed.xml",
