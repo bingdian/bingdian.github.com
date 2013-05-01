@@ -19,7 +19,7 @@
 
 ## Wunderlist
 
-* [Wunderlist](http://www.6wunderkinder.com/) - 最好用的任务管理，跨平台（iPhone, iPad, Android, Windows, Mac and Web），随时同步。
+* [Wunderlist](http://www.6wunderkinder.com/) - 个人用过最好用的任务管理应用，跨平台（iPhone, iPad, Android, Windows, Mac and Web），随时同步，界面简洁漂亮，用户体验很好。
 
 ## 办公软件
 

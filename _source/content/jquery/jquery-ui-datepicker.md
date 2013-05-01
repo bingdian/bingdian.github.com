@@ -1,7 +1,7 @@
 # jQuery UI Datepicker--漂亮的jQuery日历控件
 
 - date: 2009-03-13
-- tags: jquery框架, datepicker, ui
+- tags: jquery, datepicker, ui
 - category: jquery
 
 ----------------

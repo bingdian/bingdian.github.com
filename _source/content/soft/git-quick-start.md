@@ -1,9 +1,8 @@
 # git学习笔记
 
 - date: 2011-06-18 22:32
-- tags: git,版本控制
+- tags: git,版本控制,学习笔记
 - category: Soft
-
 ----------------
 
 Git --- The stupid content tracker。

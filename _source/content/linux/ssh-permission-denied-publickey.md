@@ -1,7 +1,7 @@
 # SSH Permission denied (publickey)解决办法
 
 - date: 2011-07-29 23:43
-- tags:  publickey,ssh
+- tags:  publickey,ssh,linux
 - category: Linux
 
 ----------------
