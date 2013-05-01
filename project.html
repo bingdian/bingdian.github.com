@@ -40,7 +40,7 @@
     <script type="text/x-handlebars-template" id="template">
     <!-- http://stackoverflow.com/questions/5117204/avoiding-ambiguous-mustaches-from-jinja2-that-includes-jquery-templates -->
     
-    {{#each data}}
+    {{#data}}
         {{#unless fork}}
             {{#unless_eq name "bingdian.github.com" }}
             <section>
@@ -50,7 +50,7 @@
             </section>
             {{/unless_eq}}
         {{/unless}}
-    {{/each}}
+    {{/data}}
     
     </script>
     <script src="/static/js/jquery.js?v=2edc9"></script>
@@ -75,9 +75,7 @@
             url: 'https://api.github.com/users/bingdian/repos',
             dataType: 'json',
             success: function(data) {
-                var html = template({
-                    data: data
-                });
+                var html = template(data);
                 
                 $main.html(html);
             },
