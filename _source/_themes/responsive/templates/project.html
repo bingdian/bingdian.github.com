@@ -42,7 +42,7 @@
         //ajax
         $.ajax({
             url: 'https://api.github.com/users/bingdian/repos',
-            dataType: 'json',
+            dataType: 'jsonp',
             success: function(data) {
                 var html = template(data);
                 
