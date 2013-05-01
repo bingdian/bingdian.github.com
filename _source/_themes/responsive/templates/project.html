@@ -1,0 +1,59 @@
+{% extends "post.html" %}
+
+{% block main %}
+<article id="main" class="hentry page-hentry">
+</article>
+{% endblock %}
+
+{%- block beforejs %}
+    <script type="text/x-handlebars-template" id="template">
+    <!-- http://stackoverflow.com/questions/5117204/avoiding-ambiguous-mustaches-from-jinja2-that-includes-jquery-templates -->
+    {% raw %}
+    {{#each data}}
+        {{#unless fork}}
+            {{#unless_eq name "bingdian.github.com" }}
+            <section>
+                <h2><a href="{{html_url}}">{{name}}</a></h2>
+                <p>Description：{{description}}</p>
+                <p>Url：{{html_url}}</p>
+            </section>
+            {{/unless_eq}}
+        {{/unless}}
+    {{/each}}
+    {% endraw %}
+    </script>
+    <script src="/static/js/jquery.js?v=2edc9"></script>
+    <script src="/static/js/handlebars.js?v=a2eac"></script>
+    <script>
+    var $main = $('#main');
+        $main.html('<p>加载中...</p>');
+        
+    $(function() {
+        var source   = $("#template").html(),
+            template = Handlebars.compile(source);
+        
+        //equal helper
+        Handlebars.registerHelper('unless_eq', function(val, val2, options) {
+            if( val !== val2 ){
+                return options.fn(this);
+            }
+        });
+        
+        //ajax
+        $.ajax({
+            url: 'https://api.github.com/users/bingdian/repos',
+            dataType: 'json',
+            success: function(data) {
+                var html = template({
+                    data: data
+                });
+                
+                $main.html(html);
+            },
+            error: function() {
+                $main.html('<p>数据加载失败，请稍后再试。</p>');
+            }
+        });
+    });
+    </script>
+{% endblock %}

@@ -1,2 +1,5 @@
 # Project
 
+- template: project.html
+
+----------------
