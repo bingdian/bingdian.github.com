@@ -25,9 +25,12 @@ HTML5是HTML的新一代标准，现在仍处于发展阶段。HTML5添加了许
 
 最新版本的 Safari、Chrome、Firefox 以及 Opera 支持某些 HTML5 特性。Internet Explorer 9支持某些 HTML5 特性。具体可查看[http://html5test.com/results/desktop.html](http://html5test.com/results/desktop.html)。
 
+对于ie9以下的ie浏览器，可以使用[html5shiv](https://code.google.com/p/html5shiv/)使其支持HTML5标签，将下面代码插入到&lt;head>标签中即。 
+
     <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    < ![endif]-->
+    <![endif]-->
+
     
 ## 二、Doctype
 
@@ -1135,9 +1138,6 @@ html5新增API：
     * http://w3help.org/zh-cn/casestudies/002
     * http://hsivonen.iki.fi/doctype/
     * http://otakustay.com/learning-html5-doctype/
- * html5 element
-    * https://developer.mozilla.org/en-US/docs/HTML/HTML5/HTML5_element_list
-    * http://html5doctor.com/element-index/
  * html5
     * [HTML5 Reference](http://dev.w3.org/html5/html-author/)
     * [HTML5 differences from HTML4](http://www.w3.org/TR/html5-diff/)
@@ -1147,7 +1147,11 @@ html5新增API：
     * http://www.w3.org/html/ig/zh/wiki/HTML5
     * http://www.w3help.org/zh-cn/kb/001#common_dtd
     * https://zh.wikipedia.org/zh-cn/HTML5
-    * http://www.w3.org/html/logo/
+    * [html5 logo](http://www.w3.org/html/logo/)
+    * https://developer.mozilla.org/en-US/docs/HTML/HTML5/HTML5_element_list
+    * http://html5doctor.com/element-index/
+    * [modernizr](http://modernizr.com/)
+    * [html5shiv]:(https://github.com/aFarkas/html5shiv)
  * demo
     * [HTML 5 Demos and Examples](http://html5demos.com/)
     * [HTML5ROCKS](http://www.html5rocks.com/en/)

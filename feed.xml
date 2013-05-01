@@ -3,7 +3,7 @@
     <title>On The Way</title>
     <link href="http://wlog.cn/feed.xml" rel="self" />
     <link href="http://wlog.cn/" />
-    <updated>2013-05-01T12:48:31+08:00</updated>
+    <updated>2013-05-01T14:20:32+08:00</updated>
     <id>http://wlog.cn/</id>
     <entry>
         <title type="html"><![CDATA[博客从typecho换成liquidluck]]></title>
@@ -188,7 +188,7 @@ grunt-init template //如grunt-init gruntfile</code></pre>
         <author><name>bingdian</name></author>
         <link href="http://wlog.cn/html/html5.html"/>
         <published>2013-02-21T23:21:00+08:00</published>
-        <updated>2013-05-01T12:48:31+08:00</updated>
+        <updated>2013-05-01T14:20:32+08:00</updated>
         <id>http://wlog.cn/html/html5.html</id>
         <category scheme="http://wlog.cn/tag/#html5" term="html5" label="html5" />
         <category scheme="http://wlog.cn/tag/#doctype" term="doctype" label="doctype" />
@@ -211,10 +211,11 @@ grunt-init template //如grunt-init gruntfile</code></pre>
 
 <h3 id="toc_2">1.2 浏览器支持性况：</h3>
 <p>最新版本的 Safari、Chrome、Firefox 以及 Opera 支持某些 HTML5 特性。Internet Explorer 9支持某些 HTML5 特性。具体可查看<a href="http://html5test.com/results/desktop.html">http://html5test.com/results/desktop.html</a>。</p>
+<p>对于ie9以下的ie浏览器，可以使用<a href="https://code.google.com/p/html5shiv/">html5shiv</a>使其支持HTML5标签，将下面代码插入到&lt;head&gt;标签中即。 </p>
 
 <pre><code>&lt;!--[if lt IE 9]&gt;
 &lt;script src=&quot;http://html5shiv.googlecode.com/svn/trunk/html5.js&quot;&gt;&lt;/script&gt;
-&lt; ![endif]--&gt;</code></pre>
+&lt;![endif]--&gt;</code></pre>
 
 <h2 id="toc_3">二、Doctype</h2>
 
@@ -1345,7 +1346,9 @@ CSS1Compat：标准兼容模式（又叫严格模式，Standards mode 或者 Str
 <li><a href="http://www.w3.org/html/ig/zh/wiki/HTML5">www.w3.org/html/ig/zh/wiki/HTML5</a></li>
 <li><a href="http://www.w3help.org/zh-cn/kb/001#common_dtd">www.w3help.org/zh-cn/kb/001#common_dtd</a></li>
 <li><a href="https://zh.wikipedia.org/zh-cn/HTML5">zh.wikipedia.org/zh-cn/HTML5</a></li>
-<li><a href="http://www.w3.org/html/logo/">www.w3.org/html/logo/</a></li>
+<li><a href="http://www.w3.org/html/logo/">html5 logo</a></li>
+<li><a href="http://modernizr.com/">modernizr</a></li>
+<li>[html5shiv]:(<a href="https://github.com/aFarkas/html5shiv">github.com/aFarkas/html5shiv</a>)</li>
 </ul></li>
 <li>demo
 
