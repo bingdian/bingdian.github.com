@@ -14,6 +14,6 @@ liquidluck是一个基于python的静态站点生成工具，是github上的一�
 
 这次迁移博客过程中，给博客做了更简单的主题，更适合阅读。这次博客迁移所有文章全手工处理，对以前的博客文章做了一些整理，有些不是很好的文章内容没有歉意过来，以前的文章的评论也全部丢失了。
 
-本博客的主题也托管在github上，项目地址：https://github.com/bingdian/liquidluck-theme-responsive，有兴趣的可以前往下载使用。
+本博客的主题也托管在github上，项目地址：[https://github.com/bingdian/liquidluck-theme-responsive](https://github.com/bingdian/liquidluck-theme-responsive)，有兴趣的可以前往下载使用。
 
 希望以后能继续坚持写出更多更好的内容。
