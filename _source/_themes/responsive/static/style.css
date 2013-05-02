@@ -634,7 +634,10 @@ table tr th :last-child, table tr td :last-child {
 	width: auto;
     max-width: 100%;
 }
-
+.post-date {
+	padding-top: 2em;
+	color: #999;
+}
 /*
  * tagcloud
  */
