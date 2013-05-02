@@ -613,7 +613,6 @@ table tr th :last-child, table tr td :last-child {
 
 .entry-content {
 	margin-bottom: 3em;
-	padding-top: 1.5em !important;
 }
 .entry-meta {
     margin-top: 1em;
@@ -634,7 +633,11 @@ table tr th :last-child, table tr td :last-child {
 	width: auto;
     max-width: 100%;
 }
-
+.post-date {
+	padding-top: 2em;
+	margin-bottom: 2em;
+	color: #999;
+}
 /*
  * tagcloud
  */

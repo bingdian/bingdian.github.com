@@ -12,7 +12,7 @@
     <meta name="description" content="" />
     
     <link rel="alternate" type="application/rss+xml" href="/feed.xml" title="On The Way" />
-    <link rel="stylesheet" href="/static/style.css?v=245b5" />
+    <link rel="stylesheet" href="/static/style.css?v=d39b1" />
     <link rel="canonical" href="http://wlog.cn/performance/mergers-compression-javascript-css.html" />
     <!--[if lt IE 9]>
     <script src="/static/js/html5shiv.js?v=fb4e3"></script>
@@ -31,7 +31,7 @@
     <a href="/links.html">LINKS</a>
     <a href="/feed.xml">FEED</a>
 </nav><article id="main" class="hentry">
-    <!-- <h1 class="entry-title">[转]在服务端合并和压缩JavaScript和CSS文件</h1> -->
+    <div class="post-date">- Posted on <time class="updated" datetime="2011-02-07" pubdate>2011-02-07</time></div>
     <div class="entry-content">
         <p>Web性能优化最佳实践中最重要的一条是减少HTTP请求，它也是YSlow中比重最大的一条规则。减少HTTP请求的方案主要有合并JavaScript和CSS文件、CSS Sprites、图像映射（Image Map）和使用Data URI来编码图片。CSS Sprites和图像映射现在已经随处可见了，但由于IE6和IE7不支持Data URI以及性能问题，这项技术尚未大量使用。目前大部分网页中的JavaScript和CSS文件数量和开发时一致，少量的网页会根据实际情况采取本地合并，这些合并中相当多的是有选择地手动完成，每次新的合并都需要重新在本地完成并上传到服务器，比较的随意和繁琐，同样文件的压缩也有类似的情况。而利用服务端的合并和压缩，我们就可以按照开发的逻辑尽可能让文件的颗粒度变小，利用网页中URL的规则来自动实现文件的合并和压缩，这会相当的灵活和高效。</p>
 
@@ -136,7 +136,7 @@ $min_serveOptions['minifiers']['text/css'] = '';</code></pre>
 
     </div>
     <div class="entry-meta">
-        Posted in<time class="updated" datetime="2011-02-07T21:11:00+08:00" pubdate>
+        Posted on<time class="updated" datetime="2011-02-07T21:11:00+08:00" pubdate>
             2011-02-07
         </time>
         <span class="entry-tags">Category:<a href="/performance/">Performance</a></span>
