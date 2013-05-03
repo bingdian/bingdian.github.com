@@ -230,7 +230,7 @@ git恢复删除了的文件，git pull 从git服务器取出，并且和本地�
 	  git push -u origin master
 
 
-[Git 常用命令图示](/filse/img/git.png)--来源：[http://www.cnblogs.com/1-2-3/archive/2010/07/18/git-commands.html](http://www.cnblogs.com/1-2-3/archive/2010/07/18/git-commands.html)
+[Git 常用命令图示](/files/img/git.png)--来源：[http://www.cnblogs.com/1-2-3/archive/2010/07/18/git-commands.html](http://www.cnblogs.com/1-2-3/archive/2010/07/18/git-commands.html)
 
 ## 扩展阅读：
 
