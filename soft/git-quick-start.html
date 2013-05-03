@@ -52,7 +52,7 @@ git config user.email &quot;my@email.com&quot;</code></pre>
 
 <pre><code>cat .git/config</code></pre>
 
-<h2 id="toc_1">二、创建git仓库及获取代码</h2>
+<h2 id="toc_1">二、创建git仓库及操作</h2>
 <p>创建git仓库：</p>
 
 <pre><code>mkdir project
@@ -61,6 +61,15 @@ git init #在当前的目录下建一个仓库</code></pre>
 <p>从已有的git仓库中提取代码:</p>
 
 <pre><code>git clone git@server:app.git myrepo</code></pre>
+<p>查看远程仓库：</p>
+
+<pre><code>$ git remote -v</code></pre>
+<p>添加远程仓库：</p>
+
+<pre><code>$ git remote add [name] [url]</code></pre>
+<p>删除远程仓库：</p>
+
+<pre><code>$ git remote rm [name]</code></pre>
 
 <h2 id="toc_2">三、更改代码的操作</h2>
 <p>更新本地代码到最新版本（需要merge才能合到本地代码中）:</p>
@@ -204,7 +213,7 @@ Existing Git Repo?
 <h2 id="toc_7">扩展阅读：</h2>
 
 <ul>
-<li><a href="http://www.linuxsir.org/main/doc/git/gittutorcn.htm">Git 中文教程</a></li>
+<li><del><a href="http://www.linuxsir.org/main/doc/git/gittutorcn.htm">Git 中文教程</a></del></li>
 <li><a href="http://progit.org/book/zh/">Pro Git professional version control</a></li>
 <li><a href="http://scie.nti.st/2007/11/14/hosting-git-repositories-the-easy-and-secure-way">Hosting Git repositories, The Easy (and Secure) Way)</a></li>
 </ul>

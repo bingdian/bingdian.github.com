@@ -32,7 +32,7 @@ git下载地址：<a href="http://git-scm.com/download" target="_blank">http://g
 
 	cat .git/config
 
-## 二、创建git仓库及获取代码
+## 二、创建git仓库及操作
 
 创建git仓库：
 	
@@ -43,6 +43,19 @@ git下载地址：<a href="http://git-scm.com/download" target="_blank">http://g
 从已有的git仓库中提取代码:
 
 	git clone git@server:app.git myrepo
+	
+查看远程仓库：
+
+	$ git remote -v
+	
+添加远程仓库：
+
+	$ git remote add [name] [url]
+	
+删除远程仓库：
+
+	$ git remote rm [name]
+	
 
 ## 三、更改代码的操作
 
@@ -91,7 +104,7 @@ git下载地址：<a href="http://git-scm.com/download" target="_blank">http://g
 提交所有修改到远程服务器，这样，其它团队成员才能更新到这些修改
 	
 	git push
-
+	
 ## 四、git 分支（branch）操作
 
 创建dev分支：
@@ -221,6 +234,6 @@ git恢复删除了的文件，git pull 从git服务器取出，并且和本地�
 
 ## 扩展阅读：
 
-* [Git 中文教程](http://www.linuxsir.org/main/doc/git/gittutorcn.htm)
+* <del>[Git 中文教程](http://www.linuxsir.org/main/doc/git/gittutorcn.htm)</del>
 * [Pro Git professional version control](http://progit.org/book/zh/)
 * [Hosting Git repositories, The Easy (and Secure) Way)](http://scie.nti.st/2007/11/14/hosting-git-repositories-the-easy-and-secure-way)
