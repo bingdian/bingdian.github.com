@@ -3,7 +3,7 @@
     <title>On The Way</title>
     <link href="http://wlog.cn/feed.xml" rel="self" />
     <link href="http://wlog.cn/" />
-    <updated>2013-05-03T20:21:27+08:00</updated>
+    <updated>2013-05-03T20:29:03+08:00</updated>
     <id>http://wlog.cn/</id>
     <entry>
         <title type="html"><![CDATA[博客从typecho换成liquidluck]]></title>
@@ -3199,7 +3199,7 @@ for (i in person) {
         <author><name>bingdian</name></author>
         <link href="http://wlog.cn/soft/git-quick-start.html"/>
         <published>2011-06-18T22:32:00+08:00</published>
-        <updated>2013-05-03T20:21:27+08:00</updated>
+        <updated>2013-05-03T20:29:03+08:00</updated>
         <id>http://wlog.cn/soft/git-quick-start.html</id>
         <category scheme="http://wlog.cn/tag/#git" term="git" label="git" />
         <category scheme="http://wlog.cn/tag/#版本控制" term="版本控制" label="版本控制" />
@@ -3380,7 +3380,7 @@ Existing Git Repo?
   cd existing_git_repo
   git remote add origin git@github.com:bingdian/projectname.git
   git push -u origin master</code></pre>
-<p><a href="http://www.wlog.cn/usr/uploads/2011/07/2671512346.png" title="git.png" target="blank">Git 常用命令图示</a>&ndash;来源：<a href="http://www.cnblogs.com/1-2-3/archive/2010/07/18/git-commands.html" target="blank"><a href="http://www.cnblogs.com/1-2-3/archive/2010/07/18/git-commands.html">www.cnblogs.com/1-2-3/archive/2010/07/18/git-commands.html</a></a></p>
+<p><a href="/filse/img/git.png">Git 常用命令图示</a>&ndash;来源：<a href="http://www.cnblogs.com/1-2-3/archive/2010/07/18/git-commands.html">http://www.cnblogs.com/1-2-3/archive/2010/07/18/git-commands.html</a></p>
 
 <h2 id="toc_7">扩展阅读：</h2>
 
