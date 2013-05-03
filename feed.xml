@@ -3,7 +3,7 @@
     <title>On The Way</title>
     <link href="http://wlog.cn/feed.xml" rel="self" />
     <link href="http://wlog.cn/" />
-    <updated>2013-05-03T20:29:03+08:00</updated>
+    <updated>2013-05-03T20:31:27+08:00</updated>
     <id>http://wlog.cn/</id>
     <entry>
         <title type="html"><![CDATA[博客从typecho换成liquidluck]]></title>
@@ -3199,7 +3199,7 @@ for (i in person) {
         <author><name>bingdian</name></author>
         <link href="http://wlog.cn/soft/git-quick-start.html"/>
         <published>2011-06-18T22:32:00+08:00</published>
-        <updated>2013-05-03T20:29:03+08:00</updated>
+        <updated>2013-05-03T20:31:27+08:00</updated>
         <id>http://wlog.cn/soft/git-quick-start.html</id>
         <category scheme="http://wlog.cn/tag/#git" term="git" label="git" />
         <category scheme="http://wlog.cn/tag/#版本控制" term="版本控制" label="版本控制" />
