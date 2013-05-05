@@ -8,7 +8,7 @@
 
 原文：http://coding.smashingmagazine.com/2011/10/11/essential-jquery-plugin-patterns/ By [Addy Osmani](http://addyosmani.com/blog/)
 
-译者注：目前还有部分内容没有翻译出来，如翻译有误，敬请指正，也欢迎你来和我一起翻译。
+译者注：目前还有部分内容没有翻译完成，如翻译有误，敬请指正。
 
 我前面写过[javascript 设计模式](http://addyosmani.com/resources/essentialjsdesignpatterns/book/)，它为javascript开发中的一些常见问题提供了很好的解决方案，使用这些设计模式将使你的开发获益良多。众所周知，javascript 设计模式非常有用，另一方面得益于它自己的设计模式：jquery 插件。 官方的[jQuery 插件开发指南](http://docs.jquery.com/Plugins/Authoring) 可以作为学习编写插件的一个很好的开始。在这篇文章中我们将更深入了解jquery插件开发技巧。
 

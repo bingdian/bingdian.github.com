@@ -34,7 +34,7 @@
     <div class="post-date">- Posted on <time class="updated" datetime="2013-05-04" pubdate>2013-05-04</time></div>
     <div class="entry-content">
         <p>原文：<a href="http://coding.smashingmagazine.com/2011/10/11/essential-jquery-plugin-patterns/">coding.smashingmagazine.com/2011/10/11/essential-jquery-plugin-patterns/</a> By <a href="http://addyosmani.com/blog/">Addy Osmani</a></p>
-<p>译者注：目前还有部分内容没有翻译出来，如翻译有误，敬请指正，也欢迎你来和我一起翻译。</p>
+<p>译者注：目前还有部分内容没有翻译完成，如翻译有误，敬请指正。</p>
 <p>我前面写过<a href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/">javascript 设计模式</a>，它为javascript开发中的一些常见问题提供了很好的解决方案，使用这些设计模式将使你的开发获益良多。众所周知，javascript 设计模式非常有用，另一方面得益于它自己的设计模式：jquery 插件。 官方的<a href="http://docs.jquery.com/Plugins/Authoring">jQuery 插件开发指南</a> 可以作为学习编写插件的一个很好的开始。在这篇文章中我们将更深入了解jquery插件开发技巧。</p>
 <p>jquery插件开发经过这几年的不断发展，我们现在很少只使用一种方式来编写插件。事实上，使用特定的设计模式在某些解决某些特定问题或场景，比其它模式更为有效。</p>
 <p>一些开发人员可能希望使用jQuery UI 组件 工厂模式（the jQuery UI widget factory），这种模式适合复杂、灵活的UI组件。另外一些开发人员可能喜欢像模块(类似模块模式)一样组织他们的代码，或者使用更正式的模块模式如<a href="https://github.com/amdjs/amdjs-api/wiki/AMD">AMD</a>(asynchronous module definition) 。还有一些开发人员希望他们的插件使用javascript强大的原型继承。还有另外一些开发人员可能想使用自定义的事件或发布/订阅(pub/sub)使插件和app之间通信。等等&hellip;</p>
