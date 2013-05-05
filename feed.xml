@@ -3,7 +3,7 @@
     <title>On The Way</title>
     <link href="http://wlog.cn/feed.xml" rel="self" />
     <link href="http://wlog.cn/" />
-    <updated>2013-05-05T19:32:09+08:00</updated>
+    <updated>2013-05-05T19:45:48+08:00</updated>
     <id>http://wlog.cn/</id>
     <entry>
         <title type="html"><![CDATA[[译]Jquery 插件设计模式]]></title>
@@ -2289,11 +2289,11 @@ if ((&quot;standalone&quot; in window.navigator) &amp;&amp; window.navigator.sta
 ]]>
         </content>
     </entry><entry>
-        <title type="html"><![CDATA[[译文][转]避免常见的六种html5错误用法]]></title>
+        <title type="html"><![CDATA[[译][转]避免常见的六种html5错误用法]]></title>
         <author><name>bingdian</name></author>
         <link href="http://wlog.cn/html/avoiding-common-html5-mistakes.html"/>
         <published>2012-03-12T21:23:00+08:00</published>
-        <updated>2013-05-05T19:15:32+08:00</updated>
+        <updated>2013-05-05T19:45:48+08:00</updated>
         <id>http://wlog.cn/html/avoiding-common-html5-mistakes.html</id>
         <category scheme="http://wlog.cn/tag/#html5" term="html5" label="html5" />
         <category scheme="http://wlog.cn/tag/#译文" term="译文" label="译文" />
