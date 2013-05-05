@@ -3,9 +3,710 @@
     <title>On The Way</title>
     <link href="http://wlog.cn/feed.xml" rel="self" />
     <link href="http://wlog.cn/" />
-    <updated>2013-05-05T19:30:05+08:00</updated>
+    <updated>2013-05-05T19:32:09+08:00</updated>
     <id>http://wlog.cn/</id>
     <entry>
+        <title type="html"><![CDATA[[译]Jquery 插件设计模式]]></title>
+        <author><name>bingdian</name></author>
+        <link href="http://wlog.cn/jquery/essential-jquery-plugin-patterns.html"/>
+        <published>2013-05-04T23:22:00+08:00</published>
+        <updated>2013-05-05T19:32:09+08:00</updated>
+        <id>http://wlog.cn/jquery/essential-jquery-plugin-patterns.html</id>
+        <category scheme="http://wlog.cn/tag/#jquery" term="jquery" label="jquery" />
+        <category scheme="http://wlog.cn/tag/#plugin" term="plugin" label="plugin" />
+        <category scheme="http://wlog.cn/tag/#patterns" term="patterns" label="patterns" />
+        <category scheme="http://wlog.cn/tag/#设计模式" term="设计模式" label="设计模式" />
+        <category scheme="http://wlog.cn/tag/#译文" term="译文" label="译文" />
+        <content type="html" xml:base="http://wlog.cn" xml:lang="en">
+            <![CDATA[ <p>原文：<a href="http://coding.smashingmagazine.com/2011/10/11/essential-jquery-plugin-patterns/">coding.smashingmagazine.com/2011/10/11/essential-jquery-plugin-patterns/</a> By <a href="http://addyosmani.com/blog/">Addy Osmani</a></p>
+<p>译者注：目前还有部分内容没有翻译出来，如翻译有误，敬请指正，也欢迎你来和我一起翻译。</p>
+<p>我前面写过<a href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/">javascript 设计模式</a>，它为javascript开发中的一些常见问题提供了很好的解决方案，使用这些设计模式将使你的开发获益良多。众所周知，javascript 设计模式非常有用，另一方面得益于它自己的设计模式：jquery 插件。 官方的<a href="http://docs.jquery.com/Plugins/Authoring">jQuery 插件开发指南</a> 可以作为学习编写插件的一个很好的开始。在这篇文章中我们将更深入了解jquery插件开发技巧。</p>
+<p>jquery插件开发经过这几年的不断发展，我们现在很少只使用一种方式来编写插件。事实上，使用特定的设计模式在某些解决某些特定问题或场景，比其它模式更为有效。</p>
+<p>一些开发人员可能希望使用jQuery UI 组件 工厂模式（the jQuery UI widget factory），这种模式适合复杂、灵活的UI组件。另外一些开发人员可能喜欢像模块(类似模块模式)一样组织他们的代码，或者使用更正式的模块模式如<a href="https://github.com/amdjs/amdjs-api/wiki/AMD">AMD</a>(asynchronous module definition) 。还有一些开发人员希望他们的插件使用javascript强大的原型继承。还有另外一些开发人员可能想使用自定义的事件或发布/订阅(pub/sub)使插件和app之间通信。等等&hellip;</p>
+<p>我注意到一些开发者尝试创建一种通用的jquery插件模板（one-size-fits-all jQuery plugin boilerplate）, 这引发了我的思考。理论上来说，使用统一模板（boilerplate）是一个很好的想法，然而，实际开发中，我们很少只使用一种模式来开发插件。</p>
+<p>假如你自己动手编写过一些jquery插件，它们运行良好，但是，你可能会觉得它可以有更好的代码组织结构，它可以更灵活，解决更多的问题。这听起来很熟悉，你不确定不同的jquery插件模式之间的差异，你会发现我后面将要讲的内容非常有用。</p>
+<p>这篇文章不会为你提供所有问题的解决方案，但是它覆盖了所有开发人员在使用的流行的设计模式。</p>
+<p>注：这篇文章主要面向由中高级的开发人员。如果你觉得还没准备好，推荐你可以先看官方的<a href="http://docs.jquery.com/Plugins/Authoring">jQuery 插件开发指南</a> 、Ben Alman的<a href="http://msdn.microsoft.com/en-us/scriptjunkie/ff696759">plugin style guide</a>和Remy Sharp的<a href="http://remysharp.com/2010/06/03/signs-of-a-poorly-written-jquery-plugin/">Signs of a Poorly Written jQuery Plugin</a>。</p>
+
+<h2 id="toc_0">模式(Patterns)</h2>
+<p>jQuery插件定义了很少的规则，而这也是为什么这些插件方法多种多样的原因之一。最简单的，你可以为jquery的$.fn对象添加一个方法，如：</p>
+
+<pre><code>$.fn.myPluginName = function() {
+    // your plugin logic
+};</code></pre>
+<p>前面的方法很间单，不过下面的这种方法会更好一些：</p>
+
+<pre><code>(function( $ ){
+    $.fn.myPluginName = function() {
+        // your plugin logic
+    };
+})( jQuery );</code></pre>
+<p>这里，我们在插件代码内嵌到一个匿名函数中，使用匿名函数创建了一个闭包，将jQuery这个全局变量传入匿名函数，并执行匿名函数。这样可以确保$不会和其它的javascript库冲突，避免$变量和页面中的全局变量冲突。</p>
+<p>还有另外一种写法是使用$.extend，使用这种方法一次可以定义多个方法，这在有些场景下非常有用：</p>
+
+<pre><code>(function( $ ){
+    $.extend($.fn, {
+        myplugin: function(){
+            // your plugin logic
+        }
+    });
+})( jQuery );</code></pre>
+<p>对此，我们可以做一些改进。首先，我们来看第一个完整的模式 - 轻量级的模式（the lightweight pattern），这种模式覆盖了我们日常插件开发的一些最佳实践和常见问题。</p>
+<p><strong>注意：</strong></p>
+<p>你可在<del><a href="https://github.com/addyosmani/jquery-plugin-patterns/">jquery-plugin-patterns</a></del>(翻译本文时，项目已经迁移到<a href="https://github.com/jquery-boilerplate/patterns">jquery-boilerplate/patterns</a>)这个项目找到这篇文章里面谈到的设计模式。</p>
+<p>虽然，这篇文章会对每一种模式做讲解，但是还是建议阅读代码中的注释，注释可以让你更深入的了解为什么使用这种做法是最好的。</p>
+<p>另外，如果有兴趣的话也可以读一下每种模式后面的扩展内容。</p>
+
+<h2 id="toc_1">简单的开始(A Lightweight Start)</h2>
+<p>首先，我们先来看一些基本的、遵循最佳实践(包括jQuery插件编写指南)的设计模式。这种模式在开发一个新的插件或实现一些简单插件时非常理想。轻量级的插件模式遵循了下面的一些原则: </p>
+
+<ul>
+<li>常见的最佳做法，如函数的调用前使用一个分号; window, document, undefined作为参数传入;遵循jQuery风格规范。</li>
+<li>插件默认配置。</li>
+<li>一个简单的插件的构造函数,用于逻辑相关的初始化和委派元素处理。</li>
+<li>使插件的配置可扩展。</li>
+<li>避免创建多个实例。</li>
+</ul>
+<p>代码：</p>
+
+<pre><code>/*!
+ * jQuery lightweight plugin boilerplate
+ * Original author: @ajpiano
+ * Further changes, comments: @addyosmani
+ * Licensed under the MIT license
+ */
+
+// the semi-colon before the function invocation is a safety 
+// net against concatenated scripts and/or other plugins 
+// that are not closed properly.
+;(function ( $, window, document, undefined ) {
+
+    // undefined is used here as the undefined global 
+    // variable in ECMAScript 3 and is mutable (i.e. it can 
+    // be changed by someone else). undefined isn't really 
+    // being passed in so we can ensure that its value is 
+    // truly undefined. In ES5, undefined can no longer be 
+    // modified.
+
+    // window and document are passed through as local 
+    // variables rather than as globals, because this (slightly) 
+    // quickens the resolution process and can be more 
+    // efficiently minified (especially when both are 
+    // regularly referenced in your plugin).
+
+    // Create the defaults once
+    var pluginName = 'defaultPluginName',
+        defaults = {
+            propertyName: &quot;value&quot;
+        };
+
+    // The actual plugin constructor
+    function Plugin( element, options ) {
+        this.element = element;
+
+        // jQuery has an extend method that merges the 
+        // contents of two or more objects, storing the 
+        // result in the first object. The first object 
+        // is generally empty because we don't want to alter 
+        // the default options for future instances of the plugin
+        this.options = $.extend( {}, defaults, options) ;
+
+        this._defaults = defaults;
+        this._name = pluginName;
+
+        this.init();
+    }
+
+    Plugin.prototype.init = function () {
+        // Place initialization logic here
+        // You already have access to the DOM element and
+        // the options via the instance, e.g. this.element 
+        // and this.options
+    };
+
+    // A really lightweight plugin wrapper around the constructor, 
+    // preventing against multiple instantiations
+    $.fn[pluginName] = function ( options ) {
+        return this.each(function () {
+            if (!$.data(this, 'plugin_' + pluginName)) {
+                $.data(this, 'plugin_' + pluginName, 
+                new Plugin( this, options ));
+            }
+        });
+    }
+
+})( jQuery, window, document );</code></pre>
+<p><strong>扩展阅读</strong></p>
+
+<ul>
+<li><a href="http://docs.jquery.com/Plugins/Authoring">Plugins/Authoring</a>, jQuery</li>
+<li><a href="http://remysharp.com/2010/06/03/signs-of-a-poorly-written-jquery-plugin/">Signs of a Poorly Written jQuery Plugin</a>, Remy Sharp</li>
+<li><a href="http://msdn.microsoft.com/en-us/scriptjunkie/ff608209">How to Create Your Own jQuery Plugin</a>, Elijah Manor</li>
+<li><a href="http://msdn.microsoft.com/en-us/scriptjunkie/ff696759">Style in jQuery Plugins and Why It Matters</a>, Ben Almon</li>
+<li><a href="http://enterprisejquery.com/2010/07/create-your-first-jquery-plugin-part-2-revising-your-plugin/">Create Your First jQuery Plugin, Part 2</a>, Andrew Wirick</li>
+</ul>
+
+<h2 id="toc_2">完整的 Widget factory(“Complete” Widget Factory)</h2>
+<p>代码：</p>
+
+<pre><code>/*!
+ * jQuery UI Widget-factory plugin boilerplate (for 1.8/9+)
+ * Author: @addyosmani
+ * Further changes: @peolanha
+ * Licensed under the MIT license
+ */
+
+
+;(function ( $, window, document, undefined ) {
+
+    // define your widget under a namespace of your choice
+    //  with additional parameters e.g. 
+    // $.widget( &quot;namespace.widgetname&quot;, (optional) - an 
+    // existing widget prototype to inherit from, an object 
+    // literal to become the widget's prototype ); 
+
+    $.widget( &quot;namespace.widgetname&quot; , {
+
+        //Options to be used as defaults
+        options: {
+            someValue: null
+        },
+
+        //Setup widget (eg. element creation, apply theming
+        // , bind events etc.)
+        _create: function () {
+
+            // _create will automatically run the first time 
+            // this widget is called. Put the initial widget 
+            // setup code here, then you can access the element 
+            // on which the widget was called via this.element. 
+            // The options defined above can be accessed 
+            // via this.options this.element.addStuff();
+        },
+
+        // Destroy an instantiated plugin and clean up 
+        // modifications the widget has made to the DOM
+        destroy: function () {
+
+            // this.element.removeStuff();
+            // For UI 1.8, destroy must be invoked from the 
+            // base widget
+            $.Widget.prototype.destroy.call(this);
+            // For UI 1.9, define _destroy instead and don't 
+            // worry about 
+            // calling the base widget
+        },
+
+        methodB: function ( event ) {
+            //_trigger dispatches callbacks the plugin user 
+            // can subscribe to
+            // signature: _trigger( &quot;callbackName&quot; , [eventObject], 
+            // [uiObject] )
+            // eg. this._trigger( &quot;hover&quot;, e /*where e.type == 
+            // &quot;mouseenter&quot;*/, { hovered: $(e.target)});
+            this._trigger('methodA', event, {
+                key: value
+            });
+        },
+
+        methodA: function ( event ) {
+            this._trigger('dataChanged', event, {
+                key: value
+            });
+        },
+
+        // Respond to any changes the user makes to the 
+        // option method
+        _setOption: function ( key, value ) {
+            switch (key) {
+            case &quot;someValue&quot;:
+                //this.options.someValue = doSomethingWith( value );
+                break;
+            default:
+                //this.options[ key ] = value;
+                break;
+            }
+
+            // For UI 1.8, _setOption must be manually invoked 
+            // from the base widget
+            $.Widget.prototype._setOption.apply( this, arguments );
+            // For UI 1.9 the _super method can be used instead
+            // this._super( &quot;_setOption&quot;, key, value );
+        }
+    });
+
+})( jQuery, window, document );</code></pre>
+<p><strong>扩展阅读</strong></p>
+
+<ul>
+<li><a href="http://ajpiano.com/widgetfactory/#slide1">The jQuery UI Widget Factory</a></li>
+<li><a href="http://msdn.microsoft.com/en-us/scriptjunkie/ff706600">Introduction to Stateful Plugins and the Widget Factory</a>，Doug Neiner</li>
+<li><a href="http://wiki.jqueryui.com/w/page/12138135/Widget%20factory">Widget Factory(explained)</a> Scott Gonzalez</li>
+<li><a href="http://bililite.com/blog/understanding-jquery-ui-widgets-a-tutorial/">Understanding jQuery UI Widgets: A Tutorial</a>，Hacking at 0300</li>
+</ul>
+
+<h2 id="toc_3">命名空间和嵌套的命名空间</h2>
+<p>使用命名空间可以避免你的代码和和全局变量或对象冲突。命名空间可以保护你的插件不会被页面上的其它同名变量或者和你的插件同名的插件破坏。同样，你也不要使其它开发者的脚本无法运行。</p>
+<p>JavaScript没有其它语言一样的内置了命名空间，但很容易使用对象来模拟命名空间。可以将一个顶级对象作为你的命名空间，可以在一开始先检查这个对象是否存在，如果不存在就定义它，如果存在，你直接可以扩展它。</p>
+<p>对象（确切地说，对象字面量）可以用来创建嵌套的命名空间，如namespace.subnamespace.pluginName等。</p>
+
+<pre><code>/*!
+ * jQuery namespaced 'Starter' plugin boilerplate
+ * Author: @dougneiner
+ * Further changes: @addyosmani
+ * Licensed under the MIT license
+ */
+
+;(function ( $ ) {
+    if (!$.myNamespace) {
+        $.myNamespace = {};
+    };
+
+    $.myNamespace.myPluginName = function ( el, myFunctionParam, options ) {
+        // To avoid scope issues, use 'base' instead of 'this'
+        // to reference this class from internal events and functions.
+        var base = this;
+
+        // Access to jQuery and DOM versions of element
+        base.$el = $(el);
+        base.el = el;
+
+        // Add a reverse reference to the DOM object
+        base.$el.data( &quot;myNamespace.myPluginName&quot; , base );
+
+        base.init = function () {
+            base.myFunctionParam = myFunctionParam;
+
+            base.options = $.extend({}, 
+            $.myNamespace.myPluginName.defaultOptions, options);
+
+            // Put your initialization code here
+        };
+
+        // Sample Function, Uncomment to use
+        // base.functionName = function( paramaters ){
+        // 
+        // };
+        // Run initializer
+        base.init();
+    };
+
+    $.myNamespace.myPluginName.defaultOptions = {
+        myDefaultValue: &quot;&quot;
+    };
+
+    $.fn.mynamespace_myPluginName = function 
+        ( myFunctionParam, options ) {
+        return this.each(function () {
+            (new $.myNamespace.myPluginName(this, 
+            myFunctionParam, options));
+        });
+    };
+
+})( jQuery );</code></pre>
+<p><strong>扩展阅读</strong></p>
+
+<ul>
+<li><a href="http://javascriptweblog.wordpress.com/2010/12/07/namespacing-in-javascript/">Namespacing in JavaScript</a>,Angus Croll</li>
+<li><a href="http://ryanflorence.com/use-your-fn-jquery-namespace/">Use Your $.fn jQuery Namespace</a>,Ryan Florence</li>
+<li><a href="http://michaux.ca/articles/javascript-namespacing">JavaScript Namespacing</a>,Peter Michaux</li>
+<li><a href="http://www.2ality.com/2011/04/modules-and-namespaces-in-javascript.html">Modules and namespaces in JavaScript</a>,Axel Rauschmayer</li>
+</ul>
+
+<h2 id="toc_4">Pub/Sub自定义事件</h2>
+<p>你可能在开发异步JavaScript应用时使用过观察者模式（ 又名发布-订阅者模式(Pub/Sub) pattern）。观察者模式的本质是对应用中某个对象状态进行观察，并且在其发生改变时能够对通知做出响应。</p>
+<p>在jQuery中，jquery提供的自定义事件和观察者模式很类似，bind(&#39;eventType&#39;)相当于subscribe(&#39;eventType&#39;)，trigger(&#39;eventType&#39;)相当于publish(&#39;eventType&#39;)。</p>
+<p>一些开发者可能认为jQuery事件系统作为发布和订阅系统使用开销太大，但是它的构架在多数情况下非常健壮和稳定。在 jQuery UI widget factory 模板中，我们实现了一个基本的自定义事件的发布/订阅模式：</p>
+
+<pre><code>/*!
+ * jQuery custom-events plugin boilerplate
+ * Author: DevPatch
+ * Further changes: @addyosmani
+ * Licensed under the MIT license
+ */
+
+// In this pattern, we use jQuery's custom events to add 
+// pub/sub (publish/subscribe) capabilities to widgets. 
+// Each widget would publish certain events and subscribe 
+// to others. This approach effectively helps to decouple 
+// the widgets and enables them to function independently.
+
+;(function ( $, window, document, undefined ) {
+    $.widget(&quot;ao.eventStatus&quot;, {
+        options: {
+
+        },
+
+        _create : function() {
+            var self = this;
+
+            //self.element.addClass( &quot;my-widget&quot; );
+
+            //subscribe to 'myEventStart'
+            self.element.bind( &quot;myEventStart&quot;, function( e ) {
+                console.log(&quot;event start&quot;);
+            });
+
+            //subscribe to 'myEventEnd'
+            self.element.bind( &quot;myEventEnd&quot;, function( e ) {
+                console.log(&quot;event end&quot;);
+            });
+
+            //unsubscribe to 'myEventStart'
+            //self.element.unbind( &quot;myEventStart&quot;, function(e){
+                ///console.log(&quot;unsubscribed to this event&quot;); 
+            //});
+        },
+
+        destroy: function(){
+            $.Widget.prototype.destroy.apply( this, arguments );
+        },
+    });
+})( jQuery, window , document );
+
+//Publishing event notifications
+//usage: 
+// $(&quot;.my-widget&quot;).trigger(&quot;myEventStart&quot;);
+// $(&quot;.my-widget&quot;).trigger(&quot;myEventEnd&quot;);</code></pre>
+<p><strong>扩展阅读</strong></p>
+
+<ul>
+<li><a href="">Communication Between jQuery UI Widgets</a>,Benjamin Sternthal</li>
+<li><a href="">Understanding the Publish/Subscribe Pattern for Greater JavaScript Scalability</a>,Addy Osmani</li>
+</ul>
+
+<h2 id="toc_5">带桥接模式的原型继承</h2>
+<p>在javascript中，没有类的概念。但是，我们可以使用javascript的原型继承，我们可以在juqery插件开发中使用原型继承。</p>
+<p><a href="http://alexsexton.com/">Alex Sexton</a> 和 <a href="http://scottgonzalez.com/">Scott Gonzalez</a>已经详细的谈过这个话题。简而言之,使用桥接模式可以弱化它和使用它的类和对象之间的耦合。另外，桥接模式有助于保持API的简洁，你可以更容易的对你的插件进行单元测试。</p>
+<p>在Sexton的文章中，他实现了一个可以让你添加自己的逻辑代码的桥接模式模板，你可以看下面的代码了解更多。这种模式的另一个优点你不必不断重复相同的插件初始化代码。一些开发人员可能觉得这种模式比其它模式更容易阅读：</p>
+
+<pre><code>/*!
+ * jQuery prototypal inheritance plugin boilerplate
+ * Author: Alex Sexton, Scott Gonzalez
+ * Further changes: @addyosmani
+ * Licensed under the MIT license
+ */
+
+
+// myObject - an object representing a concept that you want 
+// to model (e.g. a car)
+var myObject = {
+  init: function( options, elem ) {
+    // Mix in the passed-in options with the default options
+    this.options = $.extend( {}, this.options, options );
+
+    // Save the element reference, both as a jQuery
+    // reference and a normal reference
+    this.elem  = elem;
+    this.$elem = $(elem);
+
+    // Build the DOM's initial structure
+    this._build();
+
+    // return this so that we can chain and use the bridge with less code.
+    return this;
+  },
+  options: {
+    name: &quot;No name&quot;
+  },
+  _build: function(){
+    //this.$elem.html('&lt;h1&gt;'+this.options.name+'&lt;/h1&gt;');
+  },
+  myMethod: function( msg ){
+    // You have direct access to the associated and cached
+    // jQuery element
+    // this.$elem.append('&lt;p&gt;'+msg+'&lt;/p&gt;');
+  }
+};
+
+
+// Object.create support test, and fallback for browsers without it
+if ( typeof Object.create !== 'function' ) {
+    Object.create = function (o) {
+        function F() {}
+        F.prototype = o;
+        return new F();
+    };
+}
+
+
+// Create a plugin based on a defined object
+$.plugin = function( name, object ) {
+  $.fn[name] = function( options ) {
+    return this.each(function() {
+      if ( ! $.data( this, name ) ) {
+        $.data( this, name, Object.create(object).init( 
+        options, this ) );
+      }
+    });
+  };
+};
+
+// Usage:
+// With myObject, we could now essentially do this:
+// $.plugin('myobj', myObject);
+
+// and at this point we could do the following
+// $('#elem').myobj({name: &quot;John&quot;});
+// var inst = $('#elem').data('myobj');
+// inst.myMethod('I am a method');</code></pre>
+<p><strong>扩展阅读</strong></p>
+
+<ul>
+<li><a href="http://alexsexton.com/?p=51">Using Inheritance Patterns To Organize Large jQuery Applications</a>,Alex Sexton</li>
+<li><a href="http://www.slideshare.net/SlexAxton/how-to-manage-large-jquery-apps">How to Manage Large Applications With jQuery or Whatever</a>, Alex Sexton</li>
+<li><a href="http://blog.bigbinary.com/2010/03/12/pratical-example-of-need-for-prototypal-inheritance.html">Practical Example of the Need for Prototypal Inheritance</a>,Neeraj Singh</li>
+<li><a href="http://javascript.crockford.com/prototypal.html">Prototypal Inheritance in JavaScript</a>,Douglas Crockford</li>
+</ul>
+
+<h2 id="toc_6">jQuery UI Widget Factory Bridge</h2>
+
+<pre><code>/*!
+ * jQuery UI Widget factory &quot;bridge&quot; plugin boilerplate
+ * Author: @erichynds
+ * Further changes, additional comments: @addyosmani
+ * Licensed under the MIT license
+ */
+
+// a &quot;widgetName&quot; object constructor
+// required: this must accept two arguments,
+// options: an object of configuration options
+// element: the DOM element the instance was created on
+var widgetName = function( options, element ){
+  this.name = &quot;myWidgetName&quot;;
+  this.options = options;
+  this.element = element;
+  this._init();
+}
+
+
+// the &quot;widgetName&quot; prototype
+widgetName.prototype = {
+
+    // _create will automatically run the first time this 
+    // widget is called
+    _create: function(){
+        // creation code
+    },
+
+    // required: initialization logic for the plugin goes into _init
+    // This fires when your instance is first created and when 
+    // attempting to initialize the widget again (by the bridge)
+    // after it has already been initialized.
+    _init: function(){
+        // init code
+    },
+
+    // required: objects to be used with the bridge must contain an 
+    // 'option'. Post-initialization, the logic for changing options
+    // goes here. 
+    option: function( key, value ){
+
+        // optional: get/change options post initialization
+        // ignore if you don't require them.
+
+        // signature: $('#foo').bar({ cool:false });
+        if( $.isPlainObject( key ) ){
+            this.options = $.extend( true, this.options, key );
+
+        // signature: $('#foo').option('cool'); - getter
+        } else if ( key &amp;&amp; typeof value === &quot;undefined&quot; ){
+            return this.options[ key ];
+
+        // signature: $('#foo').bar('option', 'baz', false);
+        } else {
+            this.options[ key ] = value;
+        }
+
+        // required: option must return the current instance. 
+        // When re-initializing an instance on elements, option 
+        // is called first and is then chained to the _init method.
+        return this;  
+    },
+
+    // notice no underscore is used for public methods
+    publicFunction: function(){ 
+        console.log('public function');
+    },
+
+    // underscores are used for private methods
+    _privateFunction: function(){ 
+        console.log('private function');
+    }
+};
+
+
+// usage:
+
+// connect the widget obj to jQuery's API under the &quot;foo&quot; namespace
+// $.widget.bridge(&quot;foo&quot;, widgetName);
+
+// create an instance of the widget for use
+// var instance = $(&quot;#elem&quot;).foo({
+//     baz: true
+// });
+
+// your widget instance exists in the elem's data
+// instance.data(&quot;foo&quot;).element; // =&gt; #elem element
+
+// bridge allows you to call public methods...
+// instance.foo(&quot;publicFunction&quot;); // =&gt; &quot;public method&quot;
+
+// bridge prevents calls to internal methods
+// instance.foo(&quot;_privateFunction&quot;); // =&gt; #elem element</code></pre>
+<p><strong>扩展阅读</strong></p>
+
+<ul>
+<li><a href="http://erichynds.com/jquery/using-jquery-ui-widget-factory-bridge/">Using $.widget.bridge Outside of the Widget Factory</a>,Eric Hynds</li>
+</ul>
+
+<h2 id="toc_7">jQuery Mobile Widgets With The Widget factory</h2>
+
+<pre><code>/*!
+ * (jQuery mobile) jQuery UI Widget-factory plugin boilerplate (for 1.8/9+)
+ * Author: @scottjehl
+ * Further changes: @addyosmani
+ * Licensed under the MIT license
+ */
+
+;(function ( $, window, document, undefined ) {
+
+    //define a widget under a namespace of your choice
+    //here 'mobile' has been used in the first parameter
+    $.widget( &quot;mobile.widgetName&quot;, $.mobile.widget, {
+
+        //Options to be used as defaults
+        options: {
+            foo: true,
+            bar: false
+        },
+
+        _create: function() {
+            // _create will automatically run the first time this 
+            // widget is called. Put the initial widget set-up code 
+            // here, then you can access the element on which 
+            // the widget was called via this.element
+            // The options defined above can be accessed via 
+            // this.options
+
+            //var m = this.element,
+            //p = m.parents(&quot;:jqmData(role='page')&quot;),
+            //c = p.find(&quot;:jqmData(role='content')&quot;)
+        },
+
+        // Private methods/props start with underscores
+        _dosomething: function(){ ... },
+
+        // Public methods like these below can can be called 
+                // externally: 
+        // $(&quot;#myelem&quot;).foo( &quot;enable&quot;, arguments );
+
+        enable: function() { ... },
+
+        // Destroy an instantiated plugin and clean up modifications 
+        // the widget has made to the DOM
+        destroy: function () {
+            //this.element.removeStuff();
+            // For UI 1.8, destroy must be invoked from the 
+            // base widget
+            $.Widget.prototype.destroy.call(this);
+            // For UI 1.9, define _destroy instead and don't 
+            // worry about calling the base widget
+        },
+
+        methodB: function ( event ) {
+            //_trigger dispatches callbacks the plugin user can 
+            // subscribe to
+            //signature: _trigger( &quot;callbackName&quot; , [eventObject],
+            //  [uiObject] )
+            // eg. this._trigger( &quot;hover&quot;, e /*where e.type == 
+            // &quot;mouseenter&quot;*/, { hovered: $(e.target)});
+            this._trigger('methodA', event, {
+                key: value
+            });
+        },
+
+        methodA: function ( event ) {
+            this._trigger('dataChanged', event, {
+                key: value
+            });
+        },
+
+        //Respond to any changes the user makes to the option method
+        _setOption: function ( key, value ) {
+            switch (key) {
+            case &quot;someValue&quot;:
+                //this.options.someValue = doSomethingWith( value );
+                break;
+            default:
+                //this.options[ key ] = value;
+                break;
+            }
+
+            // For UI 1.8, _setOption must be manually invoked from 
+            // the base widget
+            $.Widget.prototype._setOption.apply(this, arguments);
+            // For UI 1.9 the _super method can be used instead
+            // this._super( &quot;_setOption&quot;, key, value );
+        }
+    });
+
+})( jQuery, window, document );
+
+//usage: $(&quot;#myelem&quot;).foo( options );
+
+
+/* Some additional notes - delete this section before using the boilerplate.
+
+ We can also self-init this widget whenever a new page in jQuery Mobile is created. jQuery Mobile's &quot;page&quot; plugin dispatches a &quot;create&quot; event when a jQuery Mobile page (found via data-role=page attr) is first initialized.
+
+We can listen for that event (called &quot;pagecreate&quot; ) and run our plugin automatically whenever a new page is created.
+
+$(document).bind(&quot;pagecreate&quot;, function (e) {
+    // In here, e.target refers to the page that was created 
+    // (it's the target of the pagecreate event)
+    // So, we can simply find elements on this page that match a 
+    // selector of our choosing, and call our plugin on them.
+    // Here's how we'd call our &quot;foo&quot; plugin on any element with a 
+    // data-role attribute of &quot;foo&quot;:
+    $(e.target).find(&quot;[data-role='foo']&quot;).foo(options);
+
+    // Or, better yet, let's write the selector accounting for the configurable 
+    // data-attribute namespace
+    $(e.target).find(&quot;:jqmData(role='foo')&quot;).foo(options);
+});
+
+That's it. Now you can simply reference the script containing your widget and pagecreate binding in a page running jQuery Mobile site, and it will automatically run like any other jQM plugin.
+ */</code></pre>
+
+<h2 id="toc_8">RequireJS And The jQuery UI Widget Factory</h2>
+
+<h2 id="toc_9">Globally And Per-Call Overridable Options (Best Options Pattern)</h2>
+
+<h2 id="toc_10">AMD- And CommonJS-Compatible Modules</h2>
+
+<h2 id="toc_11">如何编写一个优秀的插件？</h2>
+<p>最后，来看一下我在选择第三方插件时遵循的一些原则，它对你开发插件来说非常有用:</p>
+<p><strong>质量</strong></p>
+<p>尽可能的遵循javascript和juqery最佳实践。在编辑写插件时，思考一下，这是最佳的解决方案吗？它们是否遵循jQuery 插件开发指南？如果不是，你的代码至少应该干净可读。</p>
+<p><strong>兼容性</strong></p>
+<p>你的插件都支持哪个版本的jquery?最新的版本是否经过测试？ 我更喜欢一些插件作者在必要时更新他们的插件，至少，测试一下插件对jquery新版本的支持情况，确保插件正常运行。</p>
+<p><strong>可靠性</strong></p>
+<p>你的插件应该有单元测试，单元测试不仅可以验证你的插件能否正常的运行，同时可以保证在不影响用户使用的情况下改进你的插件。我认为用于在生产环境插件都需要进行单元测试，它们并不难写。建议你可以看一下<a href="http://msdn.microsoft.com/en-us/scriptjunkie/gg749824">QUnit下的JavaScript自动化单元测试</a>。</p>
+<p><strong>性能</strong></p>
+<p>如果你的插件需要执行大量复杂的计算，或者频繁对DOM进行操作，建议你使用<a href="http://jsperf.com/">jsPerf.com</a>测试你的代码在不同的浏览器的性能。</p>
+<p><strong>文档</strong></p>
+<p>如果你打算让其它的开发人员使用你的插件，请确保它有良好的文档。插件有哪些方法？有哪些配置选项？有哪些用户需要注意的陷阱？如果他们无法搞清楚你的插件如何使用，他们可能会寻找别外和替代方案。另外，你的代码也需要良好的注释，这对于使用你插件的其他开发者很有用。 If someone feels they can navigate your code base well enough to fork it or improve it, then you’ve done a good job.</p>
+<p><strong>维护</strong></p>
+<p>发布一个插件时，预计一下你会有多少时间来提供插件的维护和支持。我们都喜欢在一些社区分享自己的插件，但这需要时间和精力来回答问题,解决问题,并做出改进。最简单的，你可以ReadMe文件中说明，让用户自己决定是否他们自己来修复遇到的问题。</p>
+
+<h2 id="toc_12">总结</h2>
+<p>前面，我们探讨了几种可以改善jquery插件开发的设计模式。在特定的场景下，一些模式会比另一些更合适，我希望代码中的注释对有助于你深入理解这些设计模式。</p>
+<p>记住，不要为了使用设计模式而使用设计模式，而是需要花些时间去理解这些模式，了解如何选择合适的模式来解决你的问题或适应你的组件。总之，选择合适的设计模式很重要。</p>
+<p>-happy coding!</p>
+]]>
+        </content>
+    </entry><entry>
         <title type="html"><![CDATA[博客从typecho换成liquidluck]]></title>
         <author><name>bingdian</name></author>
         <link href="http://wlog.cn/life/typecho-to-liquidluck.html"/>
@@ -1396,707 +2097,6 @@ git commit -m &quot;fisrt commit&quot;
 git push origin master</code></pre>
 <p>五、共享/Dropbox/project/demo.git文件夹，其他指定用户同步后，本地clone git项目。</p>
 <p>enJoy it!</p>
-]]>
-        </content>
-    </entry><entry>
-        <title type="html"><![CDATA[[译文]Jquery 插件设计模式]]></title>
-        <author><name>bingdian</name></author>
-        <link href="http://wlog.cn/jquery/essential-jquery-plugin-patterns.html"/>
-        <published>2012-11-23T00:00:00+08:00</published>
-        <updated>2013-05-05T19:30:05+08:00</updated>
-        <id>http://wlog.cn/jquery/essential-jquery-plugin-patterns.html</id>
-        <category scheme="http://wlog.cn/tag/#jquery" term="jquery" label="jquery" />
-        <category scheme="http://wlog.cn/tag/#plugin" term="plugin" label="plugin" />
-        <category scheme="http://wlog.cn/tag/#patterns" term="patterns" label="patterns" />
-        <category scheme="http://wlog.cn/tag/#设计模式" term="设计模式" label="设计模式" />
-        <category scheme="http://wlog.cn/tag/#译文" term="译文" label="译文" />
-        <content type="html" xml:base="http://wlog.cn" xml:lang="en">
-            <![CDATA[ <p>原文：<a href="http://coding.smashingmagazine.com/2011/10/11/essential-jquery-plugin-patterns/">coding.smashingmagazine.com/2011/10/11/essential-jquery-plugin-patterns/</a> By <a href="http://addyosmani.com/blog/">Addy Osmani</a></p>
-<p>译者注：目前还有部分内容没有翻译出来，如翻译有误，敬请指正，也欢迎你来和我一起翻译。</p>
-<p>我前面写过<a href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/">javascript 设计模式</a>，它为javascript开发中的一些常见问题提供了很好的解决方案，使用这些设计模式将使你的开发获益良多。众所周知，javascript 设计模式非常有用，另一方面得益于它自己的设计模式：jquery 插件。 官方的<a href="http://docs.jquery.com/Plugins/Authoring">jQuery 插件开发指南</a> 可以作为学习编写插件的一个很好的开始。在这篇文章中我们将更深入了解jquery插件开发技巧。</p>
-<p>jquery插件开发经过这几年的不断发展，我们现在很少只使用一种方式来编写插件。事实上，使用特定的设计模式在某些解决某些特定问题或场景，比其它模式更为有效。</p>
-<p>一些开发人员可能希望使用jQuery UI 组件 工厂模式（the jQuery UI widget factory），这种模式适合复杂、灵活的UI组件。另外一些开发人员可能喜欢像模块(类似模块模式)一样组织他们的代码，或者使用更正式的模块模式如<a href="https://github.com/amdjs/amdjs-api/wiki/AMD">AMD</a>(asynchronous module definition) 。还有一些开发人员希望他们的插件使用javascript强大的原型继承。还有另外一些开发人员可能想使用自定义的事件或发布/订阅(pub/sub)使插件和app之间通信。等等&hellip;</p>
-<p>我注意到一些开发者尝试创建一种通用的jquery插件模板（one-size-fits-all jQuery plugin boilerplate）, 这引发了我的思考。理论上来说，使用统一模板（boilerplate）是一个很好的想法，然而，实际开发中，我们很少只使用一种模式来开发插件。</p>
-<p>假如你自己动手编写过一些jquery插件，它们运行良好，但是，你可能会觉得它可以有更好的代码组织结构，它可以更灵活，解决更多的问题。这听起来很熟悉，你不确定不同的jquery插件模式之间的差异，你会发现我后面将要讲的内容非常有用。</p>
-<p>这篇文章不会为你提供所有问题的解决方案，但是它覆盖了所有开发人员在使用的流行的设计模式。</p>
-<p>注：这篇文章主要面向由中高级的开发人员。如果你觉得还没准备好，推荐你可以先看官方的<a href="http://docs.jquery.com/Plugins/Authoring">jQuery 插件开发指南</a> 、Ben Alman的<a href="http://msdn.microsoft.com/en-us/scriptjunkie/ff696759">plugin style guide</a>和Remy Sharp的<a href="http://remysharp.com/2010/06/03/signs-of-a-poorly-written-jquery-plugin/">Signs of a Poorly Written jQuery Plugin</a>。</p>
-
-<h2 id="toc_0">模式(Patterns)</h2>
-<p>jQuery插件定义了很少的规则，而这也是为什么这些插件方法多种多样的原因之一。最简单的，你可以为jquery的$.fn对象添加一个方法，如：</p>
-
-<pre><code>$.fn.myPluginName = function() {
-    // your plugin logic
-};</code></pre>
-<p>前面的方法很间单，不过下面的这种方法会更好一些：</p>
-
-<pre><code>(function( $ ){
-    $.fn.myPluginName = function() {
-        // your plugin logic
-    };
-})( jQuery );</code></pre>
-<p>这里，我们在插件代码内嵌到一个匿名函数中，使用匿名函数创建了一个闭包，将jQuery这个全局变量传入匿名函数，并执行匿名函数。这样可以确保$不会和其它的javascript库冲突，避免$变量和页面中的全局变量冲突。</p>
-<p>还有另外一种写法是使用$.extend，使用这种方法一次可以定义多个方法，这在有些场景下非常有用：</p>
-
-<pre><code>(function( $ ){
-    $.extend($.fn, {
-        myplugin: function(){
-            // your plugin logic
-        }
-    });
-})( jQuery );</code></pre>
-<p>对此，我们可以做一些改进。首先，我们来看第一个完整的模式 - 轻量级的模式（the lightweight pattern），这种模式覆盖了我们日常插件开发的一些最佳实践和常见问题。</p>
-<p><strong>注意：</strong></p>
-<p>你可在<del><a href="https://github.com/addyosmani/jquery-plugin-patterns/">jquery-plugin-patterns</a></del>(翻译本文时，项目已经迁移到<a href="https://github.com/jquery-boilerplate/patterns">jquery-boilerplate/patterns</a>)这个项目找到这篇文章里面谈到的设计模式。</p>
-<p>虽然，这篇文章会对每一种模式做讲解，但是还是建议阅读代码中的注释，注释可以让你更深入的了解为什么使用这种做法是最好的。</p>
-<p>另外，如果有兴趣的话也可以读一下每种模式后面的扩展内容。</p>
-
-<h2 id="toc_1">简单的开始(A Lightweight Start)</h2>
-<p>首先，我们先来看一些基本的、遵循最佳实践(包括jQuery插件编写指南)的设计模式。这种模式在开发一个新的插件或实现一些简单插件时非常理想。轻量级的插件模式遵循了下面的一些原则: </p>
-
-<ul>
-<li>常见的最佳做法，如函数的调用前使用一个分号; window, document, undefined作为参数传入;遵循jQuery风格规范。</li>
-<li>插件默认配置。</li>
-<li>一个简单的插件的构造函数,用于逻辑相关的初始化和委派元素处理。</li>
-<li>使插件的配置可扩展。</li>
-<li>避免创建多个实例。</li>
-</ul>
-<p>代码：</p>
-
-<pre><code>/*!
- * jQuery lightweight plugin boilerplate
- * Original author: @ajpiano
- * Further changes, comments: @addyosmani
- * Licensed under the MIT license
- */
-
-// the semi-colon before the function invocation is a safety 
-// net against concatenated scripts and/or other plugins 
-// that are not closed properly.
-;(function ( $, window, document, undefined ) {
-
-    // undefined is used here as the undefined global 
-    // variable in ECMAScript 3 and is mutable (i.e. it can 
-    // be changed by someone else). undefined isn't really 
-    // being passed in so we can ensure that its value is 
-    // truly undefined. In ES5, undefined can no longer be 
-    // modified.
-
-    // window and document are passed through as local 
-    // variables rather than as globals, because this (slightly) 
-    // quickens the resolution process and can be more 
-    // efficiently minified (especially when both are 
-    // regularly referenced in your plugin).
-
-    // Create the defaults once
-    var pluginName = 'defaultPluginName',
-        defaults = {
-            propertyName: &quot;value&quot;
-        };
-
-    // The actual plugin constructor
-    function Plugin( element, options ) {
-        this.element = element;
-
-        // jQuery has an extend method that merges the 
-        // contents of two or more objects, storing the 
-        // result in the first object. The first object 
-        // is generally empty because we don't want to alter 
-        // the default options for future instances of the plugin
-        this.options = $.extend( {}, defaults, options) ;
-
-        this._defaults = defaults;
-        this._name = pluginName;
-
-        this.init();
-    }
-
-    Plugin.prototype.init = function () {
-        // Place initialization logic here
-        // You already have access to the DOM element and
-        // the options via the instance, e.g. this.element 
-        // and this.options
-    };
-
-    // A really lightweight plugin wrapper around the constructor, 
-    // preventing against multiple instantiations
-    $.fn[pluginName] = function ( options ) {
-        return this.each(function () {
-            if (!$.data(this, 'plugin_' + pluginName)) {
-                $.data(this, 'plugin_' + pluginName, 
-                new Plugin( this, options ));
-            }
-        });
-    }
-
-})( jQuery, window, document );</code></pre>
-<p><strong>扩展阅读</strong></p>
-
-<ul>
-<li><a href="http://docs.jquery.com/Plugins/Authoring">Plugins/Authoring</a>, jQuery</li>
-<li><a href="http://remysharp.com/2010/06/03/signs-of-a-poorly-written-jquery-plugin/">Signs of a Poorly Written jQuery Plugin</a>, Remy Sharp</li>
-<li><a href="http://msdn.microsoft.com/en-us/scriptjunkie/ff608209">How to Create Your Own jQuery Plugin</a>, Elijah Manor</li>
-<li><a href="http://msdn.microsoft.com/en-us/scriptjunkie/ff696759">Style in jQuery Plugins and Why It Matters</a>, Ben Almon</li>
-<li><a href="http://enterprisejquery.com/2010/07/create-your-first-jquery-plugin-part-2-revising-your-plugin/">Create Your First jQuery Plugin, Part 2</a>, Andrew Wirick</li>
-</ul>
-
-<h2 id="toc_2">完整的 Widget factory(“Complete” Widget Factory)</h2>
-<p>代码：</p>
-
-<pre><code>/*!
- * jQuery UI Widget-factory plugin boilerplate (for 1.8/9+)
- * Author: @addyosmani
- * Further changes: @peolanha
- * Licensed under the MIT license
- */
-
-
-;(function ( $, window, document, undefined ) {
-
-    // define your widget under a namespace of your choice
-    //  with additional parameters e.g. 
-    // $.widget( &quot;namespace.widgetname&quot;, (optional) - an 
-    // existing widget prototype to inherit from, an object 
-    // literal to become the widget's prototype ); 
-
-    $.widget( &quot;namespace.widgetname&quot; , {
-
-        //Options to be used as defaults
-        options: {
-            someValue: null
-        },
-
-        //Setup widget (eg. element creation, apply theming
-        // , bind events etc.)
-        _create: function () {
-
-            // _create will automatically run the first time 
-            // this widget is called. Put the initial widget 
-            // setup code here, then you can access the element 
-            // on which the widget was called via this.element. 
-            // The options defined above can be accessed 
-            // via this.options this.element.addStuff();
-        },
-
-        // Destroy an instantiated plugin and clean up 
-        // modifications the widget has made to the DOM
-        destroy: function () {
-
-            // this.element.removeStuff();
-            // For UI 1.8, destroy must be invoked from the 
-            // base widget
-            $.Widget.prototype.destroy.call(this);
-            // For UI 1.9, define _destroy instead and don't 
-            // worry about 
-            // calling the base widget
-        },
-
-        methodB: function ( event ) {
-            //_trigger dispatches callbacks the plugin user 
-            // can subscribe to
-            // signature: _trigger( &quot;callbackName&quot; , [eventObject], 
-            // [uiObject] )
-            // eg. this._trigger( &quot;hover&quot;, e /*where e.type == 
-            // &quot;mouseenter&quot;*/, { hovered: $(e.target)});
-            this._trigger('methodA', event, {
-                key: value
-            });
-        },
-
-        methodA: function ( event ) {
-            this._trigger('dataChanged', event, {
-                key: value
-            });
-        },
-
-        // Respond to any changes the user makes to the 
-        // option method
-        _setOption: function ( key, value ) {
-            switch (key) {
-            case &quot;someValue&quot;:
-                //this.options.someValue = doSomethingWith( value );
-                break;
-            default:
-                //this.options[ key ] = value;
-                break;
-            }
-
-            // For UI 1.8, _setOption must be manually invoked 
-            // from the base widget
-            $.Widget.prototype._setOption.apply( this, arguments );
-            // For UI 1.9 the _super method can be used instead
-            // this._super( &quot;_setOption&quot;, key, value );
-        }
-    });
-
-})( jQuery, window, document );</code></pre>
-<p><strong>扩展阅读</strong></p>
-
-<ul>
-<li><a href="http://ajpiano.com/widgetfactory/#slide1">The jQuery UI Widget Factory</a></li>
-<li><a href="http://msdn.microsoft.com/en-us/scriptjunkie/ff706600">Introduction to Stateful Plugins and the Widget Factory</a>，Doug Neiner</li>
-<li><a href="http://wiki.jqueryui.com/w/page/12138135/Widget%20factory">Widget Factory(explained)</a> Scott Gonzalez</li>
-<li><a href="http://bililite.com/blog/understanding-jquery-ui-widgets-a-tutorial/">Understanding jQuery UI Widgets: A Tutorial</a>，Hacking at 0300</li>
-</ul>
-
-<h2 id="toc_3">命名空间和嵌套的命名空间</h2>
-<p>使用命名空间可以避免你的代码和和全局变量或对象冲突。命名空间可以保护你的插件不会被页面上的其它同名变量或者和你的插件同名的插件破坏。同样，你也不要使其它开发者的脚本无法运行。</p>
-<p>JavaScript没有其它语言一样的内置了命名空间，但很容易使用对象来模拟命名空间。可以将一个顶级对象作为你的命名空间，可以在一开始先检查这个对象是否存在，如果不存在就定义它，如果存在，你直接可以扩展它。</p>
-<p>对象（确切地说，对象字面量）可以用来创建嵌套的命名空间，如namespace.subnamespace.pluginName等。</p>
-
-<pre><code>/*!
- * jQuery namespaced 'Starter' plugin boilerplate
- * Author: @dougneiner
- * Further changes: @addyosmani
- * Licensed under the MIT license
- */
-
-;(function ( $ ) {
-    if (!$.myNamespace) {
-        $.myNamespace = {};
-    };
-
-    $.myNamespace.myPluginName = function ( el, myFunctionParam, options ) {
-        // To avoid scope issues, use 'base' instead of 'this'
-        // to reference this class from internal events and functions.
-        var base = this;
-
-        // Access to jQuery and DOM versions of element
-        base.$el = $(el);
-        base.el = el;
-
-        // Add a reverse reference to the DOM object
-        base.$el.data( &quot;myNamespace.myPluginName&quot; , base );
-
-        base.init = function () {
-            base.myFunctionParam = myFunctionParam;
-
-            base.options = $.extend({}, 
-            $.myNamespace.myPluginName.defaultOptions, options);
-
-            // Put your initialization code here
-        };
-
-        // Sample Function, Uncomment to use
-        // base.functionName = function( paramaters ){
-        // 
-        // };
-        // Run initializer
-        base.init();
-    };
-
-    $.myNamespace.myPluginName.defaultOptions = {
-        myDefaultValue: &quot;&quot;
-    };
-
-    $.fn.mynamespace_myPluginName = function 
-        ( myFunctionParam, options ) {
-        return this.each(function () {
-            (new $.myNamespace.myPluginName(this, 
-            myFunctionParam, options));
-        });
-    };
-
-})( jQuery );</code></pre>
-<p><strong>扩展阅读</strong></p>
-
-<ul>
-<li><a href="http://javascriptweblog.wordpress.com/2010/12/07/namespacing-in-javascript/">Namespacing in JavaScript</a>,Angus Croll</li>
-<li><a href="http://ryanflorence.com/use-your-fn-jquery-namespace/">Use Your $.fn jQuery Namespace</a>,Ryan Florence</li>
-<li><a href="http://michaux.ca/articles/javascript-namespacing">JavaScript Namespacing</a>,Peter Michaux</li>
-<li><a href="http://www.2ality.com/2011/04/modules-and-namespaces-in-javascript.html">Modules and namespaces in JavaScript</a>,Axel Rauschmayer</li>
-</ul>
-
-<h2 id="toc_4">Pub/Sub自定义事件</h2>
-<p>你可能在开发异步JavaScript应用时使用过观察者模式（ 又名发布-订阅者模式(Pub/Sub) pattern）。观察者模式的本质是对应用中某个对象状态进行观察，并且在其发生改变时能够对通知做出响应。</p>
-<p>在jQuery中，jquery提供的自定义事件和观察者模式很类似，bind(&#39;eventType&#39;)相当于subscribe(&#39;eventType&#39;)，trigger(&#39;eventType&#39;)相当于publish(&#39;eventType&#39;)。</p>
-<p>一些开发者可能认为jQuery事件系统作为发布和订阅系统使用开销太大，但是它的构架在多数情况下非常健壮和稳定。在 jQuery UI widget factory 模板中，我们实现了一个基本的自定义事件的发布/订阅模式：</p>
-
-<pre><code>/*!
- * jQuery custom-events plugin boilerplate
- * Author: DevPatch
- * Further changes: @addyosmani
- * Licensed under the MIT license
- */
-
-// In this pattern, we use jQuery's custom events to add 
-// pub/sub (publish/subscribe) capabilities to widgets. 
-// Each widget would publish certain events and subscribe 
-// to others. This approach effectively helps to decouple 
-// the widgets and enables them to function independently.
-
-;(function ( $, window, document, undefined ) {
-    $.widget(&quot;ao.eventStatus&quot;, {
-        options: {
-
-        },
-
-        _create : function() {
-            var self = this;
-
-            //self.element.addClass( &quot;my-widget&quot; );
-
-            //subscribe to 'myEventStart'
-            self.element.bind( &quot;myEventStart&quot;, function( e ) {
-                console.log(&quot;event start&quot;);
-            });
-
-            //subscribe to 'myEventEnd'
-            self.element.bind( &quot;myEventEnd&quot;, function( e ) {
-                console.log(&quot;event end&quot;);
-            });
-
-            //unsubscribe to 'myEventStart'
-            //self.element.unbind( &quot;myEventStart&quot;, function(e){
-                ///console.log(&quot;unsubscribed to this event&quot;); 
-            //});
-        },
-
-        destroy: function(){
-            $.Widget.prototype.destroy.apply( this, arguments );
-        },
-    });
-})( jQuery, window , document );
-
-//Publishing event notifications
-//usage: 
-// $(&quot;.my-widget&quot;).trigger(&quot;myEventStart&quot;);
-// $(&quot;.my-widget&quot;).trigger(&quot;myEventEnd&quot;);</code></pre>
-<p><strong>扩展阅读</strong></p>
-
-<ul>
-<li><a href="">Communication Between jQuery UI Widgets</a>,Benjamin Sternthal</li>
-<li><a href="">Understanding the Publish/Subscribe Pattern for Greater JavaScript Scalability</a>,Addy Osmani</li>
-</ul>
-
-<h2 id="toc_5">带桥接模式的原型继承</h2>
-<p>在javascript中，没有类的概念。但是，我们可以使用javascript的原型继承，我们可以在juqery插件开发中使用原型继承。</p>
-<p><a href="http://alexsexton.com/">Alex Sexton</a> 和 <a href="http://scottgonzalez.com/">Scott Gonzalez</a>已经详细的谈过这个话题。简而言之,使用桥接模式可以弱化它和使用它的类和对象之间的耦合。另外，桥接模式有助于保持API的简洁，你可以更容易的对你的插件进行单元测试。</p>
-<p>在Sexton的文章中，他实现了一个可以让你添加自己的逻辑代码的桥接模式模板，你可以看下面的代码了解更多。这种模式的另一个优点你不必不断重复相同的插件初始化代码。一些开发人员可能觉得这种模式比其它模式更容易阅读：</p>
-
-<pre><code>/*!
- * jQuery prototypal inheritance plugin boilerplate
- * Author: Alex Sexton, Scott Gonzalez
- * Further changes: @addyosmani
- * Licensed under the MIT license
- */
-
-
-// myObject - an object representing a concept that you want 
-// to model (e.g. a car)
-var myObject = {
-  init: function( options, elem ) {
-    // Mix in the passed-in options with the default options
-    this.options = $.extend( {}, this.options, options );
-
-    // Save the element reference, both as a jQuery
-    // reference and a normal reference
-    this.elem  = elem;
-    this.$elem = $(elem);
-
-    // Build the DOM's initial structure
-    this._build();
-
-    // return this so that we can chain and use the bridge with less code.
-    return this;
-  },
-  options: {
-    name: &quot;No name&quot;
-  },
-  _build: function(){
-    //this.$elem.html('&lt;h1&gt;'+this.options.name+'&lt;/h1&gt;');
-  },
-  myMethod: function( msg ){
-    // You have direct access to the associated and cached
-    // jQuery element
-    // this.$elem.append('&lt;p&gt;'+msg+'&lt;/p&gt;');
-  }
-};
-
-
-// Object.create support test, and fallback for browsers without it
-if ( typeof Object.create !== 'function' ) {
-    Object.create = function (o) {
-        function F() {}
-        F.prototype = o;
-        return new F();
-    };
-}
-
-
-// Create a plugin based on a defined object
-$.plugin = function( name, object ) {
-  $.fn[name] = function( options ) {
-    return this.each(function() {
-      if ( ! $.data( this, name ) ) {
-        $.data( this, name, Object.create(object).init( 
-        options, this ) );
-      }
-    });
-  };
-};
-
-// Usage:
-// With myObject, we could now essentially do this:
-// $.plugin('myobj', myObject);
-
-// and at this point we could do the following
-// $('#elem').myobj({name: &quot;John&quot;});
-// var inst = $('#elem').data('myobj');
-// inst.myMethod('I am a method');</code></pre>
-<p><strong>扩展阅读</strong></p>
-
-<ul>
-<li><a href="http://alexsexton.com/?p=51">Using Inheritance Patterns To Organize Large jQuery Applications</a>,Alex Sexton</li>
-<li><a href="http://www.slideshare.net/SlexAxton/how-to-manage-large-jquery-apps">How to Manage Large Applications With jQuery or Whatever</a>, Alex Sexton</li>
-<li><a href="http://blog.bigbinary.com/2010/03/12/pratical-example-of-need-for-prototypal-inheritance.html">Practical Example of the Need for Prototypal Inheritance</a>,Neeraj Singh</li>
-<li><a href="http://javascript.crockford.com/prototypal.html">Prototypal Inheritance in JavaScript</a>,Douglas Crockford</li>
-</ul>
-
-<h2 id="toc_6">jQuery UI Widget Factory Bridge</h2>
-
-<pre><code>/*!
- * jQuery UI Widget factory &quot;bridge&quot; plugin boilerplate
- * Author: @erichynds
- * Further changes, additional comments: @addyosmani
- * Licensed under the MIT license
- */
-
-// a &quot;widgetName&quot; object constructor
-// required: this must accept two arguments,
-// options: an object of configuration options
-// element: the DOM element the instance was created on
-var widgetName = function( options, element ){
-  this.name = &quot;myWidgetName&quot;;
-  this.options = options;
-  this.element = element;
-  this._init();
-}
-
-
-// the &quot;widgetName&quot; prototype
-widgetName.prototype = {
-
-    // _create will automatically run the first time this 
-    // widget is called
-    _create: function(){
-        // creation code
-    },
-
-    // required: initialization logic for the plugin goes into _init
-    // This fires when your instance is first created and when 
-    // attempting to initialize the widget again (by the bridge)
-    // after it has already been initialized.
-    _init: function(){
-        // init code
-    },
-
-    // required: objects to be used with the bridge must contain an 
-    // 'option'. Post-initialization, the logic for changing options
-    // goes here. 
-    option: function( key, value ){
-
-        // optional: get/change options post initialization
-        // ignore if you don't require them.
-
-        // signature: $('#foo').bar({ cool:false });
-        if( $.isPlainObject( key ) ){
-            this.options = $.extend( true, this.options, key );
-
-        // signature: $('#foo').option('cool'); - getter
-        } else if ( key &amp;&amp; typeof value === &quot;undefined&quot; ){
-            return this.options[ key ];
-
-        // signature: $('#foo').bar('option', 'baz', false);
-        } else {
-            this.options[ key ] = value;
-        }
-
-        // required: option must return the current instance. 
-        // When re-initializing an instance on elements, option 
-        // is called first and is then chained to the _init method.
-        return this;  
-    },
-
-    // notice no underscore is used for public methods
-    publicFunction: function(){ 
-        console.log('public function');
-    },
-
-    // underscores are used for private methods
-    _privateFunction: function(){ 
-        console.log('private function');
-    }
-};
-
-
-// usage:
-
-// connect the widget obj to jQuery's API under the &quot;foo&quot; namespace
-// $.widget.bridge(&quot;foo&quot;, widgetName);
-
-// create an instance of the widget for use
-// var instance = $(&quot;#elem&quot;).foo({
-//     baz: true
-// });
-
-// your widget instance exists in the elem's data
-// instance.data(&quot;foo&quot;).element; // =&gt; #elem element
-
-// bridge allows you to call public methods...
-// instance.foo(&quot;publicFunction&quot;); // =&gt; &quot;public method&quot;
-
-// bridge prevents calls to internal methods
-// instance.foo(&quot;_privateFunction&quot;); // =&gt; #elem element</code></pre>
-<p><strong>扩展阅读</strong></p>
-
-<ul>
-<li><a href="http://erichynds.com/jquery/using-jquery-ui-widget-factory-bridge/">Using $.widget.bridge Outside of the Widget Factory</a>,Eric Hynds</li>
-</ul>
-
-<h2 id="toc_7">jQuery Mobile Widgets With The Widget factory</h2>
-
-<pre><code>/*!
- * (jQuery mobile) jQuery UI Widget-factory plugin boilerplate (for 1.8/9+)
- * Author: @scottjehl
- * Further changes: @addyosmani
- * Licensed under the MIT license
- */
-
-;(function ( $, window, document, undefined ) {
-
-    //define a widget under a namespace of your choice
-    //here 'mobile' has been used in the first parameter
-    $.widget( &quot;mobile.widgetName&quot;, $.mobile.widget, {
-
-        //Options to be used as defaults
-        options: {
-            foo: true,
-            bar: false
-        },
-
-        _create: function() {
-            // _create will automatically run the first time this 
-            // widget is called. Put the initial widget set-up code 
-            // here, then you can access the element on which 
-            // the widget was called via this.element
-            // The options defined above can be accessed via 
-            // this.options
-
-            //var m = this.element,
-            //p = m.parents(&quot;:jqmData(role='page')&quot;),
-            //c = p.find(&quot;:jqmData(role='content')&quot;)
-        },
-
-        // Private methods/props start with underscores
-        _dosomething: function(){ ... },
-
-        // Public methods like these below can can be called 
-                // externally: 
-        // $(&quot;#myelem&quot;).foo( &quot;enable&quot;, arguments );
-
-        enable: function() { ... },
-
-        // Destroy an instantiated plugin and clean up modifications 
-        // the widget has made to the DOM
-        destroy: function () {
-            //this.element.removeStuff();
-            // For UI 1.8, destroy must be invoked from the 
-            // base widget
-            $.Widget.prototype.destroy.call(this);
-            // For UI 1.9, define _destroy instead and don't 
-            // worry about calling the base widget
-        },
-
-        methodB: function ( event ) {
-            //_trigger dispatches callbacks the plugin user can 
-            // subscribe to
-            //signature: _trigger( &quot;callbackName&quot; , [eventObject],
-            //  [uiObject] )
-            // eg. this._trigger( &quot;hover&quot;, e /*where e.type == 
-            // &quot;mouseenter&quot;*/, { hovered: $(e.target)});
-            this._trigger('methodA', event, {
-                key: value
-            });
-        },
-
-        methodA: function ( event ) {
-            this._trigger('dataChanged', event, {
-                key: value
-            });
-        },
-
-        //Respond to any changes the user makes to the option method
-        _setOption: function ( key, value ) {
-            switch (key) {
-            case &quot;someValue&quot;:
-                //this.options.someValue = doSomethingWith( value );
-                break;
-            default:
-                //this.options[ key ] = value;
-                break;
-            }
-
-            // For UI 1.8, _setOption must be manually invoked from 
-            // the base widget
-            $.Widget.prototype._setOption.apply(this, arguments);
-            // For UI 1.9 the _super method can be used instead
-            // this._super( &quot;_setOption&quot;, key, value );
-        }
-    });
-
-})( jQuery, window, document );
-
-//usage: $(&quot;#myelem&quot;).foo( options );
-
-
-/* Some additional notes - delete this section before using the boilerplate.
-
- We can also self-init this widget whenever a new page in jQuery Mobile is created. jQuery Mobile's &quot;page&quot; plugin dispatches a &quot;create&quot; event when a jQuery Mobile page (found via data-role=page attr) is first initialized.
-
-We can listen for that event (called &quot;pagecreate&quot; ) and run our plugin automatically whenever a new page is created.
-
-$(document).bind(&quot;pagecreate&quot;, function (e) {
-    // In here, e.target refers to the page that was created 
-    // (it's the target of the pagecreate event)
-    // So, we can simply find elements on this page that match a 
-    // selector of our choosing, and call our plugin on them.
-    // Here's how we'd call our &quot;foo&quot; plugin on any element with a 
-    // data-role attribute of &quot;foo&quot;:
-    $(e.target).find(&quot;[data-role='foo']&quot;).foo(options);
-
-    // Or, better yet, let's write the selector accounting for the configurable 
-    // data-attribute namespace
-    $(e.target).find(&quot;:jqmData(role='foo')&quot;).foo(options);
-});
-
-That's it. Now you can simply reference the script containing your widget and pagecreate binding in a page running jQuery Mobile site, and it will automatically run like any other jQM plugin.
- */</code></pre>
-
-<h2 id="toc_8">RequireJS And The jQuery UI Widget Factory</h2>
-
-<h2 id="toc_9">Globally And Per-Call Overridable Options (Best Options Pattern)</h2>
-
-<h2 id="toc_10">AMD- And CommonJS-Compatible Modules</h2>
-
-<h2 id="toc_11">如何编写一个优秀的插件？</h2>
-<p>最后，来看一下我在选择第三方插件时遵循的一些原则，它对你开发插件来说非常有用:</p>
-<p><strong>质量</strong></p>
-<p>尽可能的遵循javascript和juqery最佳实践。在编辑写插件时，思考一下，这是最佳的解决方案吗？它们是否遵循jQuery 插件开发指南？如果不是，你的代码至少应该干净可读。</p>
-<p><strong>兼容性</strong></p>
-<p>你的插件都支持哪个版本的jquery?最新的版本是否经过测试？ 我更喜欢一些插件作者在必要时更新他们的插件，至少，测试一下插件对jquery新版本的支持情况，确保插件正常运行。</p>
-<p><strong>可靠性</strong></p>
-<p>你的插件应该有单元测试，单元测试不仅可以验证你的插件能否正常的运行，同时可以保证在不影响用户使用的情况下改进你的插件。我认为用于在生产环境插件都需要进行单元测试，它们并不难写。建议你可以看一下<a href="http://msdn.microsoft.com/en-us/scriptjunkie/gg749824">QUnit下的JavaScript自动化单元测试</a>。</p>
-<p><strong>性能</strong></p>
-<p>如果你的插件需要执行大量复杂的计算，或者频繁对DOM进行操作，建议你使用<a href="http://jsperf.com/">jsPerf.com</a>测试你的代码在不同的浏览器的性能。</p>
-<p><strong>文档</strong></p>
-<p>如果你打算让其它的开发人员使用你的插件，请确保它有良好的文档。插件有哪些方法？有哪些配置选项？有哪些用户需要注意的陷阱？如果他们无法搞清楚你的插件如何使用，他们可能会寻找别外和替代方案。另外，你的代码也需要良好的注释，这对于使用你插件的其他开发者很有用。 If someone feels they can navigate your code base well enough to fork it or improve it, then you’ve done a good job.</p>
-<p><strong>维护</strong></p>
-<p>发布一个插件时，预计一下你会有多少时间来提供插件的维护和支持。我们都喜欢在一些社区分享自己的插件，但这需要时间和精力来回答问题,解决问题,并做出改进。最简单的，你可以ReadMe文件中说明，让用户自己决定是否他们自己来修复遇到的问题。</p>
-
-<h2 id="toc_12">总结</h2>
-<p>前面，我们探讨了几种可以改善jquery插件开发的设计模式。在特定的场景下，一些模式会比另一些更合适，我希望代码中的注释对有助于你深入理解这些设计模式。</p>
-<p>记住，不要为了使用设计模式而使用设计模式，而是需要花些时间去理解这些模式，了解如何选择合适的模式来解决你的问题或适应你的组件。总之，选择合适的设计模式很重要。</p>
-<p>-happy coding!</p>
 ]]>
         </content>
     </entry><entry>

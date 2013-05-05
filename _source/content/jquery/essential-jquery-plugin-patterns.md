@@ -1,6 +1,6 @@
-# [译文]Jquery 插件设计模式
+# [译]Jquery 插件设计模式
 
-- date: 2012-11-23
+- date: 2013-05-04 23:22
 - tags: jquery, plugin, patterns, 设计模式, 译文
 - category: jquery
 
