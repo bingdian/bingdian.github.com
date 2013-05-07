@@ -88,5 +88,5 @@ php
 
 ## 扩展阅读
 
-http://derek.io/blog/2009/auto-versioning-javascript-and-css-files/
-http://www.prestashop.com/forums/topic/136126-auto-versioning-css-files-force-css-refresh/
+* http://derek.io/blog/2009/auto-versioning-javascript-and-css-files/
+* http://www.prestashop.com/forums/topic/136126-auto-versioning-css-files-force-css-refresh/
