@@ -26,7 +26,7 @@ Markdown 是一种轻量级标记语言，它允许使用易读易写的纯文�
 
 ## Markdown 语法
 
-参考下图或[markdown syntax](/demo/markdown-syntax.html)
+参考下图或[markdown syntax](/demo/code/markdown-syntax.html)
 
 <img src="/files/img/markdown-syntax.png" alt="markdown syntax" />
 

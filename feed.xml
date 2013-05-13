@@ -3,7 +3,7 @@
     <title>On The Way</title>
     <link href="http://wlog.cn/feed.xml" rel="self" />
     <link href="http://wlog.cn/" />
-    <updated>2013-05-13T20:10:14+08:00</updated>
+    <updated>2013-05-13T20:10:48+08:00</updated>
     <id>http://wlog.cn/</id>
     <entry>
         <title type="html"><![CDATA[前端开发静态文件自动添加版本号解决方案]]></title>
@@ -814,7 +814,7 @@ That's it. Now you can simply reference the script containing your widget and pa
         <author><name>bingdian</name></author>
         <link href="http://wlog.cn/soft/why-use-markdown.html"/>
         <published>2013-04-05T21:26:00+08:00</published>
-        <updated>2013-05-13T20:10:14+08:00</updated>
+        <updated>2013-05-13T20:10:48+08:00</updated>
         <id>http://wlog.cn/soft/why-use-markdown.html</id>
         <category scheme="http://wlog.cn/tag/#markdown" term="markdown" label="markdown" />
         <category scheme="http://wlog.cn/tag/#写作" term="写作" label="写作" />
