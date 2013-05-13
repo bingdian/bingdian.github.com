@@ -3,7 +3,7 @@
     <title>On The Way</title>
     <link href="http://wlog.cn/feed.xml" rel="self" />
     <link href="http://wlog.cn/" />
-    <updated>2013-05-07T23:44:50+08:00</updated>
+    <updated>2013-05-13T20:10:14+08:00</updated>
     <id>http://wlog.cn/</id>
     <entry>
         <title type="html"><![CDATA[前端开发静态文件自动添加版本号解决方案]]></title>
@@ -814,7 +814,7 @@ That's it. Now you can simply reference the script containing your widget and pa
         <author><name>bingdian</name></author>
         <link href="http://wlog.cn/soft/why-use-markdown.html"/>
         <published>2013-04-05T21:26:00+08:00</published>
-        <updated>2013-05-05T19:15:32+08:00</updated>
+        <updated>2013-05-13T20:10:14+08:00</updated>
         <id>http://wlog.cn/soft/why-use-markdown.html</id>
         <category scheme="http://wlog.cn/tag/#markdown" term="markdown" label="markdown" />
         <category scheme="http://wlog.cn/tag/#写作" term="写作" label="写作" />
@@ -837,6 +837,7 @@ That's it. Now you can simply reference the script containing your widget and pa
 </ul>
 
 <h2 id="toc_2">Markdown 语法</h2>
+<p>参考下图或<a href="/demo/markdown-syntax.html">markdown syntax</a></p>
 <p><img src="/files/img/markdown-syntax.png" alt="markdown syntax" /></p>
 
 <h2 id="toc_3">Markdown 编辑器</h2>
@@ -848,6 +849,7 @@ That's it. Now you can simply reference the script containing your widget and pa
 <li><a href="http://markedapp.com/">markedapp.com/</a> - mac，可以预览markdown，不能编辑，可以导出html、pdf,样式可自定义</li>
 <li><a href="http://markdownpad.com/">markdownpad.com/</a> -  windows</li>
 </ul>
+<p>另外感谢 <a href="http://linlis.me/">@linlis</a> 推荐的支持Markdown的在线写作平台<a href="http://jianshu.io/">简书网</a> - 简书是一款属于写作者的笔记本, 致力于提供一个简洁而优雅的环境让你专注于书写。</p>
 
 <h2 id="toc_4">扩展阅读</h2>
 

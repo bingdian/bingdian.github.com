@@ -26,6 +26,8 @@ Markdown 是一种轻量级标记语言，它允许使用易读易写的纯文�
 
 ## Markdown 语法
 
+参考下图或[markdown syntax](/demo/markdown-syntax.html)
+
 <img src="/files/img/markdown-syntax.png" alt="markdown syntax" />
 
 ## Markdown 编辑器
@@ -35,6 +37,8 @@ Markdown 是一种轻量级标记语言，它允许使用易读易写的纯文�
 * http://bywordapp.com/ - mac，iphone，ipad
 * http://markedapp.com/ - mac，可以预览markdown，不能编辑，可以导出html、pdf,样式可自定义
 * http://markdownpad.com/ -  windows
+
+另外感谢 [@linlis](http://linlis.me/) 推荐的支持Markdown的在线写作平台[简书网](http://jianshu.io/) - 简书是一款属于写作者的笔记本, 致力于提供一个简洁而优雅的环境让你专注于书写。
 
 ## 扩展阅读
 
