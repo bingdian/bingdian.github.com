@@ -5,16 +5,17 @@
 - category: Jquery
 
 ----------------
+
 瀑布流布局插件, 类似于 [Pinterest](http://pinterest.com/)、[花瓣](http://huaban.com/)、[发现啦](http://faxianla.com/)。
 
 ## 文档
 
 ### 下载
 
-下载[waterfall插件最新版本](https://github.com/bingdian/waterfall/archive/v0.1.0.tar.gz)。
+下载[waterfall插件](https://github.com/bingdian/waterfall/archive/1.0.1.tar.gz)最新版本。
 
 ### 使用
-    
+
 [min]: https://raw.github.com/bingdian/waterfall/master/build/waterfall.min.js
 [max]: https://raw.github.com/bingdian/waterfall/master/build/waterfall.js
 
@@ -267,7 +268,6 @@ callbacks:
 **option**
     
     $('#container').waterfalll('option', options, callback);
-    
     
 ## Demos
  
