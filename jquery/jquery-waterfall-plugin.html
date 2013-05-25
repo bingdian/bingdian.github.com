@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="zh-CN"> 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="On The Way" />
+    <meta name="application-name" content="On The Way" />
+    <title>jquery 瀑布流插件 - On The Way</title>
+    <meta name="keywords" content="waterfall,jquery,plugin,插件" />
+    <meta name="description" content="" />
+    
+    <link rel="alternate" type="application/rss+xml" href="/feed.xml" title="On The Way" />
+    <link rel="stylesheet" href="/static/style.css?v=d39b1" />
+    <link rel="canonical" href="http://wlog.cn/jquery/jquery-waterfall-plugin.html" />
+    <!--[if lt IE 9]>
+    <script src="/static/js/html5shiv.js?v=fb4e3"></script>
+    <![endif]-->
+</head>
+<body>
+<div id="wrapper">   
+<header id="header" class="clear">
+    <h1>jquery 瀑布流插件</h1>
+</header><!-- #header -->
+<nav id="nav" role="navigation">
+    <a href="/index.html">INDEX</a>
+    <a href="/tag/index.html">TAGS</a>
+    <a href="/project.html">PROJECTS</a>
+    <a href="/about.html">ABOUT ME</a>
+    <a href="/links.html">LINKS</a>
+    <a href="/feed.xml">FEED</a>
+</nav><article id="main" class="hentry">
+    <div class="post-date">- Posted on <time class="updated" datetime="2013-05-25" pubdate>2013-05-25</time></div>
+    <div class="entry-content">
+        <p>瀑布流布局插件, 类似于 <a href="http://pinterest.com/">Pinterest</a>、<a href="http://huaban.com/">花瓣</a>、<a href="http://faxianla.com/">发现啦</a>。</p>
+
+<h2 id="toc_0">文档</h2>
+
+<h3 id="toc_1">使用</h3>
+<p>下载<a href="https://github.com/bingdian/waterfall/tarball/master">waterfall</a>。</p>
+<p>html：</p>
+
+<pre><code>&lt;div id=&quot;container&quot;&gt;&lt;/div&gt;</code></pre>
+<p>引入jquery，handlebars和waterfall(注：waterfall默认返回json格式数据并使用<a href="http://handlebarsjs.com/">handlebars</a>模板渲染json数据，你也可以在options中配置使用其它javascript模板如<a href="http://mustache.github.com/">mustache</a>解析json数据或者直接返回html):</p>
+
+<pre><code>&lt;script src=&quot;/path/jquery.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;/path/handlebars.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;/path/waterfall.min.js&quot;&gt;&lt;/script&gt;</code></pre>
+<p>template:</p>
+
+<pre><code>&lt;script id=&quot;waterfall-tpl&quot; type=&quot;text/x-handlebars-template&quot;&gt;
+    //template content
+&lt;/script&gt;</code></pre>
+<p>script:</p>
+
+<pre><code>$('#container').waterfall(options);</code></pre>
+
+<h3 id="toc_2">options</h3>
+
+<table>
+    <tr>
+        <th class="min-th">Name</th>
+        <th class="min-th">Type</th>
+        <th class="min-th">Default value</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td>itemCls</td>
+        <td>String</td>
+        <td>&lsquo;waterfall-item&rsquo;</td>
+        <td>瀑布流数据块class</td>
+    </tr>
+    <tr>
+        <td>prefix</td>
+        <td>String</td>
+        <td>&lsquo;waterfall&rsquo;</td>
+        <td>瀑布流元素前辍</td>
+    </tr>
+    <tr>
+        <td>fitWidth</td>
+        <td>Boolean</td>
+        <td>true</td>
+        <td>是否自适应父元素宽度</td>
+    </tr>
+    <tr>
+        <td>colWidth</td>
+        <td>Integer</td>
+        <td>240</td>
+        <td>瀑布流每列的宽度</td>
+    </tr>
+    <tr>
+        <td>gutterWidth</td>
+        <td>Integer</td>
+        <td>10</td>
+        <td>数据块水平间距</td>
+    </tr>
+    <tr>
+        <td>gutterHeight</td>
+        <td>Integer</td>
+        <td>10</td>
+        <td>数据块垂直间距</td>
+    </tr>
+    <tr>
+        <td>align</td>
+        <td>String</td>
+        <td>&lsquo;center&rsquo;</td>
+        <td>数据块相对于容器对齐方式，'align', &lsquo;left&rsquo;, &lsquo;right&rsquo;</td>
+    </tr>
+    <tr>
+        <td>minCol</td>
+        <td>Integer</td>
+        <td>1</td>
+        <td>数据块最小列数</td>
+    </tr>
+    <tr>
+        <td>maxCol</td>
+        <td>Integer</td>
+        <td>undefined</td>
+        <td>数据块最多显示列数,默认undefined，最大列数无限制</td>
+    </tr>
+    <tr>
+        <td>maxPage</td>
+        <td>Integer</td>
+        <td>undefined</td>
+        <td>最多显示多少页数据,默认undefined，无限下拉</td>
+    </tr>
+    <tr>
+        <td>bufferPixel</td>
+        <td>Integer</td>
+        <td>-50</td>
+        <td>滚动时, 窗口底部到瀑布流最小高度列的距离 > bufferPixel时, 自动加载新数据</td>
+    </tr>
+    <tr>
+        <td>containerStyle</td>
+        <td>Object</td>
+        <td>{position: &lsquo;relative&rsquo;}</td>
+        <td>瀑布流默认样式</td>
+    </tr>
+    <tr>
+        <td>resizable</td>
+        <td>Boolean</td>
+        <td>true</td>
+        <td>缩放时是否触发数据重排</td>
+    </tr>
+    <tr>
+        <td>isFadeIn</td>
+        <td>Boolean</td>
+        <td>false</td>
+        <td>新插入数据是否使用fade动画</td>
+    </tr>
+    <tr>
+        <td>isAnimated</td>
+        <td>Boolean</td>
+        <td>false</td>
+        <td>resize时数据是否显示动画</td>
+    </tr>
+    <tr>
+        <td>animationOptions</td>
+        <td>Object</td>
+        <td>{}</td>
+        <td>resize动画效果，isAnimated为true时有效</td>
+    </tr>
+    <tr>
+        <td>isAutoPrefill</td>
+        <td>Boolean</td>
+        <td>true</td>
+        <td>当文档小于窗口可见区域，自动加载数据</td>
+    </tr>
+    <tr>
+        <td>checkImagesLoaded</td>
+        <td>Boolean</td>
+        <td>true</td>
+        <td>是否图片加载完成后开始排列数据块。如果直接后台输出图片尺寸，可设置为false，强烈建议从后台输出图片尺寸，设置为false</td>
+    </tr>
+    <tr>
+        <td>path</td>
+        <td>Array, Function</td>
+        <td>undefined</td>
+        <td>瀑布流数据分页url，可以是数组如[&ldquo;/popular/page/&rdquo;, &ldquo;/&rdquo;] => &ldquo;/popular/page/1/&quot;，或者是根据分页返回一个url方法如：function(page) { return &lsquo;/populr/page/&rsquo; + page; } => &rdquo;/popular/page/1/&ldquo;</td>
+    </tr>
+    <tr>
+        <td>dataType</td>
+        <td>String</td>
+        <td>&lsquo;json&rsquo;</td>
+        <td>瀑布流返回数据格式，'json', &lsquo;jsonp&rsquo;, &lsquo;html&rsquo;</td>
+    </tr>
+    <tr>
+        <td>params</td>
+        <td>Object</td>
+        <td>{}</td>
+        <td>瀑布流数据请求参数,{type: &quot;popular&rdquo;, tags: &ldquo;travel&rdquo;, format: &ldquo;json&rdquo;} => &ldquo;type=popular&tags=travel&format=json&rdquo;</td>
+    </tr>
+    <tr>
+        <td>loadingMsg</td>
+        <td>Html</td>
+        <td>见下面代码</td>
+        <td>加载提示进度条，html</td>
+    </tr>
+    <tr>
+        <td>callbacks</td>
+        <td>Object</td>
+        <td>见下面代码</td>
+        <td>callback</td>
+    </tr>
+</table>
+<p>loadingMsg:</p>
+
+<pre><code>'&amp;lt;div style=&quot;text-align:center;padding:10px 0; color:#999;&quot;&gt;&amp;lt;img src=&quot;data:image/gif;base64,R0lGODlhEAALAPQAAP///zMzM+Li4tra2u7u7jk5OTMzM1hYWJubm4CAgMjIyE9PT29vb6KiooODg8vLy1JSUjc3N3Jycuvr6+Dg4Pb29mBgYOPj4/X19cXFxbOzs9XV1fHx8TMzMzMzMzMzMyH5BAkLAAAAIf4aQ3JlYXRlZCB3aXRoIGFqYXhsb2FkLmluZm8AIf8LTkVUU0NBUEUyLjADAQAAACwAAAAAEAALAAAFLSAgjmRpnqSgCuLKAq5AEIM4zDVw03ve27ifDgfkEYe04kDIDC5zrtYKRa2WQgAh+QQJCwAAACwAAAAAEAALAAAFJGBhGAVgnqhpHIeRvsDawqns0qeN5+y967tYLyicBYE7EYkYAgAh+QQJCwAAACwAAAAAEAALAAAFNiAgjothLOOIJAkiGgxjpGKiKMkbz7SN6zIawJcDwIK9W/HISxGBzdHTuBNOmcJVCyoUlk7CEAAh+QQJCwAAACwAAAAAEAALAAAFNSAgjqQIRRFUAo3jNGIkSdHqPI8Tz3V55zuaDacDyIQ+YrBH+hWPzJFzOQQaeavWi7oqnVIhACH5BAkLAAAALAAAAAAQAAsAAAUyICCOZGme1rJY5kRRk7hI0mJSVUXJtF3iOl7tltsBZsNfUegjAY3I5sgFY55KqdX1GgIAIfkECQsAAAAsAAAAABAACwAABTcgII5kaZ4kcV2EqLJipmnZhWGXaOOitm2aXQ4g7P2Ct2ER4AMul00kj5g0Al8tADY2y6C+4FIIACH5BAkLAAAALAAAAAAQAAsAAAUvICCOZGme5ERRk6iy7qpyHCVStA3gNa/7txxwlwv2isSacYUc+l4tADQGQ1mvpBAAIfkECQsAAAAsAAAAABAACwAABS8gII5kaZ7kRFGTqLLuqnIcJVK0DeA1r/u3HHCXC/aKxJpxhRz6Xi0ANAZDWa+kEAA7&quot; alt=&quot;&quot;&gt;&amp;lt;br /&gt;Loading...&amp;lt;/div&gt;'</code></pre>
+<p>callbacks:</p>
+
+<pre><code>callbacks: {
+    /*
+     * ajax请求开始之前
+     * @param {Object} loading $('#waterfall-loading')
+     */
+    loadingStart: function($loading) {
+        $loading.show();
+    },
+
+    /*
+     * ajax请求加载完成
+     * @param {Object} loading $('#waterfall-loading')
+     * @param {Boolean} isBeyondMaxPage
+     */
+    loadingFinished: function($loading, isBeyondMaxPage) {
+        if ( !isBeyondMaxPage ) {
+            $loading.fadeOut();
+        } else {
+            $loading.remove();
+        }
+    },
+
+    /*
+     * ajax请求出错误
+     * @param {String} xhr , &quot;end&quot; &quot;error&quot;
+     */
+    loadingError: function($message, xhr) {
+        $message.html('Data load faild, please try again later.');
+    },
+
+    /*
+     * 处理ajax返回数方法
+     * @param {String} data
+     * @param {String} dataType , &quot;json&quot;, &quot;jsonp&quot;, &quot;html&quot;
+     */
+    renderData: function (data, dataType) {
+        var tpl,
+            template;
+
+        if ( dataType === 'json' ||  dataType === 'jsonp'  ) { // json或jsonp格式
+            tpl = $('#waterfall-tpl').html();
+            template = Handlebars.compile(tpl);
+
+            return template(data);
+        } else { // html格式
+            return data;
+        }
+    }
+}</code></pre>
+
+<h3 id="toc_3">method</h3>
+
+<pre><code>$('#container').waterfall( 'methodName', [optionalParameters] );</code></pre>
+<p><strong>prepend</strong></p>
+
+<pre><code>$('#container').waterfalll('prepend', $content, callback);</code></pre>
+<p><strong>append</strong></p>
+
+<pre><code>$('#container').waterfalll('append', $content, callback);</code></pre>
+<p><strong>removeItems</strong></p>
+
+<pre><code>$('#container').waterfalll('removeItems', $items, callback);</code></pre>
+<p><strong>reLayout</strong></p>
+
+<pre><code>$('#container').waterfalll('reLayout', $content, callback);</code></pre>
+<p><strong>option</strong></p>
+
+<pre><code>$('#container').waterfalll('option', options, callback);</code></pre>
+
+<h2 id="toc_4">Demos</h2>
+
+<ul>
+<li><a href="http://wlog.cn/demo/waterfall/infinitescroll.html">无限下拉数据</a></li>
+<li><a href="http://wlog.cn/demo/waterfall/finitescroll.html">有限下拉数据完成后显示分页</a></li>
+<li><a href="http://wlog.cn/demo/waterfall/custom-width.html">瀑布流固定宽度</a></li>
+<li><a href="http://wlog.cn/demo/waterfall/min-max-columns.html">自定义最大列最小列</a></li>
+<li><a href="http://wlog.cn/demo/waterfall/animate.html">resize动画效果</a></li>
+<li><a href="http://wlog.cn/demo/waterfall/fadein.html">加载数据时fadeIn效果</a></li>
+<li><a href="http://wlog.cn/demo/waterfall/fixed-left-or-right.html">左侧或右侧固定列</a></li>
+<li><a href="http://wlog.cn/demo/waterfall/mustache.html">使用其它模板如mustache解析json数据</a></li>
+<li><a href="http://wlog.cn/demo/waterfall/html.html">ajax加载html格式</a></li>
+<li><a href="http://wlog.cn/demo/waterfall/jsonp.html">ajax加载jsonp格式</a></li>
+</ul>
+
+    </div>
+    <div class="entry-meta">
+        Posted on<time class="updated" datetime="2013-05-25T17:53:00+08:00" pubdate>
+            2013-05-25
+        </time>
+        <span class="entry-category">Category:<a href="/jquery/">Jquery</a></span>
+        <span class="entry-tags">Tags:
+            
+                <a href="/tag/waterfall/">waterfall</a>
+            
+                ,<a href="/tag/jquery/">jquery</a>
+            
+                ,<a href="/tag/plugin/">plugin</a>
+            
+                ,<a href="/tag/插件/">插件</a>
+            
+		</span>
+    
+        
+    </div>
+    
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'bingdian-ontheway';
+        var disqus_title = 'jquery 瀑布流插件';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+</article><footer id="footer">
+    <p class="copyright"><span class="software">Powered by <a href="http://lab.lepture.com/liquidluck/">Felix Felicis</a> 3.8, </span><span class="theme">Theme <a href="http://wlog.cn/" rel="nofollow">responsive</a> 0.1 by <a href="http://wlog.cn/">bingdian</a></span></p>
+</footer><!-- #footer -->
+</div><!-- #wrapper -->
+
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-1245097-16']);
+_gaq.push(['_trackPageview']);
+_gaq.push(['_trackPageLoadTime']);
+(function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = 'https://ssl.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+</body>
+</html>
