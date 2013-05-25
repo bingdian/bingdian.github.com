@@ -3,14 +3,14 @@
     <title>On The Way</title>
     <link href="http://wlog.cn/feed.xml" rel="self" />
     <link href="http://wlog.cn/" />
-    <updated>2013-05-25T23:59:49+08:00</updated>
+    <updated>2013-05-26T00:16:16+08:00</updated>
     <id>http://wlog.cn/</id>
     <entry>
         <title type="html"><![CDATA[jquery 瀑布流插件]]></title>
         <author><name>bingdian</name></author>
         <link href="http://wlog.cn/jquery/jquery-waterfall-plugin.html"/>
         <published>2013-05-25T17:53:00+08:00</published>
-        <updated>2013-05-25T23:59:49+08:00</updated>
+        <updated>2013-05-26T00:16:16+08:00</updated>
         <id>http://wlog.cn/jquery/jquery-waterfall-plugin.html</id>
         <category scheme="http://wlog.cn/tag/#waterfall" term="waterfall" label="waterfall" />
         <category scheme="http://wlog.cn/tag/#jquery" term="jquery" label="jquery" />
@@ -22,7 +22,7 @@
 <h2 id="toc_0">文档</h2>
 
 <h3 id="toc_1">使用</h3>
-<p>下载<a href="https://github.com/bingdian/waterfall/tarball/master">waterfall</a>。</p>
+<p>下载<a href="https://github.com/bingdian/waterfall/archive/v0.1.0.tar.gz">waterfall插件最新版本</a>。</p>
 <p>html：</p>
 
 <pre><code>&lt;div id=&quot;container&quot;&gt;&lt;/div&gt;</code></pre>
