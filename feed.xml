@@ -3,7 +3,7 @@
     <title>On The Way</title>
     <link href="http://wlog.cn/feed.xml" rel="self" />
     <link href="http://wlog.cn/" />
-    <updated>2013-05-26T02:40:29+08:00</updated>
+    <updated>2013-05-26T19:22:44+08:00</updated>
     <id>http://wlog.cn/</id>
     <entry>
         <title type="html"><![CDATA[jquery 瀑布流插件]]></title>
@@ -4262,7 +4262,7 @@ for (i in person) {
         <author><name>bingdian</name></author>
         <link href="http://wlog.cn/soft/git-quick-start.html"/>
         <published>2011-06-18T22:32:00+08:00</published>
-        <updated>2013-05-05T19:15:32+08:00</updated>
+        <updated>2013-05-26T19:22:44+08:00</updated>
         <id>http://wlog.cn/soft/git-quick-start.html</id>
         <category scheme="http://wlog.cn/tag/#git" term="git" label="git" />
         <category scheme="http://wlog.cn/tag/#版本控制" term="版本控制" label="版本控制" />
@@ -4293,7 +4293,7 @@ git config user.email &quot;my@email.com&quot;</code></pre>
 <pre><code>mkdir project
 cd project
 git init #在当前的目录下建一个仓库</code></pre>
-<p>从已有的git仓库中提取代码:</p>
+<p>检出仓库:</p>
 
 <pre><code>git clone git@server:app.git myrepo</code></pre>
 <p>查看远程仓库：</p>
@@ -4304,7 +4304,10 @@ git init #在当前的目录下建一个仓库</code></pre>
 <pre><code>$ git remote add [name] [url]</code></pre>
 <p>删除远程仓库：</p>
 
-<pre><code>$ git remote rm [name]</code></pre>
+<pre><code>$ git remote rm [name]
+
+
+git push origin master</code></pre>
 
 <h2 id="toc_2">三、更改代码的操作</h2>
 <p>更新本地代码到最新版本（需要merge才能合到本地代码中）:</p>
@@ -4383,15 +4386,27 @@ git checkout dev</code></pre>
 
 <pre><code>git branch -d dev</code></pre>
 <p>如果要删除的分支没有被合并到其它分支中去，那么就不能用“git branch -d”来删除它，需要改用“git branch -D”来强制删除。</p>
+<p>将分支推送到远端仓库:</p>
+
+<pre><code>git push origin &lt;branch&gt;</code></pre>
+<p>删除远程分支：</p>
+
+<pre><code>git push origin --delete &lt;branch&gt;</code></pre>
 
 <h2 id="toc_4">五、打标签</h2>
 <p>git可以对某一时间点上的版本打上标签。如在发布某个软件版本（比如 v0.1等），可以打版本标签。</p>
 <p>列出已有的标签：</p>
 
 <pre><code>git tag</code></pre>
-<p>打标签</p>
+<p>打标签：</p>
 
 <pre><code>git tag -a v0.1 -m 'tag version 0.1'</code></pre>
+<p>把本地tag推送到远程：</p>
+
+<pre><code>git push --tags</code></pre>
+<p>删除tag：</p>
+
+<pre><code>git push origin --delete tag &lt;tagname&gt;</code></pre>
 
 <h2 id="toc_5">六、其它常用命令</h2>
 <p>显示commit日志：</p>

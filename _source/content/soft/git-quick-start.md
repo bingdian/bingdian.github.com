@@ -40,7 +40,7 @@ git下载地址：<a href="http://git-scm.com/download" target="_blank">http://g
 	cd project
 	git init #在当前的目录下建一个仓库
 
-从已有的git仓库中提取代码:
+检出仓库:
 
 	git clone git@server:app.git myrepo
 	
@@ -55,6 +55,9 @@ git下载地址：<a href="http://git-scm.com/download" target="_blank">http://g
 删除远程仓库：
 
 	$ git remote rm [name]
+	
+	
+	git push origin master
 	
 
 ## 三、更改代码的操作
@@ -156,6 +159,14 @@ git下载地址：<a href="http://git-scm.com/download" target="_blank">http://g
 
 如果要删除的分支没有被合并到其它分支中去，那么就不能用“git branch -d”来删除它，需要改用“git branch -D”来强制删除。
 
+将分支推送到远端仓库:
+
+	git push origin <branch>
+
+删除远程分支：
+
+	git push origin --delete <branch>
+
 ## 五、打标签
 
 git可以对某一时间点上的版本打上标签。如在发布某个软件版本（比如 v0.1等），可以打版本标签。
@@ -164,9 +175,18 @@ git可以对某一时间点上的版本打上标签。如在发布某个软件�
 
 	git tag
 
-打标签
+打标签：
 
 	git tag -a v0.1 -m 'tag version 0.1'
+	
+把本地tag推送到远程：
+
+	git push --tags
+	
+删除tag：
+
+	git push origin --delete tag <tagname>
+
 
 ## 六、其它常用命令
 
