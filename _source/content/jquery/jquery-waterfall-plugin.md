@@ -10,6 +10,10 @@
 
 ## 文档
 
+### 项目地址
+
+[https://github.com/bingdian/waterfall](https://github.com/bingdian/waterfall)
+
 ### 下载
 
 下载[waterfall插件](https://github.com/bingdian/waterfall/archive/master.tar.gz)最新版本。
