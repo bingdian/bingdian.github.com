@@ -268,6 +268,14 @@ callbacks:
 **reLayout**
 
     $('#container').waterfalll('reLayout', $content, callback);
+    
+**pause**
+
+    $('#container').waterfalll('pause', callback);
+    
+**resume**
+
+    $('#container').waterfalll('resume', callback);
 
 **option**
     
@@ -284,4 +292,5 @@ callbacks:
  * [左侧或右侧固定列](http://wlog.cn/demo/waterfall/fixed-left-or-right.html)
  * [使用其它模板如mustache解析json数据](http://wlog.cn/demo/waterfall/mustache.html)
  * [ajax加载html格式](http://wlog.cn/demo/waterfall/html.html)
+ * [没有更多数据处理](http://wlog.cn/demo/waterfall/no-more-data.html)
  * [ajax加载jsonp格式](http://wlog.cn/demo/waterfall/jsonp.html)
