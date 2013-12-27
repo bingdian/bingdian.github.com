@@ -64,7 +64,7 @@ Geolocation API的使用很简单，请求一个位置信息，如果用户同�
         console.log('geolocation is not supported in your broswer.');
     }
 
-### 2.2 getCurrentPosition 或 watchPosition
+### 2.2 getCurrentPosition 和 watchPosition
 
 * 使用 getCurrentPosition 方法获取当前的地理位置。
 * 使用 watchPosition 方法监视位置随时间变化的情况。
@@ -75,7 +75,7 @@ Geolocation API的使用很简单，请求一个位置信息，如果用户同�
     navigator.geolocation.getCurrentPosition(successCallback, errorCallback, options);
     
     // watchPosition
-    navigator.geolocation.getCurrentPosition(successCallback, errorCallback, options);
+    navigator.geolocation.watchPosition(successCallback, errorCallback, options);
 
 这两个方法都就使用的是异步回调的方式。它们有相同的参数：
 
