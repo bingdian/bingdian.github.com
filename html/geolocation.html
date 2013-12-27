@@ -88,7 +88,7 @@
     console.log('geolocation is not supported in your broswer.');
 }</code></pre>
 
-<h3 id="toc_7">2.2 getCurrentPosition 或 watchPosition</h3>
+<h3 id="toc_7">2.2 getCurrentPosition 和 watchPosition</h3>
 
 <ul>
 <li>使用 getCurrentPosition 方法获取当前的地理位置。</li>
@@ -100,7 +100,7 @@
 navigator.geolocation.getCurrentPosition(successCallback, errorCallback, options);
 
 // watchPosition
-navigator.geolocation.getCurrentPosition(successCallback, errorCallback, options);</code></pre>
+navigator.geolocation.watchPosition(successCallback, errorCallback, options);</code></pre>
 <p>这两个方法都就使用的是异步回调的方式。它们有相同的参数：</p>
 
 <ol>
