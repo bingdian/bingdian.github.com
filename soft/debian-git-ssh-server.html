@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN"> 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="On The Way" />
+    <meta name="application-name" content="On The Way" />
+    <title>搭建通过 ssh 访问的 Git 服务器 - On The Way</title>
+    <meta name="keywords" content="git,版本控制,ssh,debian,linux" />
+    <meta name="description" content="" />
+    
+    <link rel="alternate" type="application/rss+xml" href="/feed.xml" title="On The Way" />
+    <link rel="stylesheet" href="/static/style.css?v=a9da6" />
+    <link rel="canonical" href="http://wlog.cn/soft/debian-git-ssh-server.html" />
+    <!--[if lt IE 9]>
+    <script src="/static/js/html5shiv.js?v=fb4e3"></script>
+    <![endif]-->
+</head>
+<body>
+<div id="wrapper">   
+<header id="header" class="clear">
+    <h1>搭建通过 ssh 访问的 Git 服务器</h1>
+</header><!-- #header -->
+<nav id="nav" role="navigation">
+    <a href="/index.html">INDEX</a>
+    <a href="/tag/index.html">TAGS</a>
+    <a href="/project.html">PROJECTS</a>
+    <a href="/about.html">ABOUT ME</a>
+    <a href="/links.html">LINKS</a>
+    <a href="/feed.xml">FEED</a>
+</nav><article id="main" class="hentry">
+    <div class="post-date">- Posted on <time class="updated" datetime="2014-01-10" pubdate>2014-01-10</time></div>
+    <div class="entry-content">
+        <h2 id="toc_0">一、Git - 协议</h2>
+<p>Git 可以使用四种主要的协议来传输数据：本地传输，ssh 协议，Git 协议和 HTTP 协议。</p>
+<p>Git 使用的传输协议中最常见的就是 ssh 了。大多数环境已经支持通过 ssh 对服务器的访问 ，ssh 也是唯一一个同时支持读写操作的网络协议。另外两个网络协议（HTTP 和 Git）通常都是只读的。ssh 同时也是一个验证授权的网络协议；而因为其普遍性，一般架设和使用都很容易。</p>
+<p>本文主要介绍如何搭建 ssh 协议的 Git 服务器。</p>
+
+<h2 id="toc_1">二、在服务器上部署 Git</h2>
+<p>首先，你需要一台 Linux 器并且拥有 sudo 权限，本文使用的是 Debian 7.0 x32 。下面就开始安装：</p>
+
+<h3 id="toc_2">2.1 第一步，安装 git ：</h3>
+
+<pre><code>$ sudo apt-get install git</code></pre>
+
+<h3 id="toc_3">2.2 第二步，创建一个 git 用户，用来运行 git 服务：</h3>
+
+<pre><code>$ sudo adduser git</code></pre>
+
+<h3 id="toc_4">2.3 第三步，设置访问权限：</h3>
+<p>有几个办法可以让团队的每个成员都有访问权：</p>
+
+<ol>
+<li>给每个人建立一个账户。反复使用 adduser 并给所有人设定临时密码比较麻烦。</li>
+<li>在服务器上建立一个 Git 账户，让每个需要写权限的人发送一个 ssh 公钥，然后将其加入 Git 账户的 ~/.ssh/authorized_keys 文件。这样，所有人都将通过 Git 账户访问主机。</li>
+<li>另一个办法是让 ssh 服务器通过某个 LDAP 服务，或者其他已经设定好的集中授权机制，来进行授权。</li>
+</ol>
+<p>这里我们使用第二种方法，收集所有需要登录该 Git 服务器用户的公钥，就是他们自己的 id_rsa.pub 文件，把所有公钥导入到 /home/git/.ssh/authorized_keys 文件里，每行一个。（注意：/home/git/.ssh/authorized_keys 这个文件的 owner 为 Git ，如果不是请使用 chown 命令修改）。</p>
+<p>下面是创建公钥命令：</p>
+
+<pre><code>$ ssh-keygen -t rsa -C  'your email@domain.com'</code></pre>
+<p>-t 指定密钥类型，默认即 rsa ，可以省略</p>
+<p>-C 设置注释文字，比如你的邮箱</p>
+<p>关于创建公钥的详细信息，可以参考 <a href="http://github.com/guides/providing-your-ssh-key">http://github.com/guides/providing-your-ssh-key</a>。</p>
+
+<h3 id="toc_5">2.4 第四步，禁用 shell 登录：</h3>
+<p>出于安全考虑，你可以用 Git 自带的 git-shell 工具限制 git 用户的活动范围。这可以通过编辑 /etc/passwd 文件完成。找到类似下面的一行：</p>
+<p>把 bin/sh 改为 /usr/bin/git-shell （或者用 which git-shell 查看它的实际安装路径）</p>
+
+<pre><code>git:x:1003:1003:,,,:/home/git:/bin/bash</code></pre>
+<p>改为：</p>
+
+<pre><code>git:x:1003:1003:,,,:/home/git:/usr/bin/git-shell</code></pre>
+<p>现在 git 用户只能用 ssh 连接来推送和获取 Git 仓库，而不能直接使用服务器的 shell。尝试普通 ssh 登录的话，会被拒绝登录。</p>
+
+<h3 id="toc_6">2.5 第五步，初始化Git仓库：</h3>
+<p>选定一个目录作为 Git 仓库，如 /home/git/project.git ，在 /home/git/ 目录下输入命令：</p>
+
+<pre><code>$ sudo git init --bare project.git</code></pre>
+<p>Git 会创建一个裸仓库，裸仓库没有工作区，因为服务器上的 Git 仓库是为了共享，所以不让用户直接登录到服务器上去改工作区，并且服务器上的 Git 仓库通常都以 .git 结尾。然后，把 project.git 的 owner 改为 git ：</p>
+
+<pre><code>$ sudo chown -R git:git project.git</code></pre>
+
+<h3 id="toc_7">2.6 第六步，克隆远程仓库：</h3>
+<p>ssh 指定私钥的配置管理，为本地添加 ssh 别名，编辑 ~/.ssh/config ，如果没有该文件，创建一个:</p>
+
+<pre><code>$ vi ~/.ssh/config</code></pre>
+<p>在 config 中添加：</p>
+
+<pre><code># 注释说明
+Host 别名
+HostName  域名或 ip
+User 登陆服务器用的账号
+Port 端口号(默认22，可以不填，如果服务器修改了 ssh 登录端口号，此处需要修改)
+IdentityFile 密钥文件的位置</code></pre>
+<p>例如设置为:</p>
+
+<pre><code># bingdian's git server
+Host gitserver
+HostName 162.188.23.33
+User git
+Port 9000
+IdentityFile ~/.ssh/server_rsa</code></pre>
+<p>现在，可以通过 git clone 命令克隆远程仓库了：</p>
+
+<pre><code>$ git clone ssh://git@gitserver:/home/git/project.git</code></pre>
+<p>接下来你就可以享受你的 Git 之旅了。</p>
+
+<h2 id="toc_8">扩展阅读</h2>
+
+<ul>
+<li><a href="http://git-scm.com/book/zh/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84-Git-%E5%8D%8F%E8%AE%AE">http://git-scm.com/book/zh/服务器上的-Git-协议</a></li>
+<li><a href="http://dracoblue.net/dev/custom-identity-file-idrsapub-with-git-client/">Custom identity file (id_rsa.pub) with git client</a></li>
+<li><a href="http://84kids.com/git-config-for-mutiply-ssh-keys/">Git config for mutiply ssh keys</a></li>
+</ul>
+
+    </div>
+    <div class="entry-meta">
+        Posted on<time class="updated" datetime="2014-01-10T22:55:00+08:00" pubdate>
+            2014-01-10
+        </time>
+        <span class="entry-category">Category:<a href="/soft/">Soft</a></span>
+        <span class="entry-tags">Tags:
+            
+                <a href="/tag/git/">git</a>
+            
+                ,<a href="/tag/版本控制/">版本控制</a>
+            
+                ,<a href="/tag/ssh/">ssh</a>
+            
+                ,<a href="/tag/debian/">debian</a>
+            
+                ,<a href="/tag/linux/">linux</a>
+            
+		</span>
+    
+        
+    </div>
+    
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'bingdian-ontheway';
+        var disqus_title = '搭建通过 ssh 访问的 Git 服务器';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+</article><footer id="footer">
+    <p class="copyright"><span class="software">Powered by <a href="http://lab.lepture.com/liquidluck/">Felix Felicis</a> 3.8.1, </span><span class="theme">Theme <a href="http://wlog.cn/" rel="nofollow">responsive</a> 0.1 by <a href="http://wlog.cn/">bingdian</a></span></p>
+</footer><!-- #footer -->
+</div><!-- #wrapper -->
+
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-1245097-16']);
+_gaq.push(['_trackPageview']);
+_gaq.push(['_trackPageLoadTime']);
+(function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = 'https://ssl.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+</body>
+</html>
