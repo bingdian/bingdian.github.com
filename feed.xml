@@ -3,14 +3,14 @@
     <title>On The Way</title>
     <link href="http://wlog.cn/feed.xml" rel="self" />
     <link href="http://wlog.cn/" />
-    <updated>2014-01-10T23:03:32+08:00</updated>
+    <updated>2014-01-10T23:16:55+08:00</updated>
     <id>http://wlog.cn/</id>
     <entry>
         <title type="html"><![CDATA[搭建通过 ssh 访问的 Git 服务器]]></title>
         <author><name>bingdian</name></author>
         <link href="http://wlog.cn/soft/git-ssh-server-for-debian.html"/>
         <published>2014-01-10T22:55:00+08:00</published>
-        <updated>2014-01-10T23:03:32+08:00</updated>
+        <updated>2014-01-10T23:16:55+08:00</updated>
         <id>http://wlog.cn/soft/git-ssh-server-for-debian.html</id>
         <category scheme="http://wlog.cn/tag/#git" term="git" label="git" />
         <category scheme="http://wlog.cn/tag/#版本控制" term="版本控制" label="版本控制" />
