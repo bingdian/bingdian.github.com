@@ -60,7 +60,7 @@ apt-get install iptables</code></pre>
 #localip 192.168.0.234-238,192.168.0.245</code></pre>
 <p>后面添加如下内容：</p>
 
-<pre><code>llocalip 192.168.217.1
+<pre><code>localip 192.168.217.1
 remoteip 192.168.217.234-238,192.168.217.245</code></pre>
 <p>注：此处的remoteip指定的IP范围是用来给远程连接使用的。如果您远程访问VPN，VPN就会在remoteip范围内分配一个ip地址给你。localip的值直接影响到后面要说的iptables转发规则的编写，所以建议不要随意改动</p>
 <p>2）添加PPTP VPN用户</p>
