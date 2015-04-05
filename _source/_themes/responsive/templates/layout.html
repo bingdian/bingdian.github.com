@@ -48,7 +48,7 @@
 
 {%- block nav %}
 <nav id="nav" role="navigation">{% for item in theme.navigation %}
-    <a id="{{item.name}}" href="{{ content_url('') }}{{item.link}}">{{item.name}}</a>
+    <a id="{{item.name}}" onclick="_hmt.push(['_trackEvent', 'nav', 'click', '{{item.name}}'])" href="{{ content_url('') }}{{item.link}}">{{item.name}}</a>
 {%- endfor %}
 </nav>
 {%- endblock %}
