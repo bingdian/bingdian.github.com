@@ -553,7 +553,7 @@
                     expirationDate = new Date(now.getFullYear(), now.getMonth(), now.getDate()+1, 0, 0, 0);
 
                 isClose = true;
-                $.fn.cookie('closeAppDlFloatwin', true,  { expires: expirationDate, path: '/',domain:".jiaoyimao.com" });
+                $.fn.cookie('closeAppDlFloatwin', true,  { expires: expirationDate, path: '/'});
                 $download.hide();
             });
 
