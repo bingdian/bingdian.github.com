@@ -64,7 +64,7 @@ select { -webkit-tap-highlight-color: rgba(256,256,256,0); -webkit-appearance: n
 <body>
 <p>test</p>
 <!-- app链接下载地址，浮窗显示 -->
-	<div class="download-app">
+	<div class="download-app" style="display:none;">
     <div class="inner">
         <a class="app-download-url" href="http://www.jiaoyimao.com/ios/Install">
             <p>想即时收到发货、收款消息吗？登录交易猫APP（仅1.6M） </p>
@@ -72,5 +72,14 @@ select { -webkit-tap-highlight-color: rgba(256,256,256,0); -webkit-appearance: n
         </a>
     </div>
     <a href="javascript:;" class="close"></a>
+    </div>
+
+    <script src="http://cdn.staticfile.org/zepto/1.1.4/zepto.min.js"></script>
+    <script>
+    $('.download-app').show();
+    $('.close').on('click', function() {
+        $('.download-app').hide();
+    });
+    </script>
 </body>
 </html>
