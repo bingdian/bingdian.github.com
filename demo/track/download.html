@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>download</title>
+    <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <style>
+    body,
+html,
+div,
+ul,
+ol,
+li,
+section,
+article,
+dl,
+dt,
+dd,
+p,
+input { margin: 0; padding: 0; }
+input:focus { outline: 0; border: 0; }
+ul,
+ol,
+li { list-style: none; }
+body { line-height: 1; font-size: 14px; background: #eee; color: #333; font-family: "Arial Rounded MT Bold"; }
+html { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+a { text-decoration: none; font-size: 100%; color: #333; }
+img { vertical-align: middle; outline: none; border: none; }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 { font-weight: normal; margin: 0; padding: 0; font-size: 100%; }
+body {
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+html, body { width: 100%; overflow-x: hidden; }
+html { height: 100%; }
+body { min-height: 100%; height: auto; position: relative; }
+input { vertical-align: middle; border: none; font-size: 100%; border-radius: 0; }
+.clearfix:after { content: '\20'; display: block; height: 0; clear: both; }
+.clearfix { *zoom: 1;}
+*:focus { outline-style: none; }
+input,
+select { -webkit-tap-highlight-color: rgba(256,256,256,0); -webkit-appearance: none; }
+* {-webkit-tap-highlight-color: rgba(256,256,256,0);}
+.download-app { width: 100%; height: 48px; background-color: rgba(0, 0, 0, 0.8); position: fixed; bottom: 0; left: 0; z-index: 8; clolor: #fff; }
+.download-app .inner { height: 48px; padding: 0 36px 0 0; background-image: url('../images/touch-72x72.png'); background-size: 36px 36px; background-repeat: no-repeat; background-position: 6px 50%; position: relative; }
+.download-app .inner a { display: block; width: 100%; height: 48px; color: #fff; }
+.download-app .inner a:visited { color: #fff; }
+.download-app .inner p { padding: 6px 58px 0 55px; line-height: 18px; font-size: 12px; color: #fff; }
+.download-app .inner span { width: 52px; height: 29px; line-height: 29px; text-align: center; -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px; background-color: #4190e9; -webkit-appearance: none; position: absolute; right: 40px; top: 10px; }
+.download-app .close { display: block; position: absolute; right: 0; top: 0; width: 36px; height: 48px; background-image: url('../images/icon-download-close.png'); background-size: 17px auto; background-repeat: no-repeat; background-position: 50% 50%; }
+
+.ios-download { line-height: 1.5; padding-bottom: 50px; }
+.ios-download dl { padding-bottom: 25px; }
+.ios-download dt { padding-bottom: 12px; font-weight: bold;}
+.ios-download ol { color: #535353;}
+.ios-download li { list-style: decimal outside;  margin-left: 20px; }
+</style>
+</head>
+<body>
+	<div class="download-app">
+    <div class="inner">
+        <a class="app-download-url" href="http://www.jiaoyimao.com/ios/Install">
+            <p>想即时收到发货、收款消息吗？登录交易猫APP（仅1.6M） </p>
+            <span>下载</span>
+        </a>
+    </div>
+    <a href="javascript:;" class="close"></a>
+</body>
+</html>
