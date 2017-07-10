@@ -9,7 +9,7 @@
         <div class="tagcloud">
             {% for tag in tags -%}
             {%- set items = tags[tag] -%}
-            <a href="{{tag}}">{{tag}}<span class="count">({{items|length}})</span></a>
+            <a href="{{tag}}/">{{tag}}<span class="count">({{items|length}})</span></a>
             {%- endfor %}
         </div>
     </div><!-- #main -->
